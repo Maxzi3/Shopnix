@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { useMutation } from "@tanstack/react-query";
 import { forgotPassword } from "../../Services/apiAuth"
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 
 export function useForgotPassword() {
   const { mutate: sendResetEmail, isLoading } = useMutation({

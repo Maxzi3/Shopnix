@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 import { loginUser } from "../../Services/apiAuth";
 import useLocalStorage from "../../Hooks/useLocalStorageState"; 
 export function useLogin() {

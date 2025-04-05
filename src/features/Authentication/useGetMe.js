@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { getMe } from "../../Services/apiAuth";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 
 export function useGetMe() {
   const { data: user, isLoading } = useQuery({

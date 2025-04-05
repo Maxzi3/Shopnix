@@ -18,14 +18,3 @@ export async function getProductById(productId) {
     throw new Error(error.response?.data?.message || "Failed to fetch product");
   }
 }
-
-// CART
-export const getCart = async () => {
-  const response = await api.get("/cart");
-  return response.data;
-};
-
-export const addToCart = async (productId, quantity) => {
-  const response = await api.post("/cart", { product: productId, quantity });
-  return response.data;
-};

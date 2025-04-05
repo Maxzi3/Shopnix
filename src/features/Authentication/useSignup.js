@@ -2,7 +2,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { signupUser } from "../../Services/apiAuth";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 import { useLocalStorageState } from "../../Hooks/useLocalStorageState";
 
 export function useSignUp() {
