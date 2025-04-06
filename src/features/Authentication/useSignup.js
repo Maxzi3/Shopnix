@@ -3,17 +3,18 @@ import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { signupUser } from "../../Services/apiAuth";
 import { toast } from "react-hot-toast";
-import { useLocalStorageState } from "../../Hooks/useLocalStorageState";
+import { useLocalStorage } from "../../Hooks/useLocalStorage";
 
-export function useSignUp() {
+export function useSignup() {
   const navigate = useNavigate();
-  const [user, setUser] = useLocalStorageState(null, "user"); // Store user in localStorage
+  const [user, setUser] = useLocalStorage(null, "user"); // Store user in localStorage
 
-  const { mutate: registerUser, isLoading } = useMutation({
-    mutationFn: signupUser,
-    onSuccess: (data) => {
+  const { mutate: signup, isLoading } = useMutation({
+    mutationFn: ({ fullName, email, password, passwordConfirm }) =>
+      signupUser({ fullName, email, password, passwordConfirm }),
+    onSuccess: (user) => {
       toast.success("Account created successfully!");
-      setUser(data.user); // Store user data in local storage
+      setUser(user); // Store user data in local storage
       navigate("/home"); // Redirect user to homepage
     },
     onError: (err) => {
@@ -21,5 +22,5 @@ export function useSignUp() {
     },
   });
 
-  return { registerUser, isLoading };
+  return { signup, isLoading };
 }

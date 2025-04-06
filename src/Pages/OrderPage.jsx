@@ -3,7 +3,7 @@ import React from 'react'
 const OrderPage = () => {
   return (
     <div>
-      nmd
+      order
     </div>
   )
 }
