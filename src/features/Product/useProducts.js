@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { getProducts } from "../../Services/apiProduct";
 
-const useCabins = () => {
+const useProducts = () => {
   const {
     isLoading,
     data: products = [],
@@ -16,4 +16,4 @@ const useCabins = () => {
   return { isLoading, products, errorMessage };
 };
 
-export default useCabins;
+export default useProducts;

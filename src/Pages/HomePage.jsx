@@ -5,6 +5,7 @@ import SignupForm from "../features/Authentication/SignupForm";
 import LoginForm from "../features/Authentication/LoginForm";
 import UpdatePasswordForm from "../features/Authentication/UpdatePasswordForm";
 import UpdateUserDataForm from "../features/Authentication/UpdateUserDataForm";
+import Products from "../features/Product/Products";
 
 const HomePage = () => {
   // const product = {
@@ -19,8 +20,8 @@ const HomePage = () => {
   //   ratingsAverage: 2,
   //   ratingsQuantity: 140,
   // };
-  // return <ProductCard product={product} />
- return <UpdateUserDataForm />;
+  // return <Products />
+ return <LoginForm />;
 };
 
 export default HomePage;

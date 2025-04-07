@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import { useSignup } from "./useSignup";
 import Spinner from "../../UI/Spinner";
+import { Link } from "react-router-dom";
 
 function SignupForm() {
   const { register, formState, getValues, handleSubmit, reset } = useForm();
@@ -21,11 +22,11 @@ function SignupForm() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="bg-white  w-[600px] mx-auto  flex flex-col justify-center p-10 rounded-lg border border-gray-200  space-y-2 text-sm"
+      className="bg-white flex flex-col justify-center p-10 rounded-lg border border-gray-200 space-y-2 text-sm"
     >
       {/* Full Name */}
       <div>
-        <label htmlFor="fullName" className="block font-medium mb-1">
+        <label htmlFor="fullName" className="block text-base font-medium mb-1">
           Full name
         </label>
         <input
@@ -33,7 +34,7 @@ function SignupForm() {
           id="fullName"
           disabled={isLoading}
           {...register("fullName", { required: "This Field is Required" })}
-          className="w-full p-2 border border-gray-300 rounded-md"
+          className="w-[350px] p-[10px] border border-gray-300 rounded-md"
         />
         {errors?.fullName && (
           <span className="text-red-600 text-sm">
@@ -44,7 +45,7 @@ function SignupForm() {
 
       {/* Email */}
       <div>
-        <label htmlFor="email" className="block font-medium mb-1">
+        <label htmlFor="email" className="block text-base font-medium mb-1">
           Email address
         </label>
         <input
@@ -58,7 +59,7 @@ function SignupForm() {
               message: "Invalid email address",
             },
           })}
-          className="w-full p-2 border border-gray-300 rounded-md"
+          className="w-[350px] p-[10px] border border-gray-300 rounded-md"
         />
         {errors?.email && (
           <span className="text-red-600 text-sm">{errors.email.message}</span>
@@ -67,7 +68,7 @@ function SignupForm() {
 
       {/* Password */}
       <div>
-        <label htmlFor="password" className="block font-medium mb-1">
+        <label htmlFor="password" className="block text-base font-medium mb-1">
           Password (min 8 characters)
         </label>
         <input
@@ -81,7 +82,7 @@ function SignupForm() {
               message: "Password must be at least 8 characters",
             },
           })}
-          className="w-full p-2 border border-gray-300 rounded-md"
+          className="w-[350px] p-[10px] border border-gray-300 rounded-md"
         />
         {errors?.password && (
           <span className="text-red-600 text-sm">
@@ -92,7 +93,10 @@ function SignupForm() {
 
       {/* Confirm Password */}
       <div>
-        <label htmlFor="passwordConfirm" className="block font-medium mb-1">
+        <label
+          htmlFor="passwordConfirm"
+          className="block text-base font-medium mb-1"
+        >
           Repeat password
         </label>
         <input
@@ -104,7 +108,7 @@ function SignupForm() {
             validate: (value) =>
               value === getValues().password || "Password needs to match",
           })}
-          className="w-full p-2 border border-gray-300 rounded-md"
+          className="w-[350px] p-[10px]   border border-gray-300 rounded-md"
         />
         {errors?.passwordConfirm && (
           <span className="text-red-600 text-sm">
@@ -114,22 +118,20 @@ function SignupForm() {
       </div>
 
       {/* Buttons */}
-      <div className="flex justify-end gap-4 pt-4 border-t border-gray-100">
-        <button
-          type="reset"
-          onClick={reset}
-          disabled={isLoading}
-          className="px-4 py-2 bg-gray-100 text-black rounded-md hover:bg-gray-200 disabled:cursor-not-allowed"
-        >
-          Cancel
-        </button>
+      <div className="flex flex-col mx-auto justify-center  pt-2  border-gray-100">
         <button
           type="submit"
           disabled={isLoading}
-          className="px-4 py-2 bg-black text-white rounded-md hover:bg-gray-800 disabled:bg-gray-400"
+          className="px-4 py-3 w-[150px] bg-black text-white rounded-md hover:bg-gray-800 disabled:bg-gray-400"
         >
           Sign up
         </button>
+        <p className="py-2 ">
+          Have an account?{" "}
+          <Link className="hover:text-blue-600" to="/login">
+            LogIn
+          </Link>
+        </p>
       </div>
     </form>
   );

@@ -2,6 +2,7 @@ import DarkmodeToggle from "./DarkModeToggle";
 import { HiOutlineShoppingCart } from "react-icons/hi2";
 import { HiOutlineUser } from "react-icons/hi2";
 import { Link } from "react-router-dom";
+import Logo from "./Logo";
 
 const Navbar = () => {
   return (
@@ -12,22 +13,10 @@ const Navbar = () => {
           to="/"
           className="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            className="w-10 h-10 text-white p-2 bg-black rounded-full"
-            viewBox="0 0 24 24"
-          >
-            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
-          </svg>
-          <span className="ml-3 text-xl">Shopnix</span>
+          <Logo />
         </Link>
-        <select name="Cat" class="p-2  rounded">
-          <option value="" disabled selected>
+        <select name="Cat" className="p-2  rounded">
+          <option disabled selected>
             Categories
           </option>
           <option>Electronics</option>
@@ -40,7 +29,10 @@ const Navbar = () => {
           placeholder="Search Shopnix"
         />
         <div class="flex justify-between gap-5 items-center text-3xl">
-          <Link to="/profile" className=" hover:text-gray-900">
+          <Link
+            to="/account/updatedata"
+            className=" hover:text-gray-900"
+          >
             <HiOutlineUser />
           </Link>
           <DarkmodeToggle />
@@ -52,18 +44,7 @@ const Navbar = () => {
       {/* Mobile View */}
       <div className="md:hidden container mx-auto flex justify-between p-5 flex-row items-center mt-2">
         <Link to="/">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            className="w-10 h-10 text-white p-2 bg-black rounded-full"
-            viewBox="0 0 24 24"
-          >
-            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
-          </svg>
+          <Logo />
         </Link>
         <input
           className="border-2 w-[300px] rounded-full p-2"

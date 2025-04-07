@@ -1,19 +1,19 @@
-const RenderStars = (rating) => {
-  const fullStars = Math.floor(rating);
-  const hasHalf = rating % 1 >= 0.5;
-  const emptyStars = 5 - fullStars - (hasHalf ? 1 : 0);
+const RenderStars = ({ ratingsAverage, ratingsQuantity }) => {
+  const full = Math.floor(ratingsAverage);
+  const half = ratingsAverage % 1 >= 0.5;
+  const empty = 5 - full - (half ? 1 : 0);
+
   return (
     <div className="flex items-center text-yellow-500">
-      {[...Array(fullStars)].map((_, i) => (
+      {[...Array(full)].map((_, i) => (
         <FaStar key={`full-${i}`} />
       ))}
-      {hasHalf && <FaStarHalfAlt />}
-      {[...Array(emptyStars)].map((_, i) => (
+      {half && <FaStarHalfAlt />}
+      {[...Array(empty)].map((_, i) => (
         <FaRegStar key={`empty-${i}`} />
       ))}
-      <span className="text-sm text-gray-600 ml-2">({rating.toFixed(1)})</span>
+      <span className="ml-2 text-sm text-gray-600">{ratingsQuantity}+</span>
     </div>
   );
 };
-
 export default RenderStars;

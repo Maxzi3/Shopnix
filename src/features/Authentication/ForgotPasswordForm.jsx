@@ -1,22 +1,20 @@
 import { useState } from "react";
-import { useLogin } from "./useLogin";
+import { useForgotPassword } from "./useForgotPassword";
 import SpinnerMini from "../../ui/SpinnerMini";
 import { Link } from "react-router-dom";
 
-function LoginForm() {
+function ForgotPasswordForm() {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const { login, isLoading } = useLogin();
+  const { sendResetEmail, isLoading } = useForgotPassword();
 
   function handleSubmit(e) {
     e.preventDefault();
-    if (!email || !password) return;
-    login(
-      { email, password },
+    if (!email) return;
+    sendResetEmail(
+      { email },
       {
         onSettled: () => {
           setEmail("");
-          setPassword("");
         },
       }
     );
@@ -44,22 +42,6 @@ function LoginForm() {
           />
         </div>
 
-        {/* Password Input */}
-        <div className="mb-3">
-          <label htmlFor="password" className="block text-base font-medium mb-2">
-            Password
-          </label>
-          <input
-            type="password"
-            id="password"
-            autoComplete="current-password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            disabled={isLoading}
-            className="w-[350px] p-[10px] border border-gray-300 rounded-md"
-          />
-        </div>
-
         {/* Submit Button */}
         <div>
           <button
@@ -82,7 +64,7 @@ function LoginForm() {
             </Link>
           </p>
           <p className=" text-center">
-            Forgot Password? <Link to="/forgotpassword">Click here</Link>
+            Login? <Link to="/login">Click here</Link>
           </p>
         </div>
       </form>
@@ -90,4 +72,4 @@ function LoginForm() {
   );
 }
 
-export default LoginForm;
+export default ForgotPasswordForm; 

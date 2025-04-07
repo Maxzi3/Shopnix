@@ -9,7 +9,7 @@ const DarkmodeToggle = () => {
     <div>
       <button
         onClick={isDarkMode}
-        className="bg-none border-none p-2 hover:bg-gray-100"
+        className="bg-none border-none p-2 text-2xl hover:bg-gray-100"
       >
         {isDarkMode ? <HiOutlineSun /> : <HiOutlineMoon />}
       </button>

@@ -5,11 +5,12 @@ import {
   FaCartPlus,
   FaBan,
 } from "react-icons/fa";
+import RenderStars from "../../UI/RenderStars";
+
 
 const ProductCard = ({ product }) => {
   const {
     name,
-
     price,
     priceDiscount, // now a percentage
     stockNo,
@@ -21,25 +22,6 @@ const ProductCard = ({ product }) => {
   // Calculate discounted price
   const discountedPrice = price * (1 - priceDiscount / 100);
 
-  // Render star ratings
-  const renderStars = (rating) => {
-    const full = Math.floor(rating);
-    const half = rating % 1 >= 0.5;
-    const empty = 5 - full - (half ? 1 : 0);
-
-    return (
-      <div className="flex items-center text-yellow-500">
-        {[...Array(full)].map((_, i) => (
-          <FaStar key={`full-${i}`} />
-        ))}
-        {half && <FaStarHalfAlt />}
-        {[...Array(empty)].map((_, i) => (
-          <FaRegStar key={`empty-${i}`} />
-        ))}
-        <span className="ml-2 text-sm text-gray-600">{ratingsQuantity}+</span>
-      </div>
-    );
-  };
 
   return (
     <div className="bg-white rounded-2xl w-[280px] hover:shadow-lg transition overflow-hidden">
@@ -90,7 +72,10 @@ const ProductCard = ({ product }) => {
         </p>
 
         {/* Rating */}
-        {renderStars(ratingsAverage)}
+        <RenderStars
+          ratingsAverage={ratingsAverage}
+          ratingsQuantity={ratingsQuantity}
+        />
       </div>
     </div>
   );
