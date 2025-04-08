@@ -5,10 +5,14 @@ import {
   HiOutlineTrash,
   HiOutlineArrowRightOnRectangle,
   HiBars3,
+  HiXMark,
+  HiOutlineUser,
 } from "react-icons/hi2";
 
 import { NavLink } from "react-router-dom";
 import Logo from "./Logo";
+import DarkmodeToggle from "./DarkModeToggle";
+import Modal from "./Modal";
 
 const AppNavMobile = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,23 +25,36 @@ const AppNavMobile = () => {
       : " flex items-center gap-3 font-medium text-base px-2  py-3 rounded-md transition-all text-gray-600 hover:bg-gray-100 hover:text-gray-800";
   return (
     <header className="text-gray-600 body-font fixed w-full top-0 bg-white">
-      <div className="md:hidden flex flex-row justify-between w-11/12 h-full  mx-auto py-4 px-2">
+      <div className="md:hidden flex flex-row w-11/12  mx-auto py-4 px-2">
         <button onClick={ToggleMenu} className="md:hidden z-50">
           {!isOpen ? (
-            <span className="flex items-center">
-              {" "}
-              <HiBars3 /> <h1 className="z-50">Shopnix</h1>
+            <span className="flex items-center text-4xl">
+              <HiBars3 />
             </span>
           ) : (
-            <h1>x</h1>
+            <span className="flex items-center text-4xl">
+              <HiXMark />
+            </span>
           )}
         </button>
+        <div className="flex ml-4 space-x-28 ">
+          <Logo />
+          <DarkmodeToggle />
+        </div>
       </div>
       <nav
-        className={`bg-white h-screen absolute top-0 left-0 flex flex-col px-6 pt-20 pb-40 shadow-2xl ${
+        className={`bg-white h-screen absolute top-0 left-0 flex flex-col px-6 pt-20 pb-40 shadow-xl ${
           isOpen ? "transform translate-x-0" : "transform -translate-x-full"
         }`}
       >
+        <NavLink
+          to="/account/orders"
+          onClick={ToggleMenu}
+          className={linkclass}
+        >
+          <HiOutlineUser />
+          Profile
+        </NavLink>
         <NavLink
           to="/account/orders"
           onClick={ToggleMenu}
@@ -54,14 +71,12 @@ const AppNavMobile = () => {
           <HiOutlineUserCircle />
           Update Profile
         </NavLink>
-        <NavLink
-          to="/account/delete-account"
-          onClick={ToggleMenu}
-          className={linkclass}
-        >
-          <HiOutlineUserCircle />
-          Delete Account
-        </NavLink>
+        <Modal.Open opens="delete">
+          <button className="flex items-center gap-3 font-medium text-base px-2  py-3 rounded-md transition-all text-gray-600 hover:bg-gray-100 hover:text-gray-800">
+            <HiOutlineTrash />
+            Delete Account
+          </button>
+        </Modal.Open>
         <NavLink
           to="/account/logout"
           onClick={ToggleMenu}

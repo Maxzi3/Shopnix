@@ -5,7 +5,9 @@
     HiOutlineUserCircle,
     HiOutlineTrash,
     HiOutlineArrowRightOnRectangle,
+    HiOutlineUser,
   } from "react-icons/hi2";
+import Modal from "./Modal";
 
 
 
@@ -16,6 +18,10 @@
         : " flex items-center gap-3 font-medium text-base px-6 py-3 rounded-md transition-all text-gray-600 hover:bg-gray-100 hover:text-gray-800";
     return (
       <ul className="flex flex-col gap-2">
+        <NavLink to="/account/profile" className={linkclass}>
+          <HiOutlineUser />
+          Profile
+        </NavLink>
         <NavLink to="/account/orders" className={linkclass}>
           <HiOutlineClipboardDocumentList />
           Orders
@@ -24,10 +30,12 @@
           <HiOutlineUserCircle />
           Update Profile
         </NavLink>
-        <NavLink to="/account/delete-account" className={linkclass}>
-          <HiOutlineUserCircle />
-          Delete Account
-        </NavLink>
+        <Modal.Open opens="delete">
+          <button className="flex items-center gap-3 font-medium text-base px-6 py-3 rounded-md transition-all text-gray-600 hover:bg-gray-100 hover:text-gray-800 w-full text-left">
+            <HiOutlineTrash />
+            Delete Account
+          </button>
+        </Modal.Open>
         <NavLink to="/account/logout" className={linkclass}>
           <HiOutlineArrowRightOnRectangle />
           Log Out

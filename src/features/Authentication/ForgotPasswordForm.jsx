@@ -24,7 +24,7 @@ function ForgotPasswordForm() {
     <>
       <form
         onSubmit={handleSubmit}
-        className="p-10 bg-white mx-auto flex flex-col justify-center border border-gray-200 rounded-lg space-y-2 text-sm "
+        className="p-10 bg-white mx-auto flex flex-col justify-center md:border border-gray-200 rounded-lg space-y-2 text-sm "
       >
         {/* Email Input */}
         <div className="mb-3">
@@ -50,7 +50,7 @@ function ForgotPasswordForm() {
             className="w-[150px] mx-[100px] mt-2 py-3 bg-black text-white rounded-md disabled:bg-gray-400"
           >
             {!isLoading ? (
-              "Login"
+              "Send Reset Link"
             ) : (
               <div className="flex justify-center">
                 <SpinnerMini />

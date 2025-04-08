@@ -40,7 +40,7 @@ function UpdateUserDataForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-white  w-[600px] mx-auto  flex flex-col justify-center p-8 rounded-lg  space-y-6 text-sm border border-gray-200"
+      className="bg-white  md:w-[600px] mx-auto flex flex-col justify-center p-8 rounded-lg  space-y-6 text-sm border border-gray-200"
     >
       {/* Email - Disabled */}
       <div>

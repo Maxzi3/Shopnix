@@ -22,7 +22,7 @@ function SignupForm() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="bg-white flex flex-col justify-center p-10 rounded-lg border border-gray-200 space-y-2 text-sm"
+      className="bg-white flex flex-col justify-center p-10 rounded-lg md:border border-gray-200 space-y-2 text-sm"
     >
       {/* Full Name */}
       <div>

@@ -42,12 +42,12 @@ const Navbar = () => {
         </div>
       </div>
       {/* Mobile View */}
-      <div className="md:hidden container mx-auto flex justify-between p-5 flex-row items-center mt-2">
+      <div className="md:hidden container mx-auto flex justify-between p-3 flex-row items-center mt-2 space-x-6">
         <Link to="/">
           <Logo />
         </Link>
         <input
-          className="border-2 w-[300px] rounded-full p-2"
+          className="border-2 w-[200px] rounded-full p-2"
           type="text"
           placeholder="Search Shopnix"
         />

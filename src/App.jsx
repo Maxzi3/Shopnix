@@ -18,7 +18,6 @@ import Signup from "./Pages/Signup";
 import ForgotPassword from "./Pages/ForgetPassword";
 import AccountLayout from "./UI/AccountLayout";
 import UpdateUserDataForm from "./features/Authentication/UpdateUserDataForm";
-import DeleteAccForm from "./features/Authentication/DeleteAccForm";
 import LogoutForm from "./features/Authentication/LogoutForm";
 
 const queryClient = new QueryClient({
@@ -42,7 +41,6 @@ const App = () => {
         {/* App Layout (for users after login) */}
         <Route path="/" element={<AppLayout />}>
           <Route index element={<HomePage />} />
-          <Route path="/profile" element={<ProfilePage />} />
           <Route path="/cart" element={<CartPage />} />
           <Route path="/order" element={<OrderPage />} />
         </Route>
@@ -51,7 +49,7 @@ const App = () => {
         <Route path="/account" element={<AccountLayout />}>
           <Route path="/account/orders" element={<OrderPage />} />
           <Route path="/account/updatedata" element={<UpdateUserDataForm />} />
-          <Route path="/account/delete-account" element={<DeleteAccForm />} />
+          <Route path="/account/profile" element={<ProfilePage/>} />
           <Route path="/account/logout" element={<LogoutForm />} />
         </Route>
       </Route>

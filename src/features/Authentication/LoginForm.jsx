@@ -26,7 +26,7 @@ function LoginForm() {
     <>
       <form
         onSubmit={handleSubmit}
-        className="p-10 bg-white mx-auto flex flex-col justify-center border border-gray-200 rounded-lg space-y-2 text-sm "
+        className="bg-white  mx-auto flex flex-col justify-center p-8 rounded-lg  space-y-6 text-sm md:border border-gray-200"
       >
         {/* Email Input */}
         <div className="mb-3">
@@ -46,7 +46,10 @@ function LoginForm() {
 
         {/* Password Input */}
         <div className="mb-3">
-          <label htmlFor="password" className="block text-base font-medium mb-2">
+          <label
+            htmlFor="password"
+            className="block text-base font-medium mb-2"
+          >
             Password
           </label>
           <input
