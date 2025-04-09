@@ -1,21 +1,25 @@
-function ConfirmDelete({ resourceName, onConfirm, disabled, onCloseModal }) {
+function ConfirmDelete({  onCloseModal }) {
   return (
-    <div className="flex flex-col gap-4 w-[400px]">
-      <h3>Delete {resourceName}</h3>
-      <p className="text-gray-500">
-        Are you sure you want to delete this {resourceName} permanently? This
-        action cannot be undone.
+    <div className="flex flex-col space-y-3  md:w-[400px]">
+      <h3 className="text-xl text-red-600 font-semibold">Delete Account</h3>
+      <p className="text-gray-500 text-justify font-medium">
+        Are you sure you want to delete this Account permanently? This action
+        cannot be undone.
       </p>
 
       <div className="flex justify-end gap-4">
         <button
-         
-          disabled={disabled}
+          className="bg-gray-600 text-gray-50 text-base p-2 rounded-lg shadow-sm"
+          // disabled={disabled}
           onClick={onCloseModal}
         >
           Cancel
         </button>
-        <button  disabled={disabled} onClick={onConfirm}>
+        <button
+          // disabled={disabled}
+          // onClick={onConfirm}
+          className="bg-red-700 text-red-100 text-base p-2 rounded-lg shadow-sm"
+        >
           Delete
         </button>
       </div>

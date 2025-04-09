@@ -2,9 +2,10 @@ import { Outlet } from "react-router-dom";
 import AccountHeader from "./AccountHeader";
 import SideBar from "./SideBar";
 import AppNavMobile from "./AppNavMobile";
-import FooterMobile from "./FooterMobile";
+import AccountFooter from "./AccountFooter";
 import Modal from "./Modal";
 import ConfirmDelete from "./ConfirmDelete";
+import LogoutForm from "../features/Authentication/LogoutForm";
 
 const AccountLayout = () => {
   const handleDeleteAccount = () => {
@@ -23,14 +24,17 @@ const AccountLayout = () => {
       </div>
       <div className="md:hidden block">
         <AppNavMobile />
-        <main className="bg-gray-50 mt-20 overflow-scroll">
+        <main className="bg-gray-50 mt-20 overflow-scroll ">
           <Outlet />
         </main>
-        <FooterMobile />
+        <AccountFooter />
       </div>
-      {/* Place Modal.Window at the root */}
+     
       <Modal.Window name="delete">
         <ConfirmDelete resourceName="account" onConfirm={handleDeleteAccount} />
+      </Modal.Window>
+      <Modal.Window name="logout">
+        <LogoutForm />
       </Modal.Window>
     </Modal>
   );

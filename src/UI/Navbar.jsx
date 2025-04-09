@@ -1,7 +1,6 @@
-import DarkmodeToggle from "./DarkModeToggle";
-import { HiOutlineShoppingCart } from "react-icons/hi2";
-import { HiOutlineUser } from "react-icons/hi2";
 import { Link } from "react-router-dom";
+import DarkmodeToggle from "./DarkModeToggle";
+import { HiOutlineShoppingCart, HiOutlineUser } from "react-icons/hi2";
 import Logo from "./Logo";
 
 const Navbar = () => {
@@ -29,10 +28,7 @@ const Navbar = () => {
           placeholder="Search Shopnix"
         />
         <div class="flex justify-between gap-5 items-center text-3xl">
-          <Link
-            to="/account/updatedata"
-            className=" hover:text-gray-900"
-          >
+          <Link to="/account/profile" className=" hover:text-gray-900">
             <HiOutlineUser />
           </Link>
           <DarkmodeToggle />

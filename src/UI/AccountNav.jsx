@@ -1,4 +1,3 @@
-  // MainNav.jsx
   import { NavLink } from "react-router-dom";
   import {
     HiOutlineClipboardDocumentList,
@@ -8,8 +7,6 @@
     HiOutlineUser,
   } from "react-icons/hi2";
 import Modal from "./Modal";
-
-
 
   const AccountNav = () => {
     const linkclass = ({ isActive }) =>

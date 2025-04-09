@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import DarkmodeToggle from "./DarkModeToggle";
 import { HiArrowLeft, HiOutlineUser } from "react-icons/hi2";
+import DarkmodeToggle from "./DarkModeToggle";
 
 const AccountHeader = () => {
   return (

@@ -2,20 +2,20 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   HiOutlineClipboardDocumentList,
   HiOutlineShoppingCart,
-  HiOutlineHome,
   HiOutlineUser,
   HiArrowLeft,
+  HiOutlineHome,
 } from "react-icons/hi2";
-import CategoryDropdown from "./CategoryDropdown";
 
-const Footer = () => {
+const AccountFooter = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
+  const isProfilePage = location.pathname === "/account/profile";
   const isCartPage = location.pathname === "/cart";
 
   const handleClick = () => {
-    if (isCartPage) {
+    if (isProfilePage || isCartPage) {
       navigate(-1); // go back
     }
   };
@@ -27,25 +27,27 @@ const Footer = () => {
         </Link>
         <li>
           {isCartPage ? (
+            <button onClick={handleClick} className="text-2xl">
+              <HiArrowLeft />
+            </button>
+          ) : (
             <Link to="/account/orders">
               <HiOutlineClipboardDocumentList />
             </Link>
-          ) : (
-            <button className="text-2xl">
-              <CategoryDropdown />
-            </button>
           )}
         </li>
-        <Link to="/account/profile">
-          <HiOutlineUser />
+
+        <Link to="/cart">
+          <HiOutlineShoppingCart />
         </Link>
-        {isCartPage ? (
+
+        {isProfilePage ? (
           <button onClick={handleClick} className="text-2xl">
             <HiArrowLeft />
           </button>
         ) : (
-          <Link to="/cart" className="text-2xl">
-            <HiOutlineShoppingCart />
+          <Link to="/account/profile">
+            <HiOutlineUser />
           </Link>
         )}
       </ul>
@@ -53,4 +55,4 @@ const Footer = () => {
   );
 };
 
-export default Footer;
+export default AccountFooter;

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
 import {
   HiOutlineClipboardDocumentList,
   HiOutlineUserCircle,
@@ -9,7 +10,6 @@ import {
   HiOutlineUser,
 } from "react-icons/hi2";
 
-import { NavLink } from "react-router-dom";
 import Logo from "./Logo";
 import DarkmodeToggle from "./DarkModeToggle";
 import Modal from "./Modal";
@@ -43,12 +43,12 @@ const AppNavMobile = () => {
         </div>
       </div>
       <nav
-        className={`bg-white h-screen absolute top-0 left-0 flex flex-col px-6 pt-20 pb-40 shadow-xl ${
-          isOpen ? "transform translate-x-0" : "transform -translate-x-full"
-        }`}
+        className={`bg-white h-screen absolute top-0 left-0 flex flex-col px-6 pt-20 pb-40 shadow-xl
+    transition-transform duration-300 ease-in-out
+    ${isOpen ? "translate-x-0" : "-translate-x-full"}`}
       >
         <NavLink
-          to="/account/orders"
+          to="/account/profile"
           onClick={ToggleMenu}
           className={linkclass}
         >
@@ -77,14 +77,12 @@ const AppNavMobile = () => {
             Delete Account
           </button>
         </Modal.Open>
-        <NavLink
-          to="/account/logout"
-          onClick={ToggleMenu}
-          className={linkclass}
-        >
-          <HiOutlineArrowRightOnRectangle />
-          Log Out
-        </NavLink>
+        <Modal.Open opens="logout">
+          <button className="flex items-center gap-3 font-medium text-base px-2  py-3 rounded-md transition-all text-gray-600 hover:bg-gray-100 hover:text-gray-800">
+            <HiOutlineArrowRightOnRectangle />
+            Log Out
+          </button>
+        </Modal.Open>
       </nav>
     </header>
   );
