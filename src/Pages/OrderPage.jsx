@@ -1,9 +1,10 @@
 import React from 'react'
+import OrdersForm from '../features/orders/OrderForm'
 
 const OrderPage = () => {
   return (
     <div>
-      order
+      <OrdersForm/>
     </div>
   )
 }

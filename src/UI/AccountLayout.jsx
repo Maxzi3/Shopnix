@@ -16,7 +16,7 @@ const AccountLayout = () => {
       <div className="hidden md:grid h-screen grid-cols-[18rem_1fr] grid-rows-[auto_1fr]">
         <AccountHeader />
         <SideBar />
-        <main className="bg-gray-50 p-16 overflow-scroll">
+        <main className="bg-white p-16 overflow-scroll">
           <div className="max-w-[120rem] mx-auto flex flex-col gap-8">
             <Outlet />
           </div>
@@ -24,7 +24,7 @@ const AccountLayout = () => {
       </div>
       <div className="md:hidden block">
         <AppNavMobile />
-        <main className="bg-gray-50 mt-20 overflow-scroll ">
+        <main className="bg-white mt-20 overflow-scroll ">
           <Outlet />
         </main>
         <AccountFooter />

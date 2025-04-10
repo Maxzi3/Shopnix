@@ -43,7 +43,7 @@ const AppNavMobile = () => {
         </div>
       </div>
       <nav
-        className={`bg-white h-screen absolute top-0 left-0 flex flex-col px-6 pt-20 pb-40 shadow-xl
+        className={`bg-white h-screen  absolute top-0 left-0 flex flex-col px-6 pt-20 pb-40 shadow-xl
     transition-transform duration-300 ease-in-out
     ${isOpen ? "translate-x-0" : "-translate-x-full"}`}
       >

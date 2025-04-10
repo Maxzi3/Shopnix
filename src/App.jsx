@@ -16,7 +16,7 @@ import Signup from "./Pages/Signup";
 import ForgotPassword from "./Pages/ForgetPassword";
 import AccountLayout from "./UI/AccountLayout";
 import UpdateUserDataForm from "./features/Authentication/UpdateUserDataForm";
-
+import OrderDetails from "./features/orders/OrderDetails";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -45,9 +45,10 @@ const App = () => {
 
         {/* Account Layout (maybe for settings/account management) */}
         <Route path="/account" element={<AccountLayout />}>
+          <Route path="/account/profile" element={<ProfilePage />} />
           <Route path="/account/orders" element={<OrderPage />} />
+          <Route path="/account/order/:orderId" element={<OrderDetails />} />
           <Route path="/account/updatedata" element={<UpdateUserDataForm />} />
-          <Route path="/account/profile" element={<ProfilePage/>} />
         </Route>
       </Route>
     )

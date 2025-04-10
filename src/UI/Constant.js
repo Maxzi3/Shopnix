@@ -9,3 +9,4 @@ export const api = axios.create({
     "Content-Type": "application/json",
   },
 });
+export const PAGE_SIZE = 2;
