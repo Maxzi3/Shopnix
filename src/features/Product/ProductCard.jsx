@@ -6,9 +6,10 @@ import {
   FaBan,
 } from "react-icons/fa";
 import RenderStars from "../../UI/RenderStars";
-
+import { useCartContext } from "../../Contexts/CartContext";
 
 const ProductCard = ({ product }) => {
+  const { isAdding, addToCart } = useCartContext();
   const {
     name,
     price,
@@ -21,7 +22,6 @@ const ProductCard = ({ product }) => {
 
   // Calculate discounted price
   const discountedPrice = price * (1 - priceDiscount / 100);
-
 
   return (
     <div className="bg-white rounded-2xl w-[280px] hover:shadow-lg transition overflow-hidden">
@@ -49,16 +49,18 @@ const ProductCard = ({ product }) => {
 
           {/* Add to Cart or Out of Stock Button with Icons */}
           <button
-            disabled={stockNo === 0}
-            className={`w-[30px] h-[30px] flex items-center justify-center rounded-full animate-pulse transition ${
+            disabled={stockNo === 0 || isAdding}
+            onClick={() => addToCart(product, 1)}
+            className={`w-[30px] h-[30px] flex items-center justify-center rounded-full transition ${
               stockNo === 0
-                ? ""
-                : "border-[1px] border-black hover:text-blue-700"
+                ? "cursor-not-allowed text-gray-400"
+                : "border border-black hover:text-blue-700"
             }`}
           >
             {stockNo === 0 ? "" : <FaCartPlus />}
           </button>
         </div>
+
         {/* Stock */}
         <p className="text-sm text-gray-700">
           {stockNo > 0 ? (

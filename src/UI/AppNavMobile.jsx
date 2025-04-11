@@ -25,10 +25,10 @@ const AppNavMobile = () => {
       : " flex items-center gap-3 font-medium text-base px-2  py-3 rounded-md transition-all text-gray-600 hover:bg-gray-100 hover:text-gray-800";
   return (
     <header className="text-gray-600 body-font fixed w-full top-0 bg-white">
-      <div className="md:hidden flex flex-row w-11/12  mx-auto py-4 px-2">
+      <div className="md:hidden flex flex-row w-11/12  mx-auto py-4">
         <button onClick={ToggleMenu} className="md:hidden z-50">
           {!isOpen ? (
-            <span className="flex items-center text-4xl">
+            <span className="flex items-center text-3xl">
               <HiBars3 />
             </span>
           ) : (
@@ -37,7 +37,7 @@ const AppNavMobile = () => {
             </span>
           )}
         </button>
-        <div className="flex ml-4 space-x-28 ">
+        <div className="flex ml-4 space-x-24 ">
           <Logo />
           <DarkmodeToggle />
         </div>

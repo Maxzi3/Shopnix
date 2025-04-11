@@ -1,10 +1,21 @@
-import { useCart } from "../features/Cart/useCart";
+import { useCartContext } from "../Contexts/CartContext";
 import { HiOutlineTrash, HiPlus, HiMinus } from "react-icons/hi2";
-
+import Spinner from "../UI/Spinner";
 
 const CartPage = () => {
-  const { increaseQuantity, decreaseQuantity, removeItem, clearCart } =
-    useCart();
+  const {
+    // cart,
+    removeFromCart,
+    updateCartQuantity,
+    clearCart,
+    totalQuantity,
+    totalPrice,
+    isLoading,
+    isDeleting,
+    isUpdating,
+    isClearing,
+  } = useCartContext();
+
   const dummyCart = [
     {
       id: 1,
@@ -21,6 +32,7 @@ const CartPage = () => {
       image: "https://via.placeholder.com/80",
     },
   ];
+  if (isLoading) return <Spinner />;
   return (
     <div className="p-6 space-y-8 md:max-w-3xl max-h-screen mx-auto">
       <h1 className="text-2xl font-bold">Your Cart</h1>
@@ -50,10 +62,10 @@ const CartPage = () => {
                       {item.name}
                     </h2>
                     <p className="text-sm text-gray-600">
-                      ₦{item.price.toLocaleString()} × {item.quantity}
+                      ₦{item.price} × {item.quantity}
                     </p>
                     <p className="text-sm text-gray-800 font-semibold">
-                      Total: ₦{(item.price * item.quantity).toLocaleString()}
+                      Total: ₦{item.price * item.quantity}
                     </p>
                   </div>
                 </div>
@@ -61,32 +73,46 @@ const CartPage = () => {
                 {/* Right Section: Quantity + Delete */}
                 <div className="flex flex-col items-end gap-2 md:gap-4">
                   <div className="flex items-center gap-2">
-                    <button onClick={() => decreaseQuantity(item.id)}>
+                    <button
+                      disabled={isUpdating}
+                      onClick={() =>
+                        updateCartQuantity(
+                          item.id,
+                          item.quantity > 1 ? item.quantity - 1 : 1
+                        )
+                      }
+                    >
                       <HiMinus className="w-8 h-8 border border-black rounded-full p-1" />
                     </button>
-                    <span className="w-6 text-center">{item.quantity}</span>
-                    <button onClick={() => increaseQuantity(item.id)}>
+                    <span className="w-6 text-center">{totalQuantity}</span>
+                    <button
+                      disabled={isUpdating}
+                      onClick={() =>
+                        updateCartQuantity(item.id, item.quantity + 1)
+                      }
+                    >
                       <HiPlus className="w-8 h-8 border border-black rounded-full p-1" />
                     </button>
                   </div>
-                  <button onClick={() => removeItem(item.id)}>
+                  <button
+                    disabled={isDeleting}
+                    onClick={() => removeFromCart(item.id)}
+                  >
                     <HiOutlineTrash className="w-6 h-6 text-red-500" />
                   </button>
                 </div>
               </div>
             ))}
-            <p className="text-lg font-semibold">
-              {/* Total: ₦{totalPrice.toLocaleString()} */}
-              SubTotal: ₦100000
-            </p>
+            <p className="text-lg font-semibold">SubTotal:₦{totalPrice}</p>
           </div>
 
           {/* Cart Summary */}
-          <div className="flex flex-col md:flex-row justify-between items-stretch md:items-center gap-4 pb-[200px]">
+          <div className="fixed bottom-0 left-0 w-full bg-white border-t md:static md:border-none p-4 flex flex-col md:flex-row justify-between items-center gap-4">
             <button className="bg-blue-600 text-white w-full md:w-auto px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition">
               Proceed to Checkout
             </button>
             <button
+              disabled={isClearing}
               onClick={clearCart}
               className="bg-red-600 text-white w-full md:w-auto px-6 py-3 rounded-lg font-medium hover:bg-red-700 transition"
             >

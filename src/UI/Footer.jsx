@@ -7,10 +7,12 @@ import {
   HiArrowLeft,
 } from "react-icons/hi2";
 import CategoryDropdown from "./CategoryDropdown";
+import { useCartContext } from "../Contexts/CartContext";
 
 const Footer = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const { totalQuantity } = useCartContext();
 
   const isCartPage = location.pathname === "/cart";
 
@@ -44,8 +46,16 @@ const Footer = () => {
             <HiArrowLeft />
           </button>
         ) : (
-          <Link to="/cart" className="text-2xl">
-            <HiOutlineShoppingCart />
+          <Link to="/cart" className="relative hover:text-gray-900">
+            <HiOutlineShoppingCart className="w-6 h-6" />
+
+            {/* Sup badge */}
+            {totalQuantity > 0 && (
+              <sup className="absolute -top-2 -right-3 bg-red-500 text-white text-[10px] w-5 h-5 flex items-center justify-center rounded-full leading-none">
+                {/* {totalQuantity > 99 ? "99+" : totalQuantity} */}
+                2345
+              </sup>
+            )}
           </Link>
         )}
       </ul>
