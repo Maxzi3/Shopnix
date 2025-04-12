@@ -9,6 +9,14 @@ export async function loginUser({ email, password }) {
     throw new Error(error.response?.data?.message || "Login failed");
   }
 }
+export async function logoutUser() {
+  try {
+    const { data } = await api.get("/users/logout");
+    return data;
+  } catch (error) {
+    throw new Error(error.response?.data?.message || "Logout failed");
+  }
+}
 
 export async function signupUser({ fullName, email, password, passwordConfirm }) {
   try {
