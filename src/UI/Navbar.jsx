@@ -32,7 +32,7 @@ const Navbar = () => {
           type="text"
           placeholder="Search Shopnix"
         />
-        <div class="flex justify-between gap-5 items-center text-3xl">
+        <div className="flex justify-between gap-5 items-center text-3xl">
           <Link to="/account/profile" className=" hover:text-gray-900">
             <HiOutlineUser />
           </Link>

@@ -11,26 +11,37 @@ export const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
   const { data: cart = [], isLoading } = useCart();
-
+  
   const { addItem, isLoading: isAdding } = useAddToCart();
   const { deleteItem, isLoading: isDeleting } = useDeleteCartItem();
   const { updateItem, isLoading: isUpdating } = useUpdateCartItem();
   const { clear, isLoading: isClearing } = useClearCart();
 
   // Derived state
-  const totalQuantity = useMemo(
-    () => cart.reduce((acc, item) => acc + item.quantity, 0),
-    [cart]
-  );
+const totalQuantity = useMemo(
+  () =>
+    cart.items?.length
+      ? cart.items.reduce((acc, item) => acc + item.quantity, 0)
+      : 0,
+  [cart]
+);
 
-  const totalPrice = useMemo(
-    () => cart.reduce((acc, item) => acc + item.quantity * item.price, 0),
-    [cart]
-  );
+const totalPrice = useMemo(
+  () =>
+    cart.items?.length
+      ? cart.items.reduce(
+          (acc, item) => acc + item.quantity * item.product.price,
+          0
+        )
+      : 0,
+  [cart]
+);
+
+
 
   // Wrappers for mutation functions
-  const addToCart = (product, quantity) => {
-    addItem({ productId: product.id, quantity });
+  const addToCart = (productId, quantity) => {
+    addItem({ productId, quantity });
   };
 
   const removeFromCart = (productId) => {

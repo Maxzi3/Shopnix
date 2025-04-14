@@ -19,7 +19,7 @@ export function useLogin() {
       setToken(data?.token);
 
       // Redirect user to homepage
-      navigate("/home", { replace: true });
+      navigate("/", { replace: true });
 
       toast.success("Login successful!");
     },

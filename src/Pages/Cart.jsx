@@ -2,9 +2,10 @@ import { useCartContext } from "../Contexts/CartContext";
 import { HiOutlineTrash, HiPlus, HiMinus } from "react-icons/hi2";
 import Spinner from "../UI/Spinner";
 
+
 const CartPage = () => {
   const {
-    // cart,
+    cart,
     removeFromCart,
     updateCartQuantity,
     clearCart,
@@ -14,58 +15,62 @@ const CartPage = () => {
     isDeleting,
     isUpdating,
     isClearing,
+   
   } = useCartContext();
 
-  const dummyCart = [
-    {
-      id: 1,
-      name: "Nike Air Max",
-      price: 18000,
-      quantity: 2,
-      image: "https://via.placeholder.com/80",
-    },
-    {
-      id: 2,
-      name: "Adidas Hoodie",
-      price: 12000,
-      quantity: 1,
-      image: "https://via.placeholder.com/80",
-    },
-  ];
+  ;
+
+  // const dummyCart = [
+  //   {
+  //     id: 1,
+  //     name: "Nike Air Max",
+  //     price: 18000,
+  //     quantity: 2,
+  //     image: "https://via.placeholder.com/80",
+  //   },
+  //   {
+  //     id: 2,
+  //     name: "Adidas Hoodie",
+  //     price: 12000,
+  //     quantity: 1,
+  //     image: "https://via.placeholder.com/80",
+  //   },
+  // ];
   if (isLoading) return <Spinner />;
+  // console.log(cart)
   return (
     <div className="p-6 space-y-8 md:max-w-3xl max-h-screen mx-auto">
       <h1 className="text-2xl font-bold">Your Cart</h1>
 
-      {dummyCart.length === 0 ? (
+      {cart.length === 0 ? (
         <p className="text-gray-500">Your cart is empty.</p>
       ) : (
         <>
           <div className="grid gap-4">
-            {dummyCart.map((item) => (
+            {cart.map((item) => (
               <div
-                key={item.id}
+                key={item.product._id}
                 className="flex flex-col md:flex-row md:items-center justify-between border p-4 rounded-lg shadow-sm space-y-4 md:space-y-0"
               >
                 {/* Left Section: Image + Info */}
                 <div className="flex gap-4 items-start md:items-center">
                   <img
-                    src={item.image}
-                    alt={item.name}
+                    src={item.product.image}
+                    alt={item.product.name}
                     className="w-20 h-20 object-cover rounded"
                   />
                   <div>
                     <h2
                       className="font-medium max-w-[150px] truncate"
-                      title={item.name}
+                      title={item.product.name}
                     >
-                      {item.name}
+                      {item.product.name}
                     </h2>
                     <p className="text-sm text-gray-600">
-                      ₦{item.price} × {item.quantity}
+                      ₦{item.product.price} × {totalQuantity}
                     </p>
                     <p className="text-sm text-gray-800 font-semibold">
-                      Total: ₦{item.price * item.quantity}
+                      Total: ₦{item.product.price * item.product.quantity}
                     </p>
                   </div>
                 </div>
@@ -77,8 +82,8 @@ const CartPage = () => {
                       disabled={isUpdating}
                       onClick={() =>
                         updateCartQuantity(
-                          item.id,
-                          item.quantity > 1 ? item.quantity - 1 : 1
+                          item.product._id,
+                          item.product.quantity > 1 ? item.product.quantity - 1 : 1
                         )
                       }
                     >
@@ -88,7 +93,7 @@ const CartPage = () => {
                     <button
                       disabled={isUpdating}
                       onClick={() =>
-                        updateCartQuantity(item.id, item.quantity + 1)
+                        updateCartQuantity(item.product._id, item.product.quantity + 1)
                       }
                     >
                       <HiPlus className="w-8 h-8 border border-black rounded-full p-1" />
@@ -96,7 +101,7 @@ const CartPage = () => {
                   </div>
                   <button
                     disabled={isDeleting}
-                    onClick={() => removeFromCart(item.id)}
+                    onClick={() => removeFromCart(item.product._id)}
                   >
                     <HiOutlineTrash className="w-6 h-6 text-red-500" />
                   </button>

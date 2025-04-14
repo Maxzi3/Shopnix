@@ -6,7 +6,10 @@ export function useAddToCart() {
   const queryClient = useQueryClient();
 
   const { mutate: addItem, isLoading } = useMutation({
-    mutationFn: ({ productId, quantity }) => addToCart(productId, quantity),
+    mutationFn: ({ productId, quantity }) => {
+      console.log("Adding to cart:", { productId, quantity }); // Check if the correct data is being passed
+      return addToCart(productId, quantity);
+    },
     onSuccess: () => {
       toast.success("Item added to cart");
       queryClient.invalidateQueries(["cart"]);

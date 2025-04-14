@@ -11,5 +11,5 @@ export function useGetMe() {
     },
   });
 
-  return { user, isAuthenticated: user?.role === "authenticated", isLoading };
+  return { user, isLoading };
 }

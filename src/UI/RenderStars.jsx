@@ -1,3 +1,5 @@
+import { FaRegStar, FaStar, FaStarHalfAlt } from "react-icons/fa";
+
 const RenderStars = ({ ratingsAverage, ratingsQuantity }) => {
   const full = Math.floor(ratingsAverage);
   const half = ratingsAverage % 1 >= 0.5;

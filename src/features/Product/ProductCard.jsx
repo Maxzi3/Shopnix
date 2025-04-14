@@ -18,13 +18,14 @@ const ProductCard = ({ product }) => {
     imageUrl,
     ratingsAverage,
     ratingsQuantity,
+    _id,
   } = product;
 
   // Calculate discounted price
   const discountedPrice = price * (1 - priceDiscount / 100);
 
   return (
-    <div className="bg-white rounded-2xl w-[280px] hover:shadow-lg transition overflow-hidden">
+    <div className="bg-white rounded-2xl w-[280px] hover:shadow-lg transition overflow-hidden border">
       {/* Product Image */}
       <img src={imageUrl} alt={name} className="h-48 w-full object-cover" />
 
@@ -50,7 +51,7 @@ const ProductCard = ({ product }) => {
           {/* Add to Cart or Out of Stock Button with Icons */}
           <button
             disabled={stockNo === 0 || isAdding}
-            onClick={() => addToCart(product, 1)}
+            onClick={() => addToCart(_id, 1)}
             className={`w-[30px] h-[30px] flex items-center justify-center rounded-full transition ${
               stockNo === 0
                 ? "cursor-not-allowed text-gray-400"
@@ -62,7 +63,7 @@ const ProductCard = ({ product }) => {
         </div>
 
         {/* Stock */}
-        <p className="text-sm text-gray-700">
+        <div className="text-sm text-gray-700">
           {stockNo > 0 ? (
             <div className="flex items-center">{stockNo} in stock</div>
           ) : (
@@ -71,7 +72,7 @@ const ProductCard = ({ product }) => {
               Out of Stock
             </div>
           )}
-        </p>
+        </div>
 
         {/* Rating */}
         <RenderStars

@@ -33,9 +33,9 @@ const Footer = () => {
               <HiOutlineClipboardDocumentList />
             </Link>
           ) : (
-            <button className="text-2xl">
+            <span className="text-2xl">
               <CategoryDropdown />
-            </button>
+            </span>
           )}
         </li>
         <Link to="/account/profile">
