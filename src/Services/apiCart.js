@@ -2,7 +2,7 @@ import { api } from "../UI/Constant";
 export async function getUserCart() {
   try {
     const { data } = await api.get("/cart");
-    return data.data.cart.items;;
+    return data;
   } catch (error) {
     throw new Error(
       error.response?.data?.message || "Something went wrong. Please try again."

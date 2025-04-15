@@ -7,7 +7,6 @@ export function useAddToCart() {
 
   const { mutate: addItem, isLoading } = useMutation({
     mutationFn: ({ productId, quantity }) => {
-      console.log("Adding to cart:", { productId, quantity }); // Check if the correct data is being passed
       return addToCart(productId, quantity);
     },
     onSuccess: () => {

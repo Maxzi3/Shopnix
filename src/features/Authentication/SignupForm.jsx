@@ -8,9 +8,9 @@ function SignupForm() {
   const { errors } = formState;
   const { signup, isLoading } = useSignup();
 
-  const onSubmit = ({ fullName, email, password, passwordConfirm }) => {
+  const onSubmit = ({ fullName, email,phoneNumber, password, passwordConfirm }) => {
     signup(
-      { fullName, email, password, passwordConfirm},
+      { fullName, email,phoneNumber, password, passwordConfirm},
       {
         onSettled: () => reset(),
       }
@@ -25,7 +25,7 @@ function SignupForm() {
       className="bg-white flex flex-col justify-center p-10 rounded-lg md:border border-gray-200 space-y-2 text-sm"
     >
       {/* Full Name */}
-      <div>
+      <div className="flex flex-col">
         <label htmlFor="fullName" className="block text-base font-medium mb-1">
           Full name
         </label>
@@ -44,7 +44,7 @@ function SignupForm() {
       </div>
 
       {/* Email */}
-      <div>
+      <div className="flex flex-col">
         <label htmlFor="email" className="block text-base font-medium mb-1">
           Email address
         </label>
@@ -65,9 +65,29 @@ function SignupForm() {
           <span className="text-red-600 text-sm">{errors.email.message}</span>
         )}
       </div>
-
+      {/* Phone Number*/}
+      <div className="flex flex-col">
+        <label
+          htmlFor="phoneNumber"
+          className="block text-base font-medium mb-1"
+        >
+          Phone Number
+        </label>
+        <input
+          type="text"
+          id="phoneNumber"
+          disabled={isLoading}
+          {...register("phoneNumber", { required: "This Field is Required" })}
+          className="w-[350px] p-[10px] border border-gray-300 rounded-md"
+        />
+        {errors?.phoneNumber && (
+          <span className="text-red-600 text-sm">
+            {errors.phoneNumber.message}
+          </span>
+        )}
+      </div>
       {/* Password */}
-      <div>
+      <div className="flex flex-col">
         <label htmlFor="password" className="block text-base font-medium mb-1">
           Password (min 8 characters)
         </label>
@@ -92,7 +112,7 @@ function SignupForm() {
       </div>
 
       {/* Confirm Password */}
-      <div>
+      <div className="flex flex-col">
         <label
           htmlFor="passwordConfirm"
           className="block text-base font-medium mb-1"

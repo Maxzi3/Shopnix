@@ -5,10 +5,13 @@ import { toast } from "react-hot-toast";
 export function useCart() {
   return useQuery({
     queryKey: ["cart"],
-    queryFn: getUserCart,
+    queryFn: async () => {
+      const response = await getUserCart();
+      return response.data.cart;
+    },
+
     onError: (err) => {
       toast.error(err.message || "Could not fetch cart");
     },
   });
 }
-

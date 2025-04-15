@@ -18,13 +18,20 @@ export async function logoutUser() {
   }
 }
 
-export async function signupUser({ fullName, email, password, passwordConfirm }) {
+export async function signupUser({
+  fullName,
+  email,
+  phoneNumber,
+  password,
+  passwordConfirm,
+}) {
   try {
     const { data } = await api.post("/users/signup", {
       fullName,
       email,
       password,
       passwordConfirm,
+      phoneNumber,
     });
     return data;
   } catch (error) {

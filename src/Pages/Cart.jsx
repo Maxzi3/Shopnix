@@ -2,7 +2,6 @@ import { useCartContext } from "../Contexts/CartContext";
 import { HiOutlineTrash, HiPlus, HiMinus } from "react-icons/hi2";
 import Spinner from "../UI/Spinner";
 
-
 const CartPage = () => {
   const {
     cart,
@@ -15,39 +14,21 @@ const CartPage = () => {
     isDeleting,
     isUpdating,
     isClearing,
-   
   } = useCartContext();
 
-  ;
-
-  // const dummyCart = [
-  //   {
-  //     id: 1,
-  //     name: "Nike Air Max",
-  //     price: 18000,
-  //     quantity: 2,
-  //     image: "https://via.placeholder.com/80",
-  //   },
-  //   {
-  //     id: 2,
-  //     name: "Adidas Hoodie",
-  //     price: 12000,
-  //     quantity: 1,
-  //     image: "https://via.placeholder.com/80",
-  //   },
-  // ];
   if (isLoading) return <Spinner />;
-  // console.log(cart)
+  console.log(cart)
+
   return (
-    <div className="p-6 space-y-8 md:max-w-3xl max-h-screen mx-auto">
+    <div className="px-6 md:pt-4 space-y-8 md:max-w-3xl max-h-auto mx-auto mb-[100px] ">
       <h1 className="text-2xl font-bold">Your Cart</h1>
 
-      {cart.length === 0 ? (
+      {cart.items?.length === 0 ? (
         <p className="text-gray-500">Your cart is empty.</p>
       ) : (
         <>
           <div className="grid gap-4">
-            {cart.map((item) => (
+            {cart.items.map((item) => (
               <div
                 key={item.product._id}
                 className="flex flex-col md:flex-row md:items-center justify-between border p-4 rounded-lg shadow-sm space-y-4 md:space-y-0"
@@ -67,10 +48,10 @@ const CartPage = () => {
                       {item.product.name}
                     </h2>
                     <p className="text-sm text-gray-600">
-                      ₦{item.product.price} × {totalQuantity}
+                      ₦{item.product.price} × {item.quantity}
                     </p>
                     <p className="text-sm text-gray-800 font-semibold">
-                      Total: ₦{item.product.price * item.product.quantity}
+                      Total: ₦{item.product.price * item.quantity}
                     </p>
                   </div>
                 </div>
@@ -82,18 +63,18 @@ const CartPage = () => {
                       disabled={isUpdating}
                       onClick={() =>
                         updateCartQuantity(
-                          item.product._id,
-                          item.product.quantity > 1 ? item.product.quantity - 1 : 1
+                          item._id,
+                          item.quantity > 1 ? item.quantity - 1 : 1
                         )
                       }
                     >
                       <HiMinus className="w-8 h-8 border border-black rounded-full p-1" />
                     </button>
-                    <span className="w-6 text-center">{totalQuantity}</span>
+                    <span className="w-6 text-center">{item.quantity}</span>
                     <button
                       disabled={isUpdating}
                       onClick={() =>
-                        updateCartQuantity(item.product._id, item.product.quantity + 1)
+                        updateCartQuantity(item._id, item.quantity + 1)
                       }
                     >
                       <HiPlus className="w-8 h-8 border border-black rounded-full p-1" />
@@ -101,18 +82,23 @@ const CartPage = () => {
                   </div>
                   <button
                     disabled={isDeleting}
-                    onClick={() => removeFromCart(item.product._id)}
+                    onClick={() => removeFromCart(item._id)}
                   >
                     <HiOutlineTrash className="w-6 h-6 text-red-500" />
                   </button>
                 </div>
               </div>
             ))}
-            <p className="text-lg font-semibold">SubTotal:₦{totalPrice}</p>
+
+            {/* Displaying overall totals for the cart */}
+            <p className="text-lg font-semibold">SubTotal: ₦{totalPrice}</p>
+            <p className="text-sm text-gray-600">
+              Total Quantity: {totalQuantity}
+            </p>
           </div>
 
           {/* Cart Summary */}
-          <div className="fixed bottom-0 left-0 w-full bg-white border-t md:static md:border-none p-4 flex flex-col md:flex-row justify-between items-center gap-4">
+          <div className=" w-full bg-white p-4 flex flex-col md:flex-row justify-between items-center gap-4 ">
             <button className="bg-blue-600 text-white w-full md:w-auto px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition">
               Proceed to Checkout
             </button>

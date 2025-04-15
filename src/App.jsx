@@ -18,13 +18,14 @@ import ForgotPassword from "./Pages/ForgetPassword";
 import AccountLayout from "./UI/AccountLayout";
 import UpdateUserDataForm from "./features/Authentication/UpdateUserDataForm";
 import OrderDetails from "./features/orders/OrderDetails";
+import ProtectedRoute from "./UI/ProtectedRoute";
 
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      // The amount it takes before a refetch
-      staleTime: 0,
-      // staleTime: 60 * 1000,
+      refetchOnWindowFocus: false,
+      retry: 1,
+      staleTime: 1000 * 60 * 5,
     },
   },
 });
@@ -40,12 +41,32 @@ const App = () => {
         {/* App Layout (for users after login) */}
         <Route path="/" element={<AppLayout />}>
           <Route index element={<HomePage />} />
-          <Route path="/cart" element={<CartPage />} />
-          <Route path="/order" element={<OrderPage />} />
+          <Route
+            path="/cart"
+            element={
+              <ProtectedRoute>
+                <CartPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/order"
+            element={
+              <ProtectedRoute>
+                <OrderPage />
+              </ProtectedRoute>
+            }
+          />
         </Route>
-
-        {/* Account Layout (maybe for settings/account management) */}
-        <Route path="/account" element={<AccountLayout />}>
+        
+        <Route
+          path="/account"
+          element={
+            <ProtectedRoute>
+              <AccountLayout />
+            </ProtectedRoute>
+          }
+        >
           <Route path="/account/profile" element={<ProfilePage />} />
           <Route path="/account/orders" element={<OrderPage />} />
           <Route path="/account/order/:orderId" element={<OrderDetails />} />

@@ -12,7 +12,7 @@ const Products = () => {
     return <p className="text-center text-gray-500">No products found.</p>;
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 space-y-5">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 md:space-y-5  justify-items-center gap-2 max-h-auto mb-[100px]">
       {products.data.map((product) => (
         <ProductCard key={product.id} product={product} />
       ))}

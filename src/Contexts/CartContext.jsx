@@ -23,7 +23,7 @@ const totalQuantity = useMemo(
     cart.items?.length
       ? cart.items.reduce((acc, item) => acc + item.quantity, 0)
       : 0,
-  [cart]
+  [cart.items]
 );
 
 const totalPrice = useMemo(
@@ -34,9 +34,8 @@ const totalPrice = useMemo(
           0
         )
       : 0,
-  [cart]
+  [cart.items]
 );
-
 
 
   // Wrappers for mutation functions

@@ -25,7 +25,7 @@ const ProductCard = ({ product }) => {
   const discountedPrice = price * (1 - priceDiscount / 100);
 
   return (
-    <div className="bg-white rounded-2xl w-[280px] hover:shadow-lg transition overflow-hidden border">
+    <div className="bg-white rounded-2xl w-[280px] hover:shadow-lg transition overflow-hidden border mb-5">
       {/* Product Image */}
       <img src={imageUrl} alt={name} className="h-48 w-full object-cover" />
 

@@ -10,12 +10,12 @@ export function useSignup() {
   const [user, setUser] = useLocalStorage(null, "user"); // Store user in localStorage
 
   const { mutate: signup, isLoading } = useMutation({
-    mutationFn: ({ fullName, email, password, passwordConfirm }) =>
-      signupUser({ fullName, email, password, passwordConfirm }),
+    mutationFn: ({ fullName, email, phoneNumber, password, passwordConfirm }) =>
+      signupUser({ fullName, email, phoneNumber, password, passwordConfirm }),
     onSuccess: (user) => {
       toast.success("Account created successfully!");
       setUser(user); // Store user data in local storage
-      navigate("/home"); // Redirect user to homepage
+      navigate("/"); 
     },
     onError: (err) => {
       toast.error(err.message || "Signup failed");
