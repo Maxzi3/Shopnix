@@ -75,12 +75,27 @@ export async function resetPassword({ token, password, passwordConfirm }) {
 }
 export async function updateMe(userData) {
   try {
-    const { data } = await api.patch("/users/updateMe", userData);
+    const formData = new FormData();
+
+    // Append each property if it exists
+    if (userData.fullName) formData.append("fullName", userData.fullName);
+    if (userData.address) formData.append("address", userData.address);
+    if (userData.phoneNumber)
+      formData.append("phoneNumber", userData.phoneNumber);
+    // if (userData.avatar) formData.append("photo", userData.avatar);
+
+    const { data } = await api.patch("/users/updateMe", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+
     return data;
   } catch (error) {
     throw new Error(error.response?.data?.message || "Update failed");
   }
 }
+
 export async function deleteMe() {
   try {
     const { data } = await api.delete("/users/deleteMe");

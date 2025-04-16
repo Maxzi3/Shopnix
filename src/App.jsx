@@ -19,6 +19,7 @@ import AccountLayout from "./UI/AccountLayout";
 import UpdateUserDataForm from "./features/Authentication/UpdateUserDataForm";
 import OrderDetails from "./features/orders/OrderDetails";
 import ProtectedRoute from "./UI/ProtectedRoute";
+import Reviews from "./features/Reviews/Reviews";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -68,6 +69,7 @@ const App = () => {
           }
         >
           <Route path="/account/profile" element={<ProfilePage />} />
+          <Route path="/account/reviews" element={<Reviews/>} />
           <Route path="/account/orders" element={<OrderPage />} />
           <Route path="/account/order/:orderId" element={<OrderDetails />} />
           <Route path="/account/updatedata" element={<UpdateUserDataForm />} />

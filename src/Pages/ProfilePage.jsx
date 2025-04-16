@@ -1,21 +1,24 @@
 import { HiArrowRight } from "react-icons/hi2";
 import { useNavigate } from "react-router-dom";
+import { useGetMe } from "../features/Authentication/useGetMe";
+import Spinner from "../UI/Spinner";
 
 const ProfilePage = () => {
+  const { user, isLoading } = useGetMe();
   const navigate = useNavigate();
+
   const handleClick = () => {
-    navigate("/account/updatedata"); // go back
+    navigate("/account/updatedata");
   };
 
-  const user = {
-    name: "John Doe",
-    email: "john@example.com",
-    phone: "+234 812 345 6789",
-    address: "123 Main Street, Lagos, Nigeria",
-    joined: "January 15, 2024",
-    image: "https://i.pravatar.cc/150?img=3",
-  };
+  if (isLoading) return <Spinner />;
 
+  const emailStatusBadge = {
+    Pending: "bg-blue-100 text-blue-800",
+    Delivered: "bg-green-100 text-green-800",
+    Cancelled: "bg-red-100 text-red-800",
+  };
+  const getValueOrNil = (value) => value || "N/A";
   return (
     <div className=" bg-white px-4 py-8 md:w-[600px] max-w-xl mx-auto">
       <h1 className="text-2xl font-bold mb-6 text-center">Your Profile</h1>
@@ -23,8 +26,8 @@ const ProfilePage = () => {
       {/* Profile Image */}
       <div className="flex justify-center mb-6 z-10">
         <img
-          src={user.image}
-          alt={user.name}
+          src={getValueOrNil(user.data.doc.photo)}
+          alt={user.data.doc.fullName}
           className="w-24 h-24 rounded-full object-cover  border-2 border-blue-500"
         />
       </div>
@@ -33,24 +36,40 @@ const ProfilePage = () => {
       <div className="space-y-4 text-sm sm:text-base">
         <div className="flex justify-between items-center border-b pb-2">
           <span className="font-medium text-gray-600">Name:</span>
-          <span>{user.name}</span>
+          <span>{getValueOrNil(user.data.doc.fullName)}</span>
         </div>
         <div className="flex justify-between items-center border-b pb-2">
           <span className="font-medium text-gray-600">Email:</span>
-          <span>{user.email}</span>
+          <span>{getValueOrNil(user.data.doc.email)}</span>
         </div>
         <div className="flex justify-between items-center border-b pb-2">
           <span className="font-medium text-gray-600">Phone:</span>
-          <span>{user.phone}</span>
+          <span>{getValueOrNil(user.data.doc.phoneNumber)}</span>
         </div>
         <div className="flex justify-between items-center border-b pb-2">
           <span className="font-medium text-gray-600">Address:</span>
-          <span className="text-right max-w-[60%]">{user.address}</span>
+          <span className="text-right max-w-[60%]">
+            {getValueOrNil(user.data.doc.address)}
+          </span>
         </div>
         <div className="flex justify-between items-center border-b pb-2">
           <span className="font-medium text-gray-600">Date Joined:</span>
-          <span>{user.joined}</span>
+          <span>{user.data.doc.createdAt}</span>
         </div>
+
+        {/* Email Verification Status */}
+        <div className="flex justify-between items-center border-b pb-2">
+          <span className="font-medium text-gray-600">Email Verified:</span>
+          <span
+            className={`px-2 py-1 rounded-full text-xs font-semibold capitalize ${
+              emailStatusBadge[user.data.doc.emailVerified?.toLowerCase()] ||
+              "bg-gray-100 text-gray-800"
+            }`}
+          >
+            {getValueOrNil(user.data.doc.emailVerified)}
+          </span>
+        </div>
+
         <button
           onClick={handleClick}
           className="flex items-center gap-3 bg-blue-600 text-white  md:w-auto px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition"

@@ -8,9 +8,7 @@ import ConfirmDelete from "./ConfirmDelete";
 import LogoutForm from "../features/Authentication/LogoutForm";
 
 const AccountLayout = () => {
-  const handleDeleteAccount = () => {
-    console.log("Deleting account..."); // call your mutation or logic here
-  };
+ 
   return (
     <Modal>
       <div className="hidden md:grid h-screen grid-cols-[18rem_1fr] grid-rows-[auto_1fr]">
@@ -31,7 +29,7 @@ const AccountLayout = () => {
       </div>
      
       <Modal.Window name="delete">
-        <ConfirmDelete resourceName="account" onConfirm={handleDeleteAccount} />
+        <ConfirmDelete  />
       </Modal.Window>
       <Modal.Window name="logout">
         <LogoutForm />

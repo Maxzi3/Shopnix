@@ -6,6 +6,7 @@
     HiOutlineArrowRightOnRectangle,
     HiOutlineUser,
   } from "react-icons/hi2";
+  import { MdOutlineRateReview } from "react-icons/md";
 import Modal from "./Modal";
 
   const AccountNav = () => {
@@ -18,6 +19,10 @@ import Modal from "./Modal";
         <NavLink to="/account/profile" className={linkclass}>
           <HiOutlineUser />
           Profile
+        </NavLink>
+        <NavLink to="/account/reviews" className={linkclass}>
+          <MdOutlineRateReview />
+          My Reviews
         </NavLink>
         <NavLink to="/account/orders" className={linkclass}>
           <HiOutlineClipboardDocumentList />
@@ -33,7 +38,7 @@ import Modal from "./Modal";
             Delete Account
           </button>
         </Modal.Open>
-        <Modal.Open opens="delete">
+        <Modal.Open opens="logout">
           <button className="flex items-center gap-3 font-medium text-base px-6 py-3 rounded-md transition-all text-gray-600 hover:bg-gray-100 hover:text-gray-800 w-full text-left">
             <HiOutlineArrowRightOnRectangle />
             Log Out

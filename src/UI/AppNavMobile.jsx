@@ -9,6 +9,7 @@ import {
   HiXMark,
   HiOutlineUser,
 } from "react-icons/hi2";
+import { MdOutlineRateReview } from "react-icons/md";
 
 import Logo from "./Logo";
 import DarkmodeToggle from "./DarkModeToggle";
@@ -54,6 +55,14 @@ const AppNavMobile = () => {
         >
           <HiOutlineUser />
           Profile
+        </NavLink>
+        <NavLink
+          to="/account/reviews"
+          onClick={ToggleMenu}
+          className={linkclass}
+        >
+          <MdOutlineRateReview />
+          My Reviews
         </NavLink>
         <NavLink
           to="/account/orders"

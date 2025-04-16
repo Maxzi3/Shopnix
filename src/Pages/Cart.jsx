@@ -1,6 +1,7 @@
 import { useCartContext } from "../Contexts/CartContext";
 import { HiOutlineTrash, HiPlus, HiMinus } from "react-icons/hi2";
 import Spinner from "../UI/Spinner";
+import { formatCurrency } from "../UI/helpers";
 
 const CartPage = () => {
   const {
@@ -17,7 +18,7 @@ const CartPage = () => {
   } = useCartContext();
 
   if (isLoading) return <Spinner />;
-  console.log(cart)
+  console.log(cart);
 
   return (
     <div className="px-6 md:pt-4 space-y-8 md:max-w-3xl max-h-auto mx-auto mb-[100px] ">
@@ -48,10 +49,10 @@ const CartPage = () => {
                       {item.product.name}
                     </h2>
                     <p className="text-sm text-gray-600">
-                      ₦{item.product.price} × {item.quantity}
+                      {formatCurrency(item.product.price)} × {item.quantity}
                     </p>
                     <p className="text-sm text-gray-800 font-semibold">
-                      Total: ₦{item.product.price * item.quantity}
+                      Total:{formatCurrency(item.product.price * item.quantity)}
                     </p>
                   </div>
                 </div>
@@ -91,7 +92,9 @@ const CartPage = () => {
             ))}
 
             {/* Displaying overall totals for the cart */}
-            <p className="text-lg font-semibold">SubTotal: ₦{totalPrice}</p>
+            <p className="text-lg font-semibold">
+              SubTotal:{formatCurrency(totalPrice)}
+            </p>
             <p className="text-sm text-gray-600">
               Total Quantity: {totalQuantity}
             </p>

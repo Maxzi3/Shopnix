@@ -7,6 +7,7 @@ import {
 } from "react-icons/fa";
 import RenderStars from "../../UI/RenderStars";
 import { useCartContext } from "../../Contexts/CartContext";
+import { formatCurrency } from "../../UI/helpers";
 
 const ProductCard = ({ product }) => {
   const { isAdding, addToCart } = useCartContext();
@@ -37,12 +38,12 @@ const ProductCard = ({ product }) => {
         <div className="flex items-center justify-between ">
           <div className="flex items-center gap-2">
             <span className="text-lg font-bold">
-              ${discountedPrice.toFixed(2)}
+              {formatCurrency(discountedPrice)}
             </span>
             {priceDiscount > 0 && (
               <>
                 <span className="text-xs line-through text-gray-500">
-                  ${price.toFixed(2)}
+                  {formatCurrency(price)}
                 </span>
               </>
             )}
