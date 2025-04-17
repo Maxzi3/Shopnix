@@ -44,11 +44,14 @@ export async function updateMyPassword({
   passwordConfirm,
 }) {
   try {
-    const { data } = await api.patch("/users/updateMyPassword", {
-      passwordCurrent,
-      password,
-      passwordConfirm,
-    });
+    const { data } = await api.patch(
+      "/users/updateMyPassword",
+      { passwordCurrent, password, passwordConfirm },
+      {
+        withCredentials: true, // This ensures the cookies are sent with the request
+      }
+    );
+
     return data;
   } catch (error) {
     throw new Error(error.response?.data?.message || "Password update failed");
@@ -75,18 +78,9 @@ export async function resetPassword({ token, password, passwordConfirm }) {
 }
 export async function updateMe(userData) {
   try {
-    const formData = new FormData();
-
-    // Append each property if it exists
-    if (userData.fullName) formData.append("fullName", userData.fullName);
-    if (userData.address) formData.append("address", userData.address);
-    if (userData.phoneNumber)
-      formData.append("phoneNumber", userData.phoneNumber);
-    // if (userData.avatar) formData.append("photo", userData.avatar);
-
-    const { data } = await api.patch("/users/updateMe", formData, {
+    const { data } = await api.patch("/users/updateMe", userData, {
       headers: {
-        "Content-Type": "multipart/form-data",
+        "Content-Type": "application/json",
       },
     });
 
@@ -110,16 +104,14 @@ export async function getMe() {
     const { data } = await api.get("/users/me");
     return data;
   } catch (error) {
-    throw new Error(error.response?.data?.message || "Failed to fetch user data");
+    throw new Error(
+      error.response?.data?.message || "Failed to fetch user data"
+    );
   }
 }
-
-
 
 // ORDER
 export const createOrder = async (orderData) => {
   const response = await api.post("/orders", orderData);
   return response.data;
 };
-
-

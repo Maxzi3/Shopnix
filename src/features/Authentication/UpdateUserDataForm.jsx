@@ -1,8 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useUpdateMe } from "./useUpdateMe";
 import { useGetMe } from "./useGetMe";
+import toast from "react-hot-toast";
+import Spinner from "../../UI/Spinner";
+import { FiX } from "react-icons/fi";
 
 function UpdateUserDataForm() {
+  const [preview, setPreview] = useState(null);
+  const fileInputRef = useRef();
+
   const { user, isLoading } = useGetMe();
 
   const {
@@ -15,7 +21,6 @@ function UpdateUserDataForm() {
   } = user?.data?.doc || {};
 
   const { updateUser, isUpdating } = useUpdateMe();
-
   const [fullName, setFullName] = useState("");
   const [address, setAddress] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -32,7 +37,18 @@ function UpdateUserDataForm() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    if (!fullName || !address || !phoneNumber) return;
+    if (!fullName) {
+      toast.error("Full name is required.");
+      return;
+    }
+    if (!address) {
+      toast.error("Address is required.");
+      return;
+    }
+    if (!phoneNumber) {
+      toast.error("Phone number is required.");
+      return;
+    }
 
     const userData = { fullName, address, phoneNumber };
     if (avatar) userData.avatar = avatar;
@@ -49,14 +65,47 @@ function UpdateUserDataForm() {
     setAddress(currentAddress || "");
     setPhoneNumber(currentPhoneNumber || "");
     setAvatar(null);
+    setPreview(null);
+    fileInputRef.current.value = null;
+    toast.success("Changes reverted");
+  }
+  const isDirty =
+    fullName !== (currentFullName || "") ||
+    address !== (currentAddress || "") ||
+    phoneNumber !== (currentPhoneNumber || "") ||
+    avatar !== null;
+  function handleAvatarChange(e) {
+    const file = e.target.files[0];
+
+    // Check if a file is selected
+    if (!file) return;
+
+    // Validate file type and size
+    if (!file.type.startsWith("image/")) {
+      toast.error("Please select a valid image.");
+      return;
+    }
+
+    if (file.size > 5 * 1024 * 1024) {
+      toast.error("Image size exceeds 5MB.");
+      return;
+    }
+
+    setAvatar(file);
+
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setPreview(reader.result);
+    };
+    reader.readAsDataURL(file);
   }
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <Spinner />;
 
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-white md:w-[600px] mx-auto flex flex-col justify-center p-8 rounded-lg space-y-6 text-sm border border-gray-200"
+      className="bg-white md:w-[600px] mx-auto flex flex-col justify-center p-8 rounded-lg space-y-6 text-sm md:border border-gray-200"
     >
       {/* Email */}
       <div>
@@ -87,21 +136,22 @@ function UpdateUserDataForm() {
       </div>
 
       {/* Avatar Display */}
-      <div>
-        <label className="block font-medium mb-1">Current Avatar</label>
-        {currentPhoto ? (
-          <img
-            src={currentPhoto}
-            alt="User Avatar"
-            className="w-20 h-20 object-cover rounded-full border border-gray-300"
-          />
-        ) : (
-          <div className="w-20 h-20 flex items-center justify-center rounded-full bg-gray-200 text-gray-600">
-            N/A
-          </div>
-        )}
+      <div className="flex md:flex-row flex-col items-center md:space-y-4 md:space-x-5">
+        <div>
+          <label className="block font-medium mb-1">Current Avatar</label>
+          {currentPhoto ? (
+            <img
+              src={currentPhoto}
+              alt="User Avatar"
+              className="w-20 h-20 object-cover rounded-full border border-gray-300"
+            />
+          ) : (
+            <div className="w-20 h-20 flex items-center justify-center rounded-full bg-gray-200 text-gray-600">
+              N/A
+            </div>
+          )}
+        </div>
       </div>
-
       {/* Full Name */}
       <div>
         <label htmlFor="fullName" className="block font-medium mb-1">
@@ -124,7 +174,7 @@ function UpdateUserDataForm() {
         </label>
         <input
           type="text"
-          id="address"
+          id="addressField"
           value={address}
           onChange={(e) => setAddress(e.target.value)}
           disabled={isUpdating}
@@ -147,8 +197,21 @@ function UpdateUserDataForm() {
         />
       </div>
 
+      {preview && (
+        <div className="flex flex-col ">
+          <div>
+            <p className="block font-medium mb-1">Selected Preview:</p>
+            <img
+              src={preview}
+              alt="Selected preview"
+              className="w-20 h-20 object-cover rounded-full border border-gray-300"
+            />
+          </div>
+        </div>
+      )}
+
       {/* Avatar Upload */}
-      <div>
+      <div className="relative">
         <label htmlFor="avatar" className="block font-medium mb-1">
           Avatar image
         </label>
@@ -156,10 +219,26 @@ function UpdateUserDataForm() {
           type="file"
           id="avatar"
           accept="image/*"
-          onChange={(e) => setAvatar(e.target.files[0])}
+          onChange={handleAvatarChange}
+          ref={fileInputRef}
           disabled={isUpdating}
-          className="w-full p-3 border border-gray-300 rounded-md file:border-0 file:bg-black file:text-white file:px-4 file:py-2 file:rounded-md file:cursor-pointer disabled:cursor-not-allowed"
+          className="w-full p-3 pr-10 border border-gray-300 rounded-md file:border-0 file:bg-black file:text-white file:px-4 file:py-2 file:rounded-md file:cursor-pointer disabled:cursor-not-allowed"
         />
+
+        {preview && (
+          <button
+            type="button"
+            onClick={() => {
+              setAvatar(null);
+              setPreview(null);
+              fileInputRef.current.value = null;
+            }}
+            className="absolute top-1/2 -translate-y-1/2 right-3 text-red-600 p-1 rounded-full hover:bg-red-100 transition-all"
+            aria-label="Remove image"
+          >
+            <FiX size={18} />
+          </button>
+        )}
       </div>
 
       {/* Buttons */}
@@ -174,9 +253,12 @@ function UpdateUserDataForm() {
         </button>
         <button
           type="submit"
-          onClick={handleSubmit}
-          disabled={isUpdating}
-          className="px-4 py-2 bg-black text-white rounded-md hover:bg-gray-800 disabled:bg-gray-400"
+          disabled={!isDirty || isUpdating}
+          className={`px-4 py-2 rounded-md ${
+            !isDirty || isUpdating
+              ? "bg-gray-400 cursor-not-allowed"
+              : "bg-black text-white hover:bg-gray-800"
+          }`}
         >
           Update account
         </button>

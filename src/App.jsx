@@ -16,10 +16,10 @@ import Login from "./Pages/Login";
 import Signup from "./Pages/Signup";
 import ForgotPassword from "./Pages/ForgetPassword";
 import AccountLayout from "./UI/AccountLayout";
-import UpdateUserDataForm from "./features/Authentication/UpdateUserDataForm";
 import OrderDetails from "./features/orders/OrderDetails";
 import ProtectedRoute from "./UI/ProtectedRoute";
 import Reviews from "./features/Reviews/Reviews";
+import UpdatePage from "./Pages/UpdatePage";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -59,7 +59,7 @@ const App = () => {
             }
           />
         </Route>
-        
+
         <Route
           path="/account"
           element={
@@ -69,10 +69,10 @@ const App = () => {
           }
         >
           <Route path="/account/profile" element={<ProfilePage />} />
-          <Route path="/account/reviews" element={<Reviews/>} />
+          <Route path="/account/reviews" element={<Reviews />} />
           <Route path="/account/orders" element={<OrderPage />} />
           <Route path="/account/order/:orderId" element={<OrderDetails />} />
-          <Route path="/account/updatedata" element={<UpdateUserDataForm />} />
+          <Route path="/account/updatedata" element={<UpdatePage />} />
         </Route>
       </Route>
     )
