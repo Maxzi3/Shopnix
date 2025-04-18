@@ -20,6 +20,7 @@ import OrderDetails from "./features/orders/OrderDetails";
 import ProtectedRoute from "./UI/ProtectedRoute";
 import Reviews from "./features/Reviews/Reviews";
 import UpdatePage from "./Pages/UpdatePage";
+import ProductDetailsPage from "./features/Product/ProductDetailsPage";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -42,6 +43,7 @@ const App = () => {
         {/* App Layout (for users after login) */}
         <Route path="/" element={<AppLayout />}>
           <Route index element={<HomePage />} />
+          <Route path="/product/:slug" element={<ProductDetailsPage />} />
           <Route
             path="/cart"
             element={

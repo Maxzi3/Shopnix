@@ -111,7 +111,13 @@ function UpdatePasswordForm() {
           disabled={isLoading}
           className="px-4 py-2 bg-black text-white rounded-md hover:bg-gray-800 disabled:bg-gray-400"
         >
-          Update Password
+          {isLoading ? (
+            <div className="flex justify-center">
+              <SpinnerMini />
+            </div>
+          ) : (
+            "Update Password"
+          )}
         </button>
       </div>
     </form>

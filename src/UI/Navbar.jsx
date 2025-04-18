@@ -7,7 +7,7 @@ import { HiArrowLeft } from "react-icons/hi";
 import { useGetMe } from "../features/Authentication/useGetMe";
 
 const Navbar = () => {
-  const { isAuthenticated, user } = useGetMe();
+  const { isAuthenticated} = useGetMe();
   const location = useLocation();
   const { totalQuantity } = useCartContext();
   const isCartPage = location.pathname === "/cart";
@@ -24,12 +24,12 @@ const Navbar = () => {
         </Link>
 
         <select name="Cat" className="p-2 rounded">
-          <option disabled defaultValue>
+          <option >
             Categories
           </option>
-          <option>Electronics</option>
-          <option>Clothing</option>
-          <option>Books</option>
+          <option>Jerseys</option>
+          <option>Shoes</option>
+          <option>watches</option>
         </select>
 
         <input

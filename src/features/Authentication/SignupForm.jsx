@@ -144,7 +144,13 @@ function SignupForm() {
           disabled={isLoading}
           className="px-4 py-3 w-[150px] bg-black text-white rounded-md hover:bg-gray-800 disabled:bg-gray-400"
         >
-          Sign up
+          {isLoading ? (
+            <div className="flex justify-center">
+              <SpinnerMini />
+            </div>
+          ) : (
+            "Signup"
+          )}
         </button>
         <p className="py-2 ">
           Have an account?{" "}

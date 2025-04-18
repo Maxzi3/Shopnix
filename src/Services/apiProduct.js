@@ -10,11 +10,14 @@ export async function getProducts() {
     throw new Error(error.response?.data?.message || "Failed to fetch data");
   }
 }
-export async function getProductById(productId) {
+export async function getProductBySlug(productSlug) {
   try {
-    const { data } = await api.get(`/products/${productId}`);
-    return data;
+    const { data } = await api.get(`/products/${productSlug}`, {
+      withCredentials: true,
+    });
+    return data; 
   } catch (error) {
+    console.error("getProductBySlug - Error:", error.response?.data || error);
     throw new Error(error.response?.data?.message || "Failed to fetch product");
   }
 }

@@ -23,7 +23,13 @@ const LogoutForm = ({ onCloseModal }) => {
           onClick={() => logout()}
           className="bg-red-700 text-red-100 text-base p-2 rounded-lg shadow-sm"
         >
-          Logout
+          {isPending ? (
+            <div className="flex justify-center">
+              <SpinnerMini />
+            </div>
+          ) : (
+            "Logout"
+          )}
         </button>
       </div>
     </div>

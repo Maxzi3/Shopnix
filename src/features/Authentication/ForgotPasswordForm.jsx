@@ -49,12 +49,12 @@ function ForgotPasswordForm() {
             disabled={isLoading}
             className="w-[150px] mx-[100px] mt-2 py-3 bg-black text-white rounded-md disabled:bg-gray-400"
           >
-            {!isLoading ? (
-              "Send Reset Link"
-            ) : (
+            {isLoading ? (
               <div className="flex justify-center">
                 <SpinnerMini />
               </div>
+            ) : (
+              "Send Reset Email"
             )}
           </button>
           <p className="p-4 text-center">
@@ -72,4 +72,4 @@ function ForgotPasswordForm() {
   );
 }
 
-export default ForgotPasswordForm; 
+export default ForgotPasswordForm;

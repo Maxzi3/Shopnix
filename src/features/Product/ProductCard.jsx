@@ -8,9 +8,12 @@ import {
 import RenderStars from "../../UI/RenderStars";
 import { useCartContext } from "../../Contexts/CartContext";
 import { formatCurrency } from "../../UI/helpers";
+import { useGetMe } from "../Authentication/useGetMe";
+import { Link } from "react-router-dom";
 
 const ProductCard = ({ product }) => {
   const { isAdding, addToCart } = useCartContext();
+  const { isAuthenticated} = useGetMe();
   const {
     name,
     price,
@@ -32,7 +35,12 @@ const ProductCard = ({ product }) => {
 
       {/* Content */}
       <div className="p-4 space-y-2">
-        <h3 className="text-lg font-semibold text-gray-800">{name}</h3>
+        <Link
+          to={`/product/${product.slug}`}
+          className="text-lg font-semibold hover:text-blue-500 text-gray-800"
+        >
+          {name}
+        </Link>
 
         {/* Price Section */}
         <div className="flex items-center justify-between ">
@@ -50,17 +58,19 @@ const ProductCard = ({ product }) => {
           </div>
 
           {/* Add to Cart or Out of Stock Button with Icons */}
-          <button
-            disabled={stockNo === 0 || isAdding}
-            onClick={() => addToCart(_id, 1)}
-            className={`w-[30px] h-[30px] flex items-center justify-center rounded-full transition ${
-              stockNo === 0
-                ? "cursor-not-allowed text-gray-400"
-                : "border border-black hover:text-blue-700"
-            }`}
-          >
-            {stockNo === 0 ? "" : <FaCartPlus />}
-          </button>
+          {isAuthenticated && (
+            <button
+              disabled={stockNo === 0 || isAdding}
+              onClick={() => addToCart(_id, 1)}
+              className={`w-[30px] h-[30px] flex items-center justify-center rounded-full transition ${
+                stockNo === 0
+                  ? "cursor-not-allowed text-gray-400"
+                  : "border border-black hover:text-blue-700"
+              }`}
+            >
+              {stockNo === 0 ? "" : <FaCartPlus />}
+            </button>
+          )}
         </div>
 
         {/* Stock */}

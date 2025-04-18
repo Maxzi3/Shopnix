@@ -4,6 +4,7 @@ import { useGetMe } from "./useGetMe";
 import toast from "react-hot-toast";
 import Spinner from "../../UI/Spinner";
 import { FiX } from "react-icons/fi";
+import SpinnerMini from "../../ui/SpinnerMini";
 
 function UpdateUserDataForm() {
   const [preview, setPreview] = useState(null);
@@ -260,7 +261,13 @@ function UpdateUserDataForm() {
               : "bg-black text-white hover:bg-gray-800"
           }`}
         >
-          Update account
+          {isUpdating ? (
+            <div className="flex justify-center">
+              <SpinnerMini />
+            </div>
+          ) : (
+            "Update account"
+          )}
         </button>
       </div>
     </form>

@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
-import { getProductById } from "../../Services/apiProduct";
+import { getProductBySlug } from "../../Services/apiProduct";
 
 export function useProduct(productId) {
   return useQuery({
     queryKey: ["product", productId],
-    queryFn: () => getProductById(productId),
+    queryFn: () => getProductBySlug(productId),
     retry: false,
     enabled: !!productId, // Ensures the query only runs if productId is available
   });

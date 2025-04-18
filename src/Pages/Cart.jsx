@@ -110,7 +110,13 @@ const CartPage = () => {
               onClick={clearCart}
               className="bg-red-600 text-white w-full md:w-auto px-6 py-3 rounded-lg font-medium hover:bg-red-700 transition"
             >
-              Clear Cart
+              {isClearing ? (
+                <div className="flex justify-center">
+                  <SpinnerMini />
+                </div>
+              ) : (
+                "Clear Cart"
+              )}
             </button>
           </div>
         </>
