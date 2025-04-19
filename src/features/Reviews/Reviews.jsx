@@ -1,6 +1,9 @@
 import { FiEdit, FiTrash2 } from "react-icons/fi";
+import { useReviews } from "./useReviews";
 
 function Reviews() {
+  const { reviews, isLoading, error } = useReviews;
+  console.log(reviews);
   const myReviews = [
     {
       id: 1,

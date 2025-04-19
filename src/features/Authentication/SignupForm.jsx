@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { useSignup } from "./useSignup";
 import Spinner from "../../UI/Spinner";
 import { Link } from "react-router-dom";
+import SpinnerMini from "../../UI/SpinnerMini";
 
 function SignupForm() {
   const { register, formState, getValues, handleSubmit, reset } = useForm();

@@ -1,16 +1,16 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { createReviewOnProduc } from "../../Services/apiReviews";
+import { createReviewOnProduct } from "../../Services/apiReviews";
 import { toast } from "react-hot-toast";
 
-export function useCreateReview(productId) {
+export function useCreateReviewProduct(productId) {
   const queryClient = useQueryClient();
 
   const { mutate: submitReview, isLoading } = useMutation({
-    mutationFn: ({ review, rating }) =>
-      createReviewOnProduc({ productId, review, rating }),
+    mutationFn: ({ productId, review, rating }) =>
+      createReviewOnProduct({ productId, review, rating }),
     onSuccess: () => {
       toast.success("Review submitted successfully!");
-      queryClient.invalidateQueries(["reviews", productId]); // Refetch product reviews
+      queryClient.invalidateQueries(["product", productId]);
     },
     onError: (err) => {
       toast.error(err.message || "Could not submit review");

@@ -1,10 +1,19 @@
 import { useState } from "react";
 import { MdCategory } from "react-icons/md";
+import { useSearchParams } from "react-router-dom";
 
 const CategoryDropdown = () => {
   const [open, setOpen] = useState(false);
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  const categories = ["Electronics", "Clothing", "Books"];
+  const categories = ["all", "jerseys", "watches", "shoes"];
+  const filterValue = searchParams.get("category") || "all"; // Get the selected category from URL search params
+
+  const handleCategoryChange = (category) => {
+    searchParams.set("category", category); // Set the new category in search params
+    setSearchParams(searchParams); // Update the URL
+    setOpen(false); // Close the dropdown
+  };
 
   return (
     <div className="relative inline-block">
@@ -14,23 +23,20 @@ const CategoryDropdown = () => {
           {categories.map((cat) => (
             <li
               key={cat}
-              className="p-2 hover:bg-gray-100 cursor-pointer"
-              onClick={() => {
-                console.log("Selected:", cat);
-                setOpen(false);
-              }}
+              className={`p-2 cursor-pointer hover:bg-gray-100 ${
+                cat === filterValue ? "bg-gray-200" : ""
+              }`} // Highlight the selected category
+              onClick={() => handleCategoryChange(cat)} // Handle category change
             >
-              {cat}
+              {cat.charAt(0).toUpperCase() + cat.slice(1)}{" "}
+              {/* Capitalize first letter */}
             </li>
           ))}
         </ul>
       )}
 
       {/* Icon Button */}
-      <button
-        onClick={() => setOpen(!open)}
-        className="p-2 rounded-full "
-      >
+      <button onClick={() => setOpen(!open)} className="p-2 rounded-full">
         <MdCategory />
       </button>
     </div>

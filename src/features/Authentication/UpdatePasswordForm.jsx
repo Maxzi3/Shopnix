@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import { useUpdatePassword } from "./useUpdatePassword";
 import Spinner from "../../UI/Spinner";
+import SpinnerMini from "../../ui/SpinnerMini";
 
 function UpdatePasswordForm() {
   const { register, formState, getValues, handleSubmit, reset } = useForm();

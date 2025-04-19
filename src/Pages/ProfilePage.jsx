@@ -27,7 +27,7 @@ const ProfilePage = () => {
       <div className="flex justify-center mb-6 z-10">
         <img
           src={getValueOrNil(user.data.doc.photo)}
-          alt={user.data.doc.fullName}
+          alt={user.data.doc.fullName?.split(" ")[1]}
           className="w-24 h-24 rounded-full object-cover  border-2 border-blue-500"
         />
       </div>

@@ -1,42 +1,51 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useSearchParams } from "react-router-dom";
 import DarkmodeToggle from "./DarkModeToggle";
 import { HiOutlineShoppingCart, HiOutlineUser } from "react-icons/hi2";
 import Logo from "./Logo";
 import { useCartContext } from "../Contexts/CartContext";
 import { HiArrowLeft } from "react-icons/hi";
 import { useGetMe } from "../features/Authentication/useGetMe";
+import Input from "./Input";
 
 const Navbar = () => {
-  const { isAuthenticated} = useGetMe();
+  const { isAuthenticated } = useGetMe();
   const location = useLocation();
   const { totalQuantity } = useCartContext();
   const isCartPage = location.pathname === "/cart";
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const filterValue = searchParams.get("category") || "all";
+
+  const handleFilterChange = (e) => {
+    searchParams.set("category", e.target.value);
+    setSearchParams(searchParams);
+  };
 
   return (
-    <header className="text-gray-600 body-font">
+    <header className="relative text-gray-600 body-font">
       {/* Desktop View */}
       <div className="hidden container mx-auto md:flex justify-between p-5 flex-row items-center">
         <Link
           to="/"
-          className="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0"
+          className="flex title-font font-medium items-center text-gray-900 mb-4 mr-2 md:mb-0"
         >
           <Logo />
         </Link>
 
-        <select name="Cat" className="p-2 rounded">
-          <option >
-            Categories
-          </option>
-          <option>Jerseys</option>
-          <option>Shoes</option>
-          <option>watches</option>
+        {/* Category Filter */}
+        <select
+          className="border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300"
+          value={filterValue}
+          onChange={handleFilterChange}
+        >
+          <option value="all">All Categories</option>
+          <option value="jerseys">Jerseys</option>
+          <option value="watches">Watches</option>
+          <option value="shoes">Shoes</option>
         </select>
 
-        <input
-          className="border-2 w-[500px] rounded-full p-2"
-          type="text"
-          placeholder="Search Shopnix"
-        />
+        {/* Search Input */}
+        <Input />
 
         <div className="flex justify-between gap-5 items-center text-3xl">
           {/* 👇 Only show if authenticated */}
@@ -86,15 +95,11 @@ const Navbar = () => {
       </div>
 
       {/* Mobile View */}
-      <div className="md:hidden container mx-auto flex justify-between p-3 flex-row items-center mt-2 mb-10">
+      <div className="md:hidden container mx-auto flex justify-between p-3 gap-4 flex-row items-center mt-2 mb-10">
         <Link to="/">
           <Logo />
         </Link>
-        <input
-          className="border-2 md:w-[200px] text-xs rounded-full p-2"
-          type="text"
-          placeholder="Search Shopnix"
-        />
+        <Input />
       </div>
     </header>
   );

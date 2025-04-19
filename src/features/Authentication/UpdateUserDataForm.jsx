@@ -212,7 +212,7 @@ function UpdateUserDataForm() {
       )}
 
       {/* Avatar Upload */}
-      <div className="relative">
+      <div className="">
         <label htmlFor="avatar" className="block font-medium mb-1">
           Avatar image
         </label>

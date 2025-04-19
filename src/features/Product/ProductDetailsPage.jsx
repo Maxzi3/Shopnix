@@ -2,32 +2,44 @@ import { useParams } from "react-router-dom";
 import { FiStar } from "react-icons/fi";
 import { useState } from "react";
 import { useProduct } from "./useProduct";
+import { formatCurrency } from "../../UI/helpers";
+import { useCartContext } from "../../Contexts/CartContext";
+import { FaStar } from "react-icons/fa";
+import { useCreateReviewProduct } from "../Reviews/useCreateReviewProduct";
+import Spinner from "../../UI/Spinner";
+import StarRating from "../../UI/StarRating";
 
 const ProductDetailsPage = () => {
   const { slug } = useParams();
-  const { data, isLoading, isError } = useProduct(slug);
+  const { data, isLoading } = useProduct(slug);
   const product = data?.data;
-
-  console.log(product);
-
+  const { isAdding, addToCart } = useCartContext();
   const [reviewText, setReviewText] = useState("");
-  const [rating, setRating] = useState(5);
+  const [rating, setRating] = useState(0);
+  const { submitReview, isLoading: isCreating } = useCreateReviewProduct();
 
-  if (isLoading) return <div>Loading...</div>;
-  if (isError) return <div>Error loading product</div>;
-  if (!product) return <div>No product found</div>;
+  if (isLoading)
+    return (
+      <div>
+        <Spinner />{" "}
+      </div>
+    );
 
   const discountPrice = product.price - (product.priceDiscount || 0);
 
   function handleReviewSubmit(e) {
     e.preventDefault();
-    console.log("New review:", { reviewText, rating });
+    submitReview({
+      productId: product._id,
+      review: reviewText,
+      rating,
+    });
     setReviewText("");
     setRating(5);
   }
 
   return (
-    <div className="max-w-5xl mx-auto p-6 space-y-10">
+    <div className="px-6 md:pt-4 md:max-w-3xl max-h-auto mx-auto mb-[100px] max-w-5xl p-6 space-y-10">
       {/* Product Info */}
       <div className="grid md:grid-cols-2 gap-6">
         <img
@@ -48,11 +60,11 @@ const ProductDetailsPage = () => {
             </span>
           </div>
           <p className="text-2xl font-bold text-green-600">
-            ${discountPrice.toFixed(2)}
+            {formatCurrency(discountPrice)}
           </p>
           {product.priceDiscount && (
             <p className="text-sm line-through text-gray-500">
-              ${product.price.toFixed(2)}
+              {formatCurrency(product.price)}
             </p>
           )}
           <p
@@ -62,7 +74,11 @@ const ProductDetailsPage = () => {
           >
             {product.stockNo > 0 ? "In stock" : "Out of stock"}
           </p>
-          <button className="bg-black text-white px-6 py-2 rounded-md hover:bg-gray-800 transition">
+          <button
+            disabled={product.stockNo === 0 || isAdding}
+            onClick={() => addToCart(product._id, 1)}
+            className="bg-black text-white px-6 py-2 rounded-md hover:bg-gray-800 transition"
+          >
             Add to Cart
           </button>
         </div>
@@ -77,9 +93,13 @@ const ProductDetailsPage = () => {
               <div key={review._id} className="border p-3 rounded-md">
                 <div className="flex items-center gap-1">
                   <span className="font-medium">
-                    {review.user?.name || "Anonymous"}
+                    {review.user?.fullName?.split(" ")[1] || "Anonymous"}
                   </span>
-                  <span>{"⭐".repeat(review.rating)}</span>
+                  <span className="flex items-center text-yellow-500">
+                    {Array.from({ length: review.rating }, (_, index) => (
+                      <FaStar key={index} />
+                    ))}
+                  </span>
                 </div>
                 <p className="text-gray-700 mt-1">{review.review}</p>
               </div>
@@ -96,26 +116,15 @@ const ProductDetailsPage = () => {
         <form onSubmit={handleReviewSubmit} className="space-y-4">
           <div>
             <label className="block mb-1 font-medium">Your Rating</label>
-            <div className="flex space-x-1">
-              {[1, 2, 3, 4, 5].map((num) => (
-                <button
-                  key={num}
-                  type="button"
-                  onClick={() => setRating(num)}
-                  className={`text-2xl ${
-                    num <= rating ? "text-yellow-500" : "text-gray-300"
-                  }`}
-                >
-                  ⭐
-                </button>
-              ))}
+            <div className="flex flex-col space-y-2">
+              <StarRating />
             </div>
           </div>
           <div>
             <label className="block mb-1 font-medium">Your Review</label>
             <textarea
-              value={reviewText} // Fixed: Changed from review to reviewText
-              onChange={(e) => setReviewText(e.target.value)} // Fixed: Changed from setReview
+              value={reviewText}
+              onChange={(e) => setReviewText(e.target.value)}
               rows={3}
               className="w-full p-3 border border-gray-300 rounded-md"
               placeholder="Share your experience..."
@@ -123,6 +132,7 @@ const ProductDetailsPage = () => {
           </div>
           <button
             type="submit"
+            disabled={isCreating}
             className="px-4 py-2 bg-black text-white rounded-md hover:bg-gray-800"
           >
             Submit Review

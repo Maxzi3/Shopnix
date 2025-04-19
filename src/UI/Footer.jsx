@@ -11,7 +11,7 @@ import { useCartContext } from "../Contexts/CartContext";
 import { useGetMe } from "../features/Authentication/useGetMe";
 
 const Footer = () => {
-  const { isAuthenticated, user } = useGetMe();
+  const { isAuthenticated } = useGetMe();
   const location = useLocation();
   const navigate = useNavigate();
   const { totalQuantity } = useCartContext();

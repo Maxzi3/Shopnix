@@ -1,3 +1,4 @@
+import SpinnerMini from "../../ui/SpinnerMini";
 import { useLogout } from "./useLogout";
 
 const LogoutForm = ({ onCloseModal }) => {

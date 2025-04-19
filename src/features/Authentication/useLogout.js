@@ -15,6 +15,7 @@ export function useLogout() {
     onSuccess: () => {
       // Remove token
       setToken(null);
+      localStorage.removeItem("token"); // 👈 force removal
 
       // Clear React Query cache
       queryClient.clear();
