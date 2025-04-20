@@ -8,6 +8,7 @@ import ConfirmDelete from "./ConfirmDelete";
 import LogoutForm from "../features/Authentication/LogoutForm";
 
 import { useState, useEffect } from "react";
+;
 
 const AccountLayout = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);

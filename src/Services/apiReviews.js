@@ -11,12 +11,26 @@ export async function createReview({ review, rating, product }) {
 export async function getReviews() {
   try {
     const { data } = await api.get("/reviews");
-    console.log(data)
+    console.log(data);
     return data;
   } catch (error) {
     throw new Error(error.response?.data?.message || "Failed to fetch reviews");
   }
 }
+
+export async function getUserReviews() {
+  try {
+    const res = await api.get("/reviews/user", {
+      withCredentials: true,
+    });
+    return res.data.data;
+  } catch (error) {
+    throw new Error(
+      error.response?.data?.message || "Failed to fetch user reviews"
+    );
+  }
+}
+
 
 export async function getReviewsByProduct(productId) {
   try {
@@ -42,7 +56,10 @@ export async function createReviewOnProduct({ productId, review, rating }) {
 // PATCH: Update a review
 export async function updateReview({ reviewId, review, rating }) {
   try {
-    const { data } = await api.patch(`/reviews/${reviewId}`, { review, rating });
+    const { data } = await api.patch(`/reviews/${reviewId}`, {
+      review,
+      rating,
+    });
     return data;
   } catch (error) {
     throw new Error(error.response?.data?.message || "Failed to update review");

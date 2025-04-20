@@ -12,6 +12,7 @@ const Navbar = () => {
   const location = useLocation();
   const { totalQuantity } = useCartContext();
   const isCartPage = location.pathname === "/cart";
+  const isProductPage = location.pathname.startsWith("/product/");
   const [searchParams, setSearchParams] = useSearchParams();
 
   const filterValue = searchParams.get("category") || "all";
@@ -31,22 +32,25 @@ const Navbar = () => {
         >
           <Logo />
         </Link>
-
-        {/* Category Filter */}
-        <select
-          className="border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300"
-          value={filterValue}
-          onChange={handleFilterChange}
-        >
-          <option value="all">All Categories</option>
-          <option value="jerseys">Jerseys</option>
-          <option value="watches">Watches</option>
-          <option value="shoes">Shoes</option>
-        </select>
-
-        {/* Search Input */}
-        <Input />
-
+        {isCartPage || isProductPage ? (
+          ""
+        ) : (
+          <>
+            {/* Category Filter */}
+            <select
+              className="border ml-10 border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300"
+              value={filterValue}
+              onChange={handleFilterChange}
+            >
+              <option value="all">All Categories</option>
+              <option value="jerseys">Jerseys</option>
+              <option value="watches">Watches</option>
+              <option value="shoes">Shoes</option>
+            </select>
+            {/* Search Input */}
+            <Input />
+          </>
+        )}
         <div className="flex justify-between gap-5 items-center text-3xl">
           {/* 👇 Only show if authenticated */}
           {isAuthenticated ? (
@@ -95,11 +99,11 @@ const Navbar = () => {
       </div>
 
       {/* Mobile View */}
-      <div className="md:hidden container mx-auto flex justify-between p-3 gap-4 flex-row items-center mt-2 mb-10">
+      <div className="md:hidden container mx-auto flex justify-between p-3 gap-4 flex-row items-center mt-2 mb-2">
         <Link to="/">
           <Logo />
         </Link>
-        <Input />
+        {isProductPage ? <h1 className="text-xl">Buy abeg!!</h1> : <Input />}
       </div>
     </header>
   );

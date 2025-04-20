@@ -17,14 +17,12 @@ const CartPage = () => {
     isClearing,
   } = useCartContext();
 
-  if (isLoading) return <Spinner />;
-  console.log(cart);
+  if (isLoading || !cart) return <Spinner />;
 
   return (
     <div className="px-6 md:pt-4 space-y-8 md:max-w-3xl max-h-auto mx-auto mb-[100px] ">
       <h1 className="text-2xl font-bold">Your Cart</h1>
-
-      {cart.items?.length === 0 ? (
+      {cart?.items?.length === 0 ? (
         <p className="text-gray-500">Your cart is empty.</p>
       ) : (
         <>
