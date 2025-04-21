@@ -26,11 +26,14 @@ function LoginForm() {
     <>
       <form
         onSubmit={handleSubmit}
-        className="bg-white  mx-auto flex flex-col justify-center p-8 rounded-lg  space-y-6 text-sm md:border border-gray-200"
+        className="bg-white  mx-auto flex flex-col justify-center md:p-10 py-8  rounded-lg  space-y-6 text-sm md:border border-gray-200"
       >
         {/* Email Input */}
-        <div className="mb-3">
-          <label htmlFor="email" className="block text-base font-medium mb-2">
+        <div className="mb-3 flex flex-col items-center">
+          <label
+            htmlFor="email"
+            className="block text-base font-medium mb-2 self-start"
+          >
             Email address
           </label>
           <input
@@ -40,15 +43,15 @@ function LoginForm() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             disabled={isLoading}
-            className="w-[350px] p-[10px] border border-gray-300 rounded-md"
+            className="w-[300px] p-[10px] border border-gray-300 rounded-md"
           />
         </div>
 
         {/* Password Input */}
-        <div className="mb-3">
+        <div className="mb-3 flex flex-col items-center">
           <label
             htmlFor="password"
-            className="block text-base font-medium mb-2"
+            className="block text-base font-medium mb-2 self-start"
           >
             Password
           </label>
@@ -59,16 +62,16 @@ function LoginForm() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             disabled={isLoading}
-            className="w-[350px] p-[10px] border border-gray-300 rounded-md"
+            className="w-[300px] p-[10px] border border-gray-300 rounded-md"
           />
         </div>
 
         {/* Submit Button */}
-        <div>
+        <div className="flex flex-col items-center">
           <button
             type="submit"
             disabled={isLoading}
-            className="w-[150px] mx-[100px] mt-2 py-3 bg-black text-white rounded-md disabled:bg-gray-400"
+            className="w-[150px]  mt-2 py-3 bg-black text-white rounded-md disabled:bg-gray-400"
           >
             {isLoading ? (
               <div className="flex justify-center">

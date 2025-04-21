@@ -1,21 +1,20 @@
 import { useQuery } from "@tanstack/react-query";
 import { getUserCart } from "../../Services/apiCart";
 import { toast } from "react-hot-toast";
-import { useLocalStorage } from "../../Hooks/useLocalStorage";
+import { useAuth } from "../../Contexts/AuthContext";
 
 export function useCart() {
-  const [token] = useLocalStorage("token", null);
+  const { token } = useAuth();
 
   return useQuery({
-    queryKey: ["cart"],
+    queryKey: ["cart", token],
     queryFn: async () => {
       const response = await getUserCart();
       return response.data.cart;
     },
-    enabled: !!token, // 👈 only run if token exists
+    enabled: !!token,
     onError: (err) => {
       toast.error(err.message || "Could not fetch cart");
     },
   });
 }
-

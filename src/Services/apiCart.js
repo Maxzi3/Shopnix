@@ -2,6 +2,8 @@ import { api } from "../UI/Constant";
 export async function getUserCart() {
   try {
     const { data } = await api.get("/cart");
+
+    console.log(data)
     return data;
   } catch (error) {
     throw new Error(

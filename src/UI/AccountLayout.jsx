@@ -8,8 +8,7 @@ import ConfirmDelete from "./ConfirmDelete";
 import LogoutForm from "../features/Authentication/LogoutForm";
 
 import { useState, useEffect } from "react";
-;
-
+import EditReviewForm from "../features/Reviews/EditReviewForm";
 const AccountLayout = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
@@ -58,6 +57,9 @@ const AccountLayout = () => {
       </Modal.Window>
       <Modal.Window name="logout">
         <LogoutForm />
+      </Modal.Window>
+      <Modal.Window name="editreview">
+        <EditReviewForm />
       </Modal.Window>
     </Modal>
   );

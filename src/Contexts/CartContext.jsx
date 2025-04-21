@@ -6,13 +6,13 @@ import { useUpdateCartItem } from "../features/Cart/useUpdateCartItem";
 import { useDeleteCartItem } from "../features/Cart/useDeleteCartItem";
 import { useClearCart } from "../features/Cart/useClearCart";
 
+
 // Create context
 export const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
   const { data: cartData, isLoading } = useCart();
   const cart = cartData ?? { items: [] };
-  
 
   const { addItem, isLoading: isAdding } = useAddToCart();
   const { deleteItem, isLoading: isDeleting } = useDeleteCartItem();

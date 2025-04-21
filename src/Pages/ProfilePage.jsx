@@ -2,6 +2,7 @@ import { HiArrowRight } from "react-icons/hi2";
 import { useNavigate } from "react-router-dom";
 import { useGetMe } from "../features/Authentication/useGetMe";
 import Spinner from "../UI/Spinner";
+import { formatDate } from "../UI/helpers";
 
 const ProfilePage = () => {
   const { user, isLoading } = useGetMe();
@@ -26,8 +27,8 @@ const ProfilePage = () => {
       {/* Profile Image */}
       <div className="flex justify-center mb-6 z-10">
         <img
-          src={getValueOrNil(user.data.doc.photo)}
-          alt={user.data.doc.fullName?.split(" ")[1]}
+          src={getValueOrNil(user.photo)}
+          alt={user.fullName?.split(" ")[1]}
           className="w-24 h-24 rounded-full object-cover  border-2 border-blue-500"
         />
       </div>
@@ -36,25 +37,25 @@ const ProfilePage = () => {
       <div className="space-y-4 text-sm sm:text-base">
         <div className="flex justify-between items-center border-b pb-2">
           <span className="font-medium text-gray-600">Name:</span>
-          <span>{getValueOrNil(user.data.doc.fullName)}</span>
+          <span>{getValueOrNil(user.fullName)}</span>
         </div>
         <div className="flex justify-between items-center border-b pb-2">
           <span className="font-medium text-gray-600">Email:</span>
-          <span>{getValueOrNil(user.data.doc.email)}</span>
+          <span>{getValueOrNil(user.email)}</span>
         </div>
         <div className="flex justify-between items-center border-b pb-2">
           <span className="font-medium text-gray-600">Phone:</span>
-          <span>{getValueOrNil(user.data.doc.phoneNumber)}</span>
+          <span>{getValueOrNil(user.phoneNumber)}</span>
         </div>
         <div className="flex justify-between items-center border-b pb-2">
           <span className="font-medium text-gray-600">Address:</span>
           <span className="text-right max-w-[60%]">
-            {getValueOrNil(user.data.doc.address)}
+            {getValueOrNil(user.address)}
           </span>
         </div>
         <div className="flex justify-between items-center border-b pb-2">
           <span className="font-medium text-gray-600">Date Joined:</span>
-          <span>{user.data.doc.createdAt}</span>
+          <span>{formatDate(user.createdAt)}</span>
         </div>
 
         {/* Email Verification Status */}
@@ -62,11 +63,11 @@ const ProfilePage = () => {
           <span className="font-medium text-gray-600">Email Verified:</span>
           <span
             className={`px-2 py-1 rounded-full text-xs font-semibold capitalize ${
-              emailStatusBadge[user.data.doc.emailVerified?.toLowerCase()] ||
+              emailStatusBadge[user.emailVerified?.toLowerCase()] ||
               "bg-gray-100 text-gray-800"
             }`}
           >
-            {getValueOrNil(user.data.doc.emailVerified)}
+            {getValueOrNil(user.emailVerified)}
           </span>
         </div>
 

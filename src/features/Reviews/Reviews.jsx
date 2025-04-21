@@ -4,13 +4,21 @@ import { useState } from "react";
 import { PAGE_SIZE } from "../../UI/Constant";
 import { HiArrowLeft, HiArrowRight } from "react-icons/hi2";
 import Spinner from "../../UI/Spinner";
-import Modal from "../../UI/Modal";
 import EditReviewForm from "./EditReviewForm";
+import ReviewsModal from "./ReviewsModal";
+import { useDeleteReview } from "./useDeleteReview";
+import SpinnerMini from "../../ui/SpinnerMini";
+import { formatDate } from "../../UI/helpers";
 
 function Reviews() {
   const { data: reviews, isLoading, error } = useUserReviews();
   const [currentPage, setCurrentPage] = useState(1);
-  const [editingReview, setEditingReview] = useState(null);
+  const [selectedReview, setSelectedReview] = useState(null);
+  const { removeReview, isLoading: isDeleting } = useDeleteReview();
+
+  const handleDelete = (reviewId) => {
+    removeReview(reviewId);
+  };
 
   if (!reviews?.length) return <p>No reviews yet.</p>;
   if (isLoading)
@@ -43,7 +51,7 @@ function Reviews() {
             <div className="flex justify-between items-center">
               <h2 className="font-medium">{review?.product?.name}</h2>
               <span className="text-gray-500 text-sm">
-                {new Date(review.createdAt).toLocaleDateString()}
+                {formatDate(review.createdAt)}
               </span>
             </div>
 
@@ -56,17 +64,26 @@ function Reviews() {
             <p className="text-gray-700">{review.review}</p>
 
             <div className="flex space-x-4 text-sm text-gray-600">
-              <Modal.Open opens="editreview">
-                <button
-                  onClick={() => setEditingReview(review)}
-                  className="flex items-center gap-1 hover:text-blue-600"
-                >
-                  <FiEdit /> Edit
-                </button>
-              </Modal.Open>
+              <button
+                onClick={() => setSelectedReview(review)}
+                disabled={isDeleting}
+                className="flex items-center gap-1 hover:text-blue-600"
+              >
+                <FiEdit /> Edit
+              </button>
 
-              <button className="flex items-center gap-1 hover:text-red-600">
-                <FiTrash2 /> Delete
+              <button
+                onClick={() => handleDelete(review._id)}
+                disabled={isLoading}
+                className="flex items-center gap-1 hover:text-red-600"
+              >
+                {isDeleting ? (
+                  <SpinnerMini />
+                ) : (
+                  <>
+                    <FiTrash2 /> Delete
+                  </>
+                )}
               </button>
             </div>
           </div>
@@ -104,11 +121,14 @@ function Reviews() {
           </button>
         </div>
       )}
-      <Modal>
-        <Modal.Window name="editreview">
-          <EditReviewForm review={editingReview} />
-        </Modal.Window>
-      </Modal>
+      {selectedReview && (
+        <ReviewsModal onClose={() => setSelectedReview(null)}>
+          <EditReviewForm
+            review={selectedReview}
+            onClose={() => setSelectedReview(null)}
+          />
+        </ReviewsModal>
+      )}
     </>
   );
 }

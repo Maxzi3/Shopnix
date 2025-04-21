@@ -1,6 +1,5 @@
 import { api } from "../UI/Constant";
 
-
 // PRODUCTS
 export async function getProducts() {
   try {
@@ -15,7 +14,7 @@ export async function getProductBySlug(productSlug) {
     const { data } = await api.get(`/products/${productSlug}`, {
       withCredentials: true,
     });
-    return data; 
+    return data.data;
   } catch (error) {
     console.error("getProductBySlug - Error:", error.response?.data || error);
     throw new Error(error.response?.data?.message || "Failed to fetch product");

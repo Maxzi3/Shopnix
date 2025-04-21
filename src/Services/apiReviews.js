@@ -69,9 +69,10 @@ export async function updateReview({ reviewId, review, rating }) {
 // DELETE: Delete a review
 export async function deleteReview(reviewId) {
   try {
-    const { data } = await api.delete(`/reviews/${reviewId}`);
-    return data;
+    const res = await api.delete(`/reviews/${reviewId}`);
+    return res.data; 
   } catch (error) {
     throw new Error(error.response?.data?.message || "Failed to delete review");
   }
 }
+

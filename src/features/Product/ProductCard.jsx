@@ -13,11 +13,11 @@ import { Link } from "react-router-dom";
 
 const ProductCard = ({ product }) => {
   const { isAdding, addToCart } = useCartContext();
-  const { isAuthenticated} = useGetMe();
+  const { isAuthenticated } = useGetMe();
   const {
     name,
     price,
-    priceDiscount, // now a percentage
+    priceDiscount, 
     stockNo,
     imageUrl,
     ratingsAverage,
@@ -38,12 +38,9 @@ const ProductCard = ({ product }) => {
 
       {/* Content */}
       <div className="p-4 space-y-2">
-        <Link
-          to={`/product/${product.slug}`}
-          className="text-lg font-semibold hover:text-blue-500 text-gray-800"
-        >
+        <p className="text-lg font-semibold hover:text-blue-500 text-gray-800">
           {name}
-        </Link>
+        </p>
 
         {/* Price Section */}
         <div className="flex items-center justify-between ">
@@ -89,10 +86,14 @@ const ProductCard = ({ product }) => {
         </div>
 
         {/* Rating */}
-        <RenderStars
-          ratingsAverage={ratingsAverage}
-          ratingsQuantity={ratingsQuantity}
-        />
+        {ratingsQuantity > 0 ? (
+          <RenderStars
+            ratingsAverage={ratingsAverage}
+            ratingsQuantity={ratingsQuantity}
+          />
+        ) : (
+          <span className="text-sm text-gray-500">No ratings yet</span>
+        )}
       </div>
     </Link>
   );

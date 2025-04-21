@@ -2,7 +2,8 @@ import { useForm } from "react-hook-form";
 import { useSignup } from "./useSignup";
 import Spinner from "../../UI/Spinner";
 import { Link } from "react-router-dom";
-import SpinnerMini from "../../UI/SpinnerMini";
+import SpinnerMini from "../../ui/SpinnerMini";
+
 
 function SignupForm() {
   const { register, formState, getValues, handleSubmit, reset } = useForm();
@@ -23,11 +24,14 @@ function SignupForm() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="bg-white flex flex-col justify-center p-10 rounded-lg md:border border-gray-200 space-y-2 text-sm"
+      className="bg-white flex flex-col justify-center md:p-8 py-8 rounded-lg md:border border-gray-200  text-sm"
     >
       {/* Full Name */}
-      <div className="flex flex-col">
-        <label htmlFor="fullName" className="block text-base font-medium mb-1">
+      <div className="mb-3 flex flex-col items-center">
+        <label
+          htmlFor="fullName"
+          className="block text-base font-medium mb-1 self-start"
+        >
           Full name
         </label>
         <input
@@ -35,7 +39,7 @@ function SignupForm() {
           id="fullName"
           disabled={isLoading}
           {...register("fullName", { required: "This Field is Required" })}
-          className="w-[350px] p-[10px] border border-gray-300 rounded-md"
+          className="w-[300px] p-[10px] border border-gray-300 rounded-md"
         />
         {errors?.fullName && (
           <span className="text-red-600 text-sm">
@@ -45,8 +49,11 @@ function SignupForm() {
       </div>
 
       {/* Email */}
-      <div className="flex flex-col">
-        <label htmlFor="email" className="block text-base font-medium mb-1">
+      <div className="mb-3 flex flex-col items-center">
+        <label
+          htmlFor="email"
+          className="block text-base font-medium mb-1 self-start"
+        >
           Email address
         </label>
         <input
@@ -60,17 +67,17 @@ function SignupForm() {
               message: "Invalid email address",
             },
           })}
-          className="w-[350px] p-[10px] border border-gray-300 rounded-md"
+          className="w-[300px] p-[10px] border border-gray-300 rounded-md"
         />
         {errors?.email && (
           <span className="text-red-600 text-sm">{errors.email.message}</span>
         )}
       </div>
       {/* Phone Number*/}
-      <div className="flex flex-col">
+      <div className="mb-3 flex flex-col items-center">
         <label
           htmlFor="phoneNumber"
-          className="block text-base font-medium mb-1"
+          className="block text-base font-medium mb-1 self-start"
         >
           Phone Number
         </label>
@@ -79,7 +86,7 @@ function SignupForm() {
           id="phoneNumber"
           disabled={isLoading}
           {...register("phoneNumber", { required: "This Field is Required" })}
-          className="w-[350px] p-[10px] border border-gray-300 rounded-md"
+          className="w-[300px] p-[10px] border border-gray-300 rounded-md"
         />
         {errors?.phoneNumber && (
           <span className="text-red-600 text-sm">
@@ -88,8 +95,11 @@ function SignupForm() {
         )}
       </div>
       {/* Password */}
-      <div className="flex flex-col">
-        <label htmlFor="password" className="block text-base font-medium mb-1">
+      <div className="mb-3 flex flex-col items-center">
+        <label
+          htmlFor="password"
+          className="block text-base font-medium mb-1 self-start"
+        >
           Password (min 8 characters)
         </label>
         <input
@@ -103,7 +113,7 @@ function SignupForm() {
               message: "Password must be at least 8 characters",
             },
           })}
-          className="w-[350px] p-[10px] border border-gray-300 rounded-md"
+          className="w-[300px] p-[10px] border border-gray-300 rounded-md"
         />
         {errors?.password && (
           <span className="text-red-600 text-sm">
@@ -113,10 +123,10 @@ function SignupForm() {
       </div>
 
       {/* Confirm Password */}
-      <div className="flex flex-col">
+      <div className="mb-3 flex flex-col items-center">
         <label
           htmlFor="passwordConfirm"
-          className="block text-base font-medium mb-1"
+          className="block text-base font-medium mb-1 self-start"
         >
           Repeat password
         </label>
@@ -129,7 +139,7 @@ function SignupForm() {
             validate: (value) =>
               value === getValues().password || "Password needs to match",
           })}
-          className="w-[350px] p-[10px]   border border-gray-300 rounded-md"
+          className="w-[300px] p-[10px]   border border-gray-300 rounded-md"
         />
         {errors?.passwordConfirm && (
           <span className="text-red-600 text-sm">
@@ -139,7 +149,7 @@ function SignupForm() {
       </div>
 
       {/* Buttons */}
-      <div className="flex flex-col mx-auto justify-center  pt-2  border-gray-100">
+      <div className="flex flex-col items-center pt-2 border-gray-100">
         <button
           type="submit"
           disabled={isLoading}
@@ -147,7 +157,7 @@ function SignupForm() {
         >
           {isLoading ? (
             <div className="flex justify-center">
-              <SpinnerMini />
+              <SpinnerMini/>
             </div>
           ) : (
             "Signup"

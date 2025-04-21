@@ -1,8 +1,4 @@
-import {
-  useParams,
-  useSearchParams,
-  useNavigate,
-} from "react-router-dom";
+import { useParams, useSearchParams, useNavigate } from "react-router-dom";
 import { FiStar } from "react-icons/fi";
 import { useEffect, useState } from "react";
 import { useProduct } from "./useProduct";
@@ -16,13 +12,14 @@ import SimilarProducts from "./SimilarProducts";
 import ProductReviews from "../Reviews/ProductReviews";
 import AddReview from "../Reviews/AddReview";
 import { HiArrowLeft } from "react-icons/hi2";
+import toast from "react-hot-toast";
 
 const ProductDetailsPage = () => {
   const { slug } = useParams();
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const { data, isLoading } = useProduct(slug);
-  const product = data?.data;
+  const product = data;
   const { isAdding, addToCart } = useCartContext();
   const [reviewText, setReviewText] = useState("");
   const [rating, setRating] = useState(0);
@@ -44,7 +41,14 @@ const ProductDetailsPage = () => {
 
   function handleReviewSubmit(e) {
     e.preventDefault();
-    if (!reviewText.trim() || !rating) return;
+    if (!reviewText.trim()) {
+      toast.error("Review is required.");
+      return;
+    }
+    if (!rating) {
+      toast.error("Rating is required.");
+      return;
+    }
     submitReview({
       productId: product._id,
       review: reviewText,
@@ -56,7 +60,7 @@ const ProductDetailsPage = () => {
   return (
     <>
       <button
-        onClick={() => navigate(-3)}
+        onClick={() => navigate("/")}
         className="flex items-center text-base md: m-4 cursor-pointer hover:text-blue-600"
       >
         <HiArrowLeft className="mr-2" /> Back

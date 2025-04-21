@@ -14,7 +14,7 @@ const RenderStars = ({ ratingsAverage, ratingsQuantity }) => {
       {[...Array(empty)].map((_, i) => (
         <FaRegStar key={`empty-${i}`} />
       ))}
-      <span className="ml-2 text-sm text-gray-600">{ratingsQuantity}+</span>
+      <span className="ml-2 text-sm text-gray-600">{ratingsQuantity}</span>
     </div>
   );
 };

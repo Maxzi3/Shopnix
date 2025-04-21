@@ -102,7 +102,7 @@ export async function deleteMe() {
 export async function getMe() {
   try {
     const { data } = await api.get("/users/me");
-    return data;
+    return data.data.doc;
   } catch (error) {
     throw new Error(
       error.response?.data?.message || "Failed to fetch user data"

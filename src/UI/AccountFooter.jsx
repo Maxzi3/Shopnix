@@ -6,10 +6,12 @@ import {
   HiArrowLeft,
   HiOutlineHome,
 } from "react-icons/hi2";
+import { useCartContext } from "../Contexts/CartContext";
 
 const AccountFooter = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const { totalQuantity } = useCartContext();
 
   const isProfilePage = location.pathname === "/account/profile";
   const isCartPage = location.pathname === "/cart";
@@ -38,7 +40,12 @@ const AccountFooter = () => {
         </li>
 
         <Link to="/cart">
-          <HiOutlineShoppingCart />
+          <HiOutlineShoppingCart className="relative" />
+          {totalQuantity > 0 && (
+            <sup className="absolute top-[10px] right-[115px]  bg-red-600 text-white text-[10px] w-5 h-5 flex items-center justify-center rounded-full leading-none">
+              {totalQuantity > 99 ? "99+" : totalQuantity}
+            </sup>
+          )}
         </Link>
 
         {isProfilePage ? (

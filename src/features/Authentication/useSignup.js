@@ -4,18 +4,20 @@ import { useNavigate } from "react-router-dom";
 import { signupUser } from "../../Services/apiAuth";
 import { toast } from "react-hot-toast";
 import { useLocalStorage } from "../../Hooks/useLocalStorage";
+import { useAuth } from "../../Contexts/AuthContext";
 
 export function useSignup() {
   const navigate = useNavigate();
-  const [user, setUser] = useLocalStorage(null, "user"); // Store user in localStorage
+  const { setToken, setUser } = useAuth();
 
   const { mutate: signup, isLoading } = useMutation({
     mutationFn: ({ fullName, email, phoneNumber, password, passwordConfirm }) =>
       signupUser({ fullName, email, phoneNumber, password, passwordConfirm }),
-    onSuccess: (user) => {
+    onSuccess: (data) => {
       toast.success("Account created successfully!");
-      setUser(user); // Store user data in local storage
-      navigate("/"); 
+     setToken(data?.token);
+     setUser(data?.user);
+      navigate("/");
     },
     onError: (err) => {
       toast.error(err.message || "Signup failed");

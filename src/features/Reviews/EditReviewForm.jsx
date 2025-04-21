@@ -1,21 +1,35 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useUpdateReview } from "./useUpdateReview";
 
 function EditReviewForm({ review, onClose }) {
-  const [text, setText] = useState(review.review);
-  const [rating, setRating] = useState(review.rating);
-  const { updateReview, isLoading } = useUpdateReview();
+  const [text, setText] = useState("");
+  const [rating, setRating] = useState(1);
+  const { editReview, isLoading } = useUpdateReview();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    updateReview(
-      { id: review._id, data: { review: text, rating } },
-      { onSuccess: onClose }
-    );
+  useEffect(() => {
+    if (review) {
+      setText(review.review);
+      setRating(review.rating);
+    }
+  }, [review]);
+
+  const handleSubmit = () => {
+    editReview({
+      reviewId: review._id, 
+      review: text,
+      rating,
+    });
+    onClose(); // Close modal after submission
   };
 
+  const handleCancel = () => {
+    onClose(); // Close modal on cancel
+  };
+
+  if (!review) return <h1>No review selected</h1>;
+
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form className="space-y-4">
       <textarea
         value={text}
         onChange={(e) => setText(e.target.value)}
@@ -31,7 +45,8 @@ function EditReviewForm({ review, onClose }) {
       />
       <div className="flex space-x-2">
         <button
-          type="submit"
+          type="button"
+          onClick={handleSubmit} 
           disabled={isLoading}
           className="bg-blue-600 text-white px-3 py-1 rounded"
         >
@@ -39,7 +54,7 @@ function EditReviewForm({ review, onClose }) {
         </button>
         <button
           type="button"
-          onClick={onClose}
+          onClick={handleCancel}
           className="bg-gray-300 px-3 py-1 rounded"
         >
           Cancel
@@ -48,4 +63,5 @@ function EditReviewForm({ review, onClose }) {
     </form>
   );
 }
+
 export default EditReviewForm;

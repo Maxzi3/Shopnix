@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import { getUserReviews } from "../../Services/apiReviews";
 import { toast } from "react-hot-toast";
-import { useLocalStorage } from "../../Hooks/useLocalStorage";
+import { useAuth } from "../../Contexts/AuthContext";
 
 export function useUserReviews() {
-  const [token] = useLocalStorage("token", null);
+ const { token } = useAuth();;
 
   return useQuery({
     queryKey: ["userReviews"],

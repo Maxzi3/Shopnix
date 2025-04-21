@@ -2,12 +2,12 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import { updateMyPassword } from "../../Services/apiAuth";
-import { useLocalStorage } from "../../Hooks/useLocalStorage";
+import { useAuth } from "../../Contexts/AuthContext";
 
 export function useUpdatePassword() {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
-  const [, setToken] = useLocalStorage("token", null);
+  const { setToken } = useAuth();
 
   const { mutate: updatePassword, isLoading } = useMutation({
     mutationFn: updateMyPassword,

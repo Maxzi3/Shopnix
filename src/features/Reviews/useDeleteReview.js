@@ -2,17 +2,18 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deleteReview } from "../../Services/apiReviews";
 import { toast } from "react-hot-toast";
 
-export function useDeleteReview(productId) {
+export function useDeleteReview() {
   const queryClient = useQueryClient();
 
   const { mutate: removeReview, isLoading } = useMutation({
     mutationFn: deleteReview,
     onSuccess: () => {
       toast.success("Review deleted!");
-      queryClient.invalidateQueries(["reviews", productId]);
+      queryClient.invalidateQueries(["reviews"]); // 🔄 Correct key here
     },
-    onError: (err) => toast.error(err.message || "Could not delete review"),
+    onError: (err) => console.log(err),
   });
 
   return { removeReview, isLoading };
 }
+

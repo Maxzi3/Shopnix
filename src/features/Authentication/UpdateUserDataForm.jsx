@@ -19,7 +19,7 @@ function UpdateUserDataForm() {
     phoneNumber: currentPhoneNumber,
     photo: currentPhoto,
     address: currentAddress,
-  } = user?.data?.doc || {};
+  } = user || {};
 
   const { updateUser, isUpdating } = useUpdateMe();
   const [fullName, setFullName] = useState("");
