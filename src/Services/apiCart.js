@@ -2,8 +2,6 @@ import { api } from "../UI/Constant";
 export async function getUserCart() {
   try {
     const { data } = await api.get("/cart");
-
-    console.log(data)
     return data;
   } catch (error) {
     throw new Error(
@@ -45,5 +43,13 @@ export async function clearCart() {
     return data;
   } catch (error) {
     throw new Error(error.response?.data?.message || "Failed to clear cart");
+  }
+}
+export async function mergeGuestCartApi(guestCart) {
+  try {
+    const { data } = await api.post("/cart/merge", guestCart); 
+    return data;
+  } catch (error) {
+    throw new Error(error.response?.data?.message || "Failed to Merge cart");
   }
 }

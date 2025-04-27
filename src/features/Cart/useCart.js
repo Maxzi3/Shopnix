@@ -13,6 +13,7 @@ export function useCart() {
       return response.data.cart;
     },
     enabled: !!token,
+    refetchOnMount: "always",
     onError: (err) => {
       toast.error(err.message || "Could not fetch cart");
     },

@@ -53,29 +53,27 @@ const Navbar = () => {
         )}
         <div className="flex justify-between gap-5 items-center text-3xl">
           {/* 👇 Only show if authenticated */}
-          {isAuthenticated ? (
-            <>
-              {isCartPage ? (
-                <Link
-                  to="/"
-                  className="flex items-center text-base hover:text-blue-600"
-                >
-                  <HiArrowLeft className="mr-2" /> Back to Store
-                </Link>
-              ) : (
-                <Link to="/cart" className="relative hover:text-gray-900">
-                  <HiOutlineShoppingCart className="w-6 h-6" />
-                  {totalQuantity > 0 && (
-                    <sup className="absolute -top-2 -right-3 bg-red-500 text-white text-[10px] w-5 h-5 flex items-center justify-center rounded-full leading-none">
-                      {totalQuantity > 99 ? "99+" : totalQuantity}
-                    </sup>
-                  )}
-                </Link>
+          {isCartPage ? (
+            <Link
+              to="/"
+              className="flex items-center text-base hover:text-blue-600"
+            >
+              <HiArrowLeft className="mr-2" /> Back to Store
+            </Link>
+          ) : (
+            <Link to="/cart" className="relative hover:text-gray-900">
+              <HiOutlineShoppingCart className="w-6 h-6" />
+              {totalQuantity > 0 && (
+                <sup className="absolute -top-2 -right-3 bg-red-500 text-white text-[10px] w-5 h-5 flex items-center justify-center rounded-full leading-none">
+                  {totalQuantity > 99 ? "99+" : totalQuantity}
+                </sup>
               )}
-              <Link to="/account/profile" className="hover:text-gray-900">
-                <HiOutlineUser />
-              </Link>
-            </>
+            </Link>
+          )}
+          {isAuthenticated ? (
+            <Link to="/account/profile" className="hover:text-gray-900">
+              <HiOutlineUser />
+            </Link>
           ) : (
             // 👇 Show these if NOT authenticated
             <div className="flex gap-4 text-base">

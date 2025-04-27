@@ -2,10 +2,11 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { logoutUser } from "../../Services/apiAuth";
 import { toast } from "react-hot-toast";
-import { useAuth } from "../../Contexts/AuthContext";
+import { useLocalStorage } from "../../Hooks/useLocalStorage";
 
 export function useLogout() {
-  const { setToken } = useAuth();
+    const [, setToken] = useLocalStorage("token", null);  // Corrected
+  
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
