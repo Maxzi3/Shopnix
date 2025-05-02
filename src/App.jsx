@@ -80,7 +80,9 @@ const App = () => {
           <Toaster
             position="top-center"
             gutter={12}
-            containerStyle={{ margin: "8px" }}
+            containerStyle={{
+              margin: "8px",
+            }}
             toastOptions={{
               success: {
                 duration: 3000,
@@ -89,14 +91,19 @@ const App = () => {
                 duration: 3000,
               },
               style: {
-                fontSize: "16px",
-                maxWidth: "500px",
-                padding: "16px 24px",
+                fontSize: "14px",
+                maxWidth: "90vw", // responsive on mobile
+                wordWrap: "break-word", // handles long messages
+                padding: "12px 16px",
                 backgroundColor: "#fff",
                 color: "#374151",
+                borderRadius: "12px",
+                boxShadow:
+                  "0 2px 6px rgba(0, 0, 0, 0.05), 0 4px 12px rgba(0, 0, 0, 0.1)",
               },
             }}
           />
+
           <RouterProvider router={router} />
         </CartProvider>
       </AuthProvider>

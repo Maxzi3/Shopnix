@@ -8,12 +8,10 @@ import {
 import RenderStars from "../../UI/RenderStars";
 import { useCartContext } from "../../Contexts/CartContext";
 import { formatCurrency } from "../../UI/helpers";
-// import { useGetMe } from "../Authentication/useGetMe";
 import { Link } from "react-router-dom";
 
 const ProductCard = ({ product }) => {
   const { isAdding, addToCart } = useCartContext();
-  // const { isAuthenticated } = useGetMe();
   const {
     name,
     price,
@@ -29,40 +27,40 @@ const ProductCard = ({ product }) => {
   const discountedPrice = price * (1 - priceDiscount / 100);
 
   return (
-    <Link
-      // to={`/product/${product.slug}`}
-      className="bg-white rounded-2xl w-[280px] hover:shadow-lg transition overflow-hidden border mb-5"
-    >
+    <div className="bg-white rounded-2xl w-[280px] hover:shadow-lg transition overflow-hidden border mb-5">
       {/* Product Image */}
-      <img src={imageUrl} alt={name} className="h-48 w-full object-cover" />
+      <Link to={`/product/${product.slug}`}>
+        <img src={imageUrl} alt={name} className="h-48 w-full object-cover" />
+      </Link>
 
       {/* Content */}
-      <div className="p-4 space-y-2">
-        <p className="text-lg font-semibold hover:text-blue-500 text-gray-800">
-          {name}
-        </p>
+      <div className="p-4 flex flex-col gap-2">
+        
+        {/* Product Name */}
+        <Link to={`/product/${product.slug}`}>
+          <p className="text-lg font-semibold hover:text-blue-500 text-gray-800 break-words line-clamp-2">
+            {name}
+          </p>
+        </Link>
 
         {/* Price Section */}
-        <div className="flex items-center justify-between ">
-          <div className="flex items-center gap-2">
+        <div className="flex items-center justify-between mt-2">
+          <div className="flex flex-wrap items-center gap-2">
             <span className="text-base font-bold">
               {formatCurrency(discountedPrice)}
             </span>
+
             {priceDiscount > 0 && (
-              <>
-                <span className="text-xs line-through text-gray-500">
-                  {formatCurrency(price)}
-                </span>
-              </>
+              <span className="text-xs line-through text-gray-500">
+                {formatCurrency(price)}
+              </span>
             )}
           </div>
-
-          {/* Add to Cart or Out of Stock Button with Icons */}
 
           <button
             disabled={stockNo === 0 || isAdding}
             onClick={() => addToCart(product, 1)}
-            className={`w-[30px] h-[30px] flex items-center justify-center rounded-full transition ${
+            className={`w-9 h-9 flex items-center justify-center rounded-full transition shrink-0 ${
               stockNo === 0
                 ? "cursor-not-allowed text-gray-400"
                 : "border border-black hover:text-blue-700"
@@ -72,19 +70,19 @@ const ProductCard = ({ product }) => {
           </button>
         </div>
 
-        {/* Stock */}
+        {/* Stock Info */}
         <div className="text-sm text-gray-700">
           {stockNo > 0 ? (
             <div className="flex items-center">{stockNo} in stock</div>
           ) : (
             <div className="flex items-center text-red-500">
-              <FaBan className="mr-2" />
+              <FaBan className="mr-1" />
               Out of Stock
             </div>
           )}
         </div>
 
-        {/* Rating */}
+        {/* Ratings */}
         {ratingsQuantity > 0 ? (
           <RenderStars
             ratingsAverage={ratingsAverage}
@@ -94,7 +92,7 @@ const ProductCard = ({ product }) => {
           <span className="text-sm text-gray-500">No ratings yet</span>
         )}
       </div>
-    </Link>
+    </div>
   );
 };
 

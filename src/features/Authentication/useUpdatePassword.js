@@ -7,12 +7,12 @@ import { useAuth } from "../../Contexts/AuthContext";
 export function useUpdatePassword() {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
-  const { setToken } = useAuth();
+  const { setAuth } = useAuth();
 
   const { mutate: updatePassword, isLoading } = useMutation({
     mutationFn: updateMyPassword,
     onSuccess: (data) => {
-      if (data.token) setToken(data.token);
+      if (data.token) setAuth(data.token);
       if (data.data?.user) queryClient.setQueryData(["user"], data.data.user);
       toast.success("Password updated successfully!");
       navigate("/account/profile", { replace: true });
@@ -23,7 +23,7 @@ export function useUpdatePassword() {
         err.message.includes("token") ||
         err.message.includes("Unauthorized")
       ) {
-        setToken(null);
+        setAuth(null);
         navigate("/login");
       }
     },

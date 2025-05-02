@@ -25,7 +25,7 @@ const Navbar = () => {
   return (
     <header className="relative text-gray-600 body-font">
       {/* Desktop View */}
-      <div className="hidden container mx-auto md:flex justify-between p-5 flex-row items-center">
+      <div className="hidden w-full md:flex justify-between items-center px-4 md:px-8 py-5">
         <Link
           to="/"
           className="flex title-font font-medium items-center text-gray-900 mb-4 mr-2 md:mb-0"
@@ -97,11 +97,17 @@ const Navbar = () => {
       </div>
 
       {/* Mobile View */}
-      <div className="md:hidden container mx-auto flex justify-between p-3 gap-4 flex-row items-center mt-2 mb-2">
+      <div className="md:hidden fixed top-0 left-0 w-full z-50 bg-white shadow-sm px-4 py-3 flex justify-between items-center gap-4">
         <Link to="/">
           <Logo />
         </Link>
-        {isProductPage ? <h1 className="text-xl">Buy abeg!!</h1> : <Input />}
+        {isProductPage ? (
+          <h1 className="text-xl font-semibold">Buy abeg!!</h1>
+        ) : (
+          <div className="flex-1">
+            <Input />
+          </div>
+        )}
       </div>
     </header>
   );

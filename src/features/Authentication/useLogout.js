@@ -1,37 +1,30 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
-import { logoutUser } from "../../Services/apiAuth";
 import { toast } from "react-hot-toast";
-import { useLocalStorage } from "../../Hooks/useLocalStorage";
+import { logoutUser } from "../../Services/apiAuth";
+import { useAuth } from "../../Contexts/AuthContext";
 
 export function useLogout() {
-    const [, setToken] = useLocalStorage("token", null);  // Corrected
-  
-  const queryClient = useQueryClient();
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
+  const { clearAuth } = useAuth();
 
-  const { mutate: logout, isPending } = useMutation({
-    mutationFn: logoutUser,
-
+  const { mutate: logout, isLoading } = useMutation({
+    mutationFn: logoutUser, 
     onSuccess: () => {
-      // Remove token
-      setToken(null);
-      localStorage.removeItem("token"); // 👈 force removal
-
-      // Clear React Query cache
-      queryClient.clear();
-
-      // Optionally: toast message
-      toast.success("Logged out successfully");
-
-      // Redirect to login
-      navigate("/login");
+      clearAuth(); // Clear token and user
+      queryClient.invalidateQueries({ queryKey: ["cart"] }); 
+      navigate("/login", { replace: true });
+      toast.success("Logged out successfully!");
     },
-
     onError: (err) => {
-      toast.error(err.message || "Logout failed");
+      console.error(
+        "Logout Error:",
+        err.response?.data?.message || err.message
+      );
+      toast.error("Failed to log out");
     },
   });
 
-  return { logout, isPending };
+  return { logout, isLoading };
 }

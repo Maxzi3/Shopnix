@@ -59,7 +59,8 @@ const CartPage = () => {
                 <div className="flex flex-col items-end gap-2 md:gap-4">
                   <div className="flex items-center gap-2">
                     <button
-                      disabled={isUpdating}
+                      disabled={isUpdating || item.quantity === 1}
+                      className="disabled:cursor-not-allowed"
                       onClick={() =>
                         updateCartQuantity(
                           item._id,
@@ -67,7 +68,7 @@ const CartPage = () => {
                         )
                       }
                     >
-                      <HiMinus className="w-8 h-8 border border-black rounded-full p-1" />
+                      <HiMinus className="w-8 h-8 border border-black rounded-full p-1 disabled:text-gray-400 disabled:border-gray-400" />
                     </button>
                     <span className="w-6 text-center">{item.quantity}</span>
                     <button

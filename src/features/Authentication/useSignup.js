@@ -28,7 +28,7 @@ export function useSignup() {
            queryKey: ["cart", data?.token],
            exact: true,
          });
-         toast.success("Guest cart merged successfully!");
+        //  toast.success("Guest cart merged successfully!");
        } catch (error) {
          console.error("Guest cart merge failed", error);
        }

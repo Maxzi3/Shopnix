@@ -6,11 +6,13 @@
     const queryClient = useQueryClient();
 
     const { mutate: addItem, isLoading } = useMutation({
-      mutationFn: ({ productId, quantity }) => {
-        return addToCart(productId, quantity);
+      mutationFn: async ({ productId, quantity }) => {
+        return await addToCart(productId, quantity);
       },
-      onSuccess: () => {
-        toast.success("Item added to cart");
+      onSuccess: (data, variables) => {
+        const { productName } = variables;
+
+        toast.success(`${productName} added to cart!`);
         queryClient.invalidateQueries(["cart"]);
       },
       onError: (err) => {

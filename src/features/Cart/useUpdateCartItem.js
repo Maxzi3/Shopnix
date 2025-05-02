@@ -10,7 +10,7 @@ export function useUpdateCartItem() {
       return updateCart({ itemId, quantity });
     },
     onSuccess: () => {
-      toast.success("Cart updated");
+      toast.success("Cart Item updated");
       queryClient.invalidateQueries(["cart"]);
     },
     onError: (err) => {

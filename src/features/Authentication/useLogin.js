@@ -1,4 +1,3 @@
-// useLogin.js
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
@@ -26,7 +25,7 @@ export function useLogin() {
             queryKey: ["cart", data?.token],
             exact: true,
           });
-          toast.success("Guest cart merged successfully!");
+          // toast.success("Guest cart merged successfully!");
         } catch (error) {
           console.error("Guest cart merge failed", error);
         }

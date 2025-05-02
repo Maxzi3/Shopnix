@@ -76,15 +76,23 @@ const ProductDetailsPage = () => {
           <div className="space-y-4">
             <h1 className="text-3xl font-bold">{product.name}</h1>
             <p className="text-gray-600">{product.description}</p>
+
             <div className="flex items-center gap-2">
-              <FiStar className="text-yellow-500" />
-              <span className="font-medium">
-                {product.ratingsAverage || "N/A"}
-              </span>
-              <span className="text-sm text-gray-500">
-                ({product.ratingsQuantity || 0} review)
-              </span>
+              {product.ratingsQuantity > 0 ? (
+                <>
+                  <FiStar className="text-yellow-500" />
+                  <span className="font-medium">
+                    {product.ratingsAverage || "N/A"}
+                  </span>
+                  <span className="text-sm text-gray-500">
+                    ({product.ratingsQuantity || 0} review)
+                  </span>
+                </>
+              ) : (
+                <span className="text-sm text-gray-500">No ratings yet</span>
+              )}
             </div>
+
             <p className="text-2xl font-bold text-green-600">
               {formatCurrency(discountPrice)}
             </p>
@@ -102,7 +110,7 @@ const ProductDetailsPage = () => {
             </p>
             <button
               disabled={product.stockNo === 0 || isAdding}
-              onClick={() => addToCart(product._id, 1)}
+              onClick={() => addToCart(product, 1)}
               className="bg-black text-white px-6 py-2 rounded-md hover:bg-gray-800 transition"
             >
               Add to Cart

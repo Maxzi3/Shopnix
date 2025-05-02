@@ -1,4 +1,3 @@
-// CartContext.jsx
 import { createContext, useContext, useMemo, useState, useEffect } from "react";
 import { useCart } from "../features/Cart/useCart";
 import { useAddToCart } from "../features/Cart/useAddToCart";
@@ -40,24 +39,25 @@ export const CartProvider = ({ children }) => {
 
   const addToCart = (product, quantity) => {
     if (token) {
-      addItem({ productId: product._id, quantity });
+      addItem({ productId: product._id, quantity, productName: product.name });
     } else {
       const guestCart = getGuestCart();
       const existingItem = guestCart.find((item) => item._id === product._id);
 
       if (existingItem) {
         existingItem.quantity += quantity;
+        toast.success(`${product.name} quantity updated!`);
       } else {
         guestCart.push({
           _id: product._id,
           product,
           quantity,
         });
+        toast.success(`${product.name} added to cart!`);
       }
 
       saveGuestCart(guestCart);
       setGuestCartItems(guestCart);
-      toast.success("Item added to guest cart!");
     }
   };
 
@@ -70,7 +70,7 @@ export const CartProvider = ({ children }) => {
       );
       saveGuestCart(guestCart);
       setGuestCartItems(guestCart);
-      toast.success("Item removed from guest cart!");
+      toast.success("Item removed from cart!");
     }
   };
 
@@ -78,13 +78,20 @@ export const CartProvider = ({ children }) => {
     if (token) {
       updateItem({ itemId: productId, quantity });
     } else {
-      const guestCart = getGuestCart();
-      const item = guestCart.find((item) => item._id === productId);
-      if (item) {
-        item.quantity = quantity;
+      let guestCart = getGuestCart();
+      const itemIndex = guestCart.findIndex((item) => item._id === productId);
+
+      if (itemIndex !== -1) {
+        if (quantity === 0) {
+          guestCart.splice(itemIndex, 1); 
+          toast.success("Item removed from cart!");
+        } else {
+          guestCart[itemIndex].quantity = quantity;
+          toast.success("Cart item updated!");
+        }
+
         saveGuestCart(guestCart);
         setGuestCartItems(guestCart);
-        toast.success("Guest cart item updated!");
       }
     }
   };
@@ -95,7 +102,7 @@ export const CartProvider = ({ children }) => {
     } else {
       clearGuestCart();
       setGuestCartItems([]);
-      toast.success("Guest cart cleared!");
+      toast.success("Cart cleared!");
     }
   };
 
