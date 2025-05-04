@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useGetMe } from "../features/Authentication/useGetMe";
 import Spinner from "../UI/Spinner";
 import { formatDate } from "../UI/helpers";
+import { API_BASE_URL } from "../UI/Constant";
 
 const ProfilePage = () => {
   const { user, isLoading } = useGetMe();
@@ -27,9 +28,9 @@ const ProfilePage = () => {
       {/* Profile Image */}
       <div className="flex justify-center mb-6 z-10">
         <img
-          src={getValueOrNil(user.photo)}
+          src={user.avatar}
           alt={user.fullName?.split(" ")[1]}
-          className="w-24 h-24 rounded-full object-cover  border-2 border-blue-500"
+          className="relative z-0 w-24 h-24 rounded-full  border-2 border-blue-500"
         />
       </div>
 

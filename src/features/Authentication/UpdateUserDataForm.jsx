@@ -17,7 +17,7 @@ function UpdateUserDataForm() {
     email,
     emailVerified,
     phoneNumber: currentPhoneNumber,
-    photo: currentPhoto,
+    avatar: currentPhoto,
     address: currentAddress,
   } = user || {};
 
@@ -52,11 +52,15 @@ function UpdateUserDataForm() {
     }
 
     const userData = { fullName, address, phoneNumber };
-    if (avatar) userData.avatar = avatar;
+    if (avatar && avatar instanceof File) {
+      userData.avatar = avatar;
+    }
 
     updateUser(userData, {
       onSuccess: () => {
         setAvatar(null);
+        setPreview(null);
+        fileInputRef.current.value = null;
       },
     });
   }
@@ -70,18 +74,18 @@ function UpdateUserDataForm() {
     fileInputRef.current.value = null;
     toast.success("Changes reverted");
   }
+
   const isDirty =
     fullName !== (currentFullName || "") ||
     address !== (currentAddress || "") ||
     phoneNumber !== (currentPhoneNumber || "") ||
     avatar !== null;
+
   function handleAvatarChange(e) {
     const file = e.target.files[0];
 
-    // Check if a file is selected
     if (!file) return;
 
-    // Validate file type and size
     if (!file.type.startsWith("image/")) {
       toast.error("Please select a valid image.");
       return;
@@ -234,7 +238,7 @@ function UpdateUserDataForm() {
               setPreview(null);
               fileInputRef.current.value = null;
             }}
-            className="absolute top-1/2 -translate-y-1/2 right-3 text-red-600 p-1 rounded-full hover:bg-red-100 transition-all"
+            className="relative bottom-[2.8rem] left-[12rem] -translate-y-1/2  text-red-600 p-1 rounded-full hover:bg-red-100 transition-all"
             aria-label="Remove image"
           >
             <FiX size={18} />
@@ -255,9 +259,9 @@ function UpdateUserDataForm() {
         <button
           type="submit"
           disabled={!isDirty || isUpdating}
-          className={`px-4 py-2 rounded-md ${
+          className={`px-4 py-2 rounded-md transition-all duration-200 ${
             !isDirty || isUpdating
-              ? "bg-gray-400 cursor-not-allowed"
+              ? "bg-gray-400 cursor-not-allowed opacity-50"
               : "bg-black text-white hover:bg-gray-800"
           }`}
         >

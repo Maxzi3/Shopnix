@@ -10,7 +10,7 @@ export function useUpdateMe() {
 
     onSuccess: (data) => {
       toast.success("Profile updated successfully!");
-      queryClient.setQueryData(["user"], data.user); // Update cached user data immediately
+      queryClient.setQueryData(["user"], data.data.user); // Update cached user data immediately
     },
 
     onError: (err) => {

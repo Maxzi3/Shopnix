@@ -17,8 +17,13 @@ const AccountFooter = () => {
   const isCartPage = location.pathname === "/cart";
 
   const handleClick = () => {
-    if (isProfilePage || isCartPage) {
+    if (isCartPage) {
       navigate(-1); // go back
+    }
+  };
+  const handleClick2 = () => {
+    if (isProfilePage ) {
+      navigate('/'); // go back
     }
   };
   return (
@@ -39,17 +44,17 @@ const AccountFooter = () => {
           )}
         </li>
 
-        <Link to="/cart">
-          <HiOutlineShoppingCart className="relative" />
+        <Link to="/cart" className="relative">
+          <HiOutlineShoppingCart className="text-2xl" />
           {totalQuantity > 0 && (
-            <sup className="absolute top-[10px] right-[115px]  bg-red-600 text-white text-[10px] w-5 h-5 flex items-center justify-center rounded-full leading-none">
+            <sup className="absolute -top-3 -right-2 sm:static sm:hidden bg-red-600 text-white text-[10px] w-5 h-5 flex items-center justify-center rounded-full leading-none">
               {totalQuantity > 99 ? "99+" : totalQuantity}
             </sup>
           )}
         </Link>
 
         {isProfilePage ? (
-          <button onClick={handleClick} className="text-2xl">
+          <button onClick={handleClick2} className="text-2xl">
             <HiArrowLeft />
           </button>
         ) : (

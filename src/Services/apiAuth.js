@@ -78,18 +78,26 @@ export async function resetPassword({ token, password, passwordConfirm }) {
 }
 export async function updateMe(userData) {
   try {
-    const { data } = await api.patch("/users/updateMe", userData, {
+    const formData = new FormData();
+
+    for (const key in userData) {
+      if (userData[key] !== null && userData[key] !== undefined) {
+        formData.append(key, userData[key]);
+      }
+    }
+
+    const { data } = await api.patch("/users/updateMe", formData, {
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "multipart/form-data",
       },
     });
 
     return data;
   } catch (error) {
+    console.error(error);
     throw new Error(error.response?.data?.message || "Update failed");
   }
 }
-
 export async function deleteMe() {
   try {
     const { data } = await api.delete("/users/deleteMe");
