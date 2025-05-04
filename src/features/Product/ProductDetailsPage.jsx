@@ -71,7 +71,7 @@ const ProductDetailsPage = () => {
           <img
             src={product.imageUrl || "/placeholder.jpg"}
             alt={product.name}
-            className="rounded-lg"
+            className="rounded-lg w-full h-[300px] object-cover md:h-[400px]"
           />
           <div className="space-y-4">
             <h1 className="text-3xl font-bold">{product.name}</h1>

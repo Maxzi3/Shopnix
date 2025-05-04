@@ -16,6 +16,7 @@ const CartPage = () => {
     isUpdating,
     isClearing,
   } = useCartContext();
+ 
 
   if (isLoading || !cart) return <Spinner />;
 
@@ -35,9 +36,9 @@ const CartPage = () => {
                 {/* Left Section: Image + Info */}
                 <div className="flex gap-4 items-start md:items-center">
                   <img
-                    src={item.product.image}
+                    src={item.product.imageUrl}
                     alt={item.product.name}
-                    className="w-20 h-20 object-cover rounded"
+                    className="w-20 h-20 object-scale-down rounded"
                   />
                   <div>
                     <h2

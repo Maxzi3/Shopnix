@@ -43,9 +43,9 @@ const SimilarProducts = ({ currentSlug, category }) => {
             className="border rounded-lg overflow-hidden hover:shadow-lg transition"
           >
             <img
-              src={product.image}
+              src={product.imageUrl}
               alt={product.name}
-              className="h-40 w-full object-cover"
+              className="h-40 w-full object-contain"
             />
             <div className="p-4">
               <h3 className="font-medium text-lg truncate">{product.name}</h3>

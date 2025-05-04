@@ -22,6 +22,7 @@ const ProductCard = ({ product }) => {
     ratingsQuantity,
     _id,
   } = product;
+  
 
   // Calculate discounted price
   const discountedPrice = price * (1 - priceDiscount / 100);
@@ -30,7 +31,7 @@ const ProductCard = ({ product }) => {
     <div className="bg-white rounded-2xl w-[280px] hover:shadow-lg transition overflow-hidden border mb-5">
       {/* Product Image */}
       <Link to={`/product/${product.slug}`}>
-        <img src={imageUrl} alt={name} className="h-48 w-full object-cover" />
+        <img src={imageUrl} alt={name} className="h-48 w-full object-contain" />
       </Link>
 
       {/* Content */}
