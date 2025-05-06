@@ -5,7 +5,7 @@ import { toast } from "react-hot-toast";
 export function useClearCart() {
   const queryClient = useQueryClient();
 
-  const { mutate: clear, isLoading } = useMutation({
+  const { mutate: clear, isPending } = useMutation({
     mutationFn: clearCart,
     onSuccess: () => {
       toast.success("Cart cleared");
@@ -16,5 +16,5 @@ export function useClearCart() {
     },
   });
 
-  return { clear, isLoading };
+  return { clear, isLoading: isPending };
 }

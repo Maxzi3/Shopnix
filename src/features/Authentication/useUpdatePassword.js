@@ -9,7 +9,7 @@ export function useUpdatePassword() {
   const navigate = useNavigate();
   const { setAuth } = useAuth();
 
-  const { mutate: updatePassword, isLoading } = useMutation({
+  const { mutate: updatePassword, isPending } = useMutation({
     mutationFn: updateMyPassword,
     onSuccess: (data) => {
       if (data.token) setAuth(data.token);
@@ -29,5 +29,5 @@ export function useUpdatePassword() {
     },
   });
 
-  return { updatePassword, isLoading };
+  return { updatePassword, isLoading: isPending };
 }

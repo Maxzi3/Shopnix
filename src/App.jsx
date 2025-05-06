@@ -22,6 +22,8 @@ import ProtectedRoute from "./UI/ProtectedRoute";
 import Reviews from "./features/Reviews/Reviews";
 import UpdatePage from "./Pages/UpdatePage";
 import ProductDetailsPage from "./features/Product/ProductDetailsPage";
+import EmailVerificationPage from "./Pages/EmailVerificationPage";
+import ResetPasswordPage from "./Pages/ResetPasswordPage";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -40,6 +42,8 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/forgotpassword" element={<ForgotPassword />} />
+        <Route path="/verify-email/:token" element={<EmailVerificationPage />} />
+        <Route path="/reset-password/:token" element={<ResetPasswordPage />} />
 
         {/* App Layout (for users after login) */}
         <Route path="/" element={<AppLayout />}>

@@ -5,7 +5,7 @@ import { toast } from "react-hot-toast";
 export function useUpdateCartItem() {
   const queryClient = useQueryClient();
 
-  const { mutate: updateItem, isLoading } = useMutation({
+  const { mutate: updateItem, isPending } = useMutation({
     mutationFn: ({ itemId, quantity }) => {
       return updateCart({ itemId, quantity });
     },
@@ -18,5 +18,5 @@ export function useUpdateCartItem() {
     },
   });
 
-  return { updateItem, isLoading };
+  return { updateItem, isLoading: isPending };
 }

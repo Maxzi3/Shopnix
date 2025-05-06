@@ -5,7 +5,7 @@ import { toast } from "react-hot-toast";
 export function useDeleteReview() {
   const queryClient = useQueryClient();
 
-  const { mutate: removeReview, isLoading } = useMutation({
+  const { mutate: removeReview, isPending } = useMutation({
     mutationFn: deleteReview,
     onSuccess: () => {
       toast.success("Review deleted!");
@@ -14,6 +14,6 @@ export function useDeleteReview() {
     onError: (err) => console.log(err),
   });
 
-  return { removeReview, isLoading };
+  return { removeReview, isLoading: isPending };
 }
 

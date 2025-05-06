@@ -1,12 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
 import { getMe } from "../../Services/apiAuth";
 import { toast } from "react-hot-toast";
-import { useLocalStorage } from "../../Hooks/useLocalStorage";
+import { useAuth } from "../../Contexts/AuthContext";
+
+
 
 export function useGetMe() {
-  const [token] = useLocalStorage("token", null);
-
-  const { data: user, isLoading } = useQuery({
+ const { token } = useAuth();
+  const { data: user, isPending } = useQuery({
     queryKey: ["user", token], // 👈 see? added token here
     queryFn: getMe,
     enabled: !!token,
@@ -17,5 +18,5 @@ export function useGetMe() {
 
   const isAuthenticated = !!user && !!token;
 
-  return { user, isLoading, isAuthenticated };
+  return { user, isLoading: isPending, isAuthenticated };
 }

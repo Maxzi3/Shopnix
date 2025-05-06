@@ -5,7 +5,7 @@ import { toast } from "react-hot-toast";
 export function useCreateReviewProduct(productId) {
   const queryClient = useQueryClient();
 
-  const { mutate: submitReview, isLoading } = useMutation({
+  const { mutate: submitReview, isPending} = useMutation({
     mutationFn: ({ productId, review, rating }) =>
       createReviewOnProduct({ productId, review, rating }),
     onSuccess: () => {
@@ -17,5 +17,5 @@ export function useCreateReviewProduct(productId) {
     },
   });
 
-  return { submitReview, isLoading };
+  return { submitReview, isLoading:  isPending, };
 }

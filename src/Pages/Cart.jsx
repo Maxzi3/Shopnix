@@ -1,6 +1,7 @@
 import { useCartContext } from "../Contexts/CartContext";
 import { HiOutlineTrash, HiPlus, HiMinus } from "react-icons/hi2";
 import Spinner from "../UI/Spinner";
+import SpinnerMini from "../UI/SpinnerMini";
 import { formatCurrency } from "../UI/helpers";
 
 const CartPage = () => {
@@ -38,7 +39,7 @@ const CartPage = () => {
                   <img
                     src={item.product.imageUrl}
                     alt={item.product.name}
-                    className="w-20 h-20 object-scale-down rounded"
+                    className="md:w-20 w-28 h-28 md:h-20 object-cover md:object-scale-down rounded"
                   />
                   <div>
                     <h2

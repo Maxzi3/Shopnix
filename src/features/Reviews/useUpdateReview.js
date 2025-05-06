@@ -5,7 +5,7 @@ import { toast } from "react-hot-toast";
 export function useUpdateReview() {
   const queryClient = useQueryClient();
 
-  const { mutate: editReview, isLoading } = useMutation({
+  const { mutate: editReview, isPending } = useMutation({
     mutationFn: updateReview,
     onSuccess: () => {
       toast.success("Review updated!");
@@ -14,5 +14,5 @@ export function useUpdateReview() {
     onError: (err) => toast.error(err.message || "Could not update review"),
   });
 
-  return { editReview, isLoading };
+  return { editReview, isLoading: isPending };
 }

@@ -13,10 +13,12 @@ import ProductReviews from "../Reviews/ProductReviews";
 import AddReview from "../Reviews/AddReview";
 import { HiArrowLeft } from "react-icons/hi2";
 import toast from "react-hot-toast";
+import { useGetMe } from "../Authentication/useGetMe";
 
 const ProductDetailsPage = () => {
   const { slug } = useParams();
   const navigate = useNavigate();
+  const { isAuthenticated } = useGetMe();
   const [searchParams, setSearchParams] = useSearchParams();
   const { data, isLoading } = useProduct(slug);
   const product = data;
@@ -69,9 +71,9 @@ const ProductDetailsPage = () => {
         {/* Product Info */}
         <div className="grid md:grid-cols-2 gap-6">
           <img
-            src={product.imageUrl || "/placeholder.jpg"}
+            src={product.imageUrl}
             alt={product.name}
-            className="rounded-lg w-full h-[300px] object-cover md:h-[400px]"
+            className="rounded-lg w-full md:h-[400px] md:object-cover object-contain"
           />
           <div className="space-y-4">
             <h1 className="text-3xl font-bold">{product.name}</h1>
@@ -122,13 +124,13 @@ const ProductDetailsPage = () => {
         <ProductReviews reviews={product.reviews} />
 
         {/* Leave a Review */}
-        <AddReview
+      {   isAuthenticated && <AddReview
           reviewText={reviewText}
           setReviewText={setReviewText}
           setRating={setRating}
           handleReviewSubmit={handleReviewSubmit}
           isCreating={isCreating}
-        />
+        />}
 
         <SimilarProducts
           currentSlug={product.slug}

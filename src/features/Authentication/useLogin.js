@@ -6,13 +6,12 @@ import { mergeGuestCartApi } from "../../Services/apiCart";
 import { getGuestCart, clearGuestCart } from "../../Hooks/useLocalStorage";
 import { useAuth } from "../../Contexts/AuthContext";
 
-
 export function useLogin() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const { setAuth } = useAuth();
 
-  const { mutate: login, isLoading } = useMutation({
+  const { mutate: login, isPending } = useMutation({
     mutationFn: ({ email, password }) => loginUser({ email, password }),
     onSuccess: async (data) => {
       setAuth(data?.token, data?.user);
@@ -39,5 +38,5 @@ export function useLogin() {
     },
   });
 
-  return { login, isLoading };
+  return { login, isLoading: isPending };
 }

@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 export function useDeleteAccount() {
   const navigate = useNavigate();
-  const { mutate: deleteAccount, isLoading } = useMutation({
+  const { mutate: deleteAccount, isPending } = useMutation({
     mutationFn: deleteMe,
     onSuccess: () => {
       toast.success("Account deleted successfully!");
@@ -17,5 +17,5 @@ export function useDeleteAccount() {
     },
   });
 
-  return { deleteAccount, isLoading };
+  return { deleteAccount, isLoading: isPending };
 }

@@ -14,25 +14,25 @@ export function useSignup() {
     const queryClient = useQueryClient();
     const { setAuth } = useAuth();
 
-  const { mutate: signup, isLoading } = useMutation({
+  const { mutate: signup, isPending } = useMutation({
     mutationFn: ({ fullName, email, phoneNumber, password, passwordConfirm }) =>
       signupUser({ fullName, email, phoneNumber, password, passwordConfirm }),
     onSuccess: async (data) => {
-     setAuth(data?.token, data?.user);
-     const guestCart = getGuestCart();
-     if (guestCart.length > 0) {
-       try {
-         await mergeGuestCartApi({ guestItems: guestCart });
-         clearGuestCart();
-         queryClient.invalidateQueries({
-           queryKey: ["cart", data?.token],
-           exact: true,
-         });
-        //  toast.success("Guest cart merged successfully!");
-       } catch (error) {
-         console.error("Guest cart merge failed", error);
-       }
-     }
+      setAuth(data?.token, data?.user);
+      const guestCart = getGuestCart();
+      if (guestCart.length > 0) {
+        try {
+          await mergeGuestCartApi({ guestItems: guestCart });
+          clearGuestCart();
+          queryClient.invalidateQueries({
+            queryKey: ["cart", data?.token],
+            exact: true,
+          });
+          //  toast.success("Guest cart merged successfully!");
+        } catch (error) {
+          console.error("Guest cart merge failed", error);
+        }
+      }
 
       navigate("/");
       toast.success("Account created successfully!");
@@ -42,5 +42,5 @@ export function useSignup() {
     },
   });
 
-  return { signup, isLoading };
+  return { signup, isLoading: isPending };
 }

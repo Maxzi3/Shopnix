@@ -67,13 +67,21 @@ export async function forgotPassword({ email }) {
 }
 export async function resetPassword({ token, password, passwordConfirm }) {
   try {
-    const { data } = await api.post(`/users/resetPassword/${token}`, {
+    const { data } = await api.patch(`/users/resetPassword/${token}`, {
       password,
       passwordConfirm,
     });
     return data;
   } catch (error) {
     throw new Error(error.response?.data?.message || "Password reset failed");
+  }
+}
+export async function emailVerify({ token}) {
+  try {
+    const { data } = await api.post(`/users/verifyEmail/${token}`);
+    return data;
+  } catch (error) {
+    throw new Error(error.response?.data?.message || "Email verification failed");
   }
 }
 export async function updateMe(userData) {

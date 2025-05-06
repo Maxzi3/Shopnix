@@ -16,9 +16,9 @@ const ProfilePage = () => {
   if (isLoading) return <Spinner />;
 
   const emailStatusBadge = {
-    Pending: "bg-blue-100 text-blue-800",
-    Delivered: "bg-green-100 text-green-800",
-    Cancelled: "bg-red-100 text-red-800",
+    pending: "bg-blue-100 text-blue-800",
+    verified: "bg-green-100 text-green-800",
+    cancelled: "bg-red-100 text-red-800",
   };
   const getValueOrNil = (value) => value || "N/A";
   return (

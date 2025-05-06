@@ -3,7 +3,7 @@ import { forgotPassword } from "../../Services/apiAuth";
 import { toast } from "react-hot-toast";
 
 export function useForgotPassword() {
-  const { mutate: sendResetEmail, isLoading } = useMutation({
+  const mutation = useMutation({
     mutationFn: ({ email }) => forgotPassword({ email }),
     onSuccess: () => {
       toast.success("Reset link sent! Check your email.");
@@ -13,5 +13,8 @@ export function useForgotPassword() {
     },
   });
 
-  return { sendResetEmail, isLoading };
+  return {
+    sendResetEmail: mutation.mutate,
+    isPending: mutation.isPending, // ✅ use this instead of isLoading
+  };
 }

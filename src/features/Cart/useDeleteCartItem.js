@@ -5,7 +5,7 @@ import { toast } from "react-hot-toast";
 export function useDeleteCartItem() {
   const queryClient = useQueryClient();
 
-  const { mutate: deleteItem, isLoading } = useMutation({
+  const { mutate: deleteItem, isPending } = useMutation({
     mutationFn: deleteCartItem,
     onSuccess: () => {
       toast.success("Item removed from cart");
@@ -16,5 +16,5 @@ export function useDeleteCartItem() {
     },
   });
 
-  return { deleteItem, isLoading };
+  return { deleteItem, isLoading: isPending };
 }

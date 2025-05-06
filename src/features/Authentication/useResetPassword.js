@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 export function useResetPassword() {
   const navigate = useNavigate();
 
-  const { mutate: reset, isLoading } = useMutation({
+  const { mutate: reset, isPending } = useMutation({
     mutationFn: resetPassword,
     onSuccess: () => {
       toast.success("Password reset successfully! Please login.");
@@ -16,6 +16,6 @@ export function useResetPassword() {
       toast.error(err.message || "Failed to reset password");
     },
   });
-
-  return { reset, isLoading };
+  
+  return { reset, isLoading: isPending };
 }
