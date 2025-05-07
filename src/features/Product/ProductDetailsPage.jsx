@@ -14,6 +14,7 @@ import AddReview from "../Reviews/AddReview";
 import { HiArrowLeft } from "react-icons/hi2";
 import toast from "react-hot-toast";
 import { useGetMe } from "../Authentication/useGetMe";
+import Button from "../../UI/Button";
 
 const ProductDetailsPage = () => {
   const { slug } = useParams();
@@ -77,7 +78,7 @@ const ProductDetailsPage = () => {
           />
           <div className="space-y-4">
             <h1 className="text-3xl font-bold">{product.name}</h1>
-            <p className="text-gray-600">{product.description}</p>
+            <p className="">{product.description}</p>
 
             <div className="flex items-center gap-2">
               {product.ratingsQuantity > 0 ? (
@@ -86,12 +87,12 @@ const ProductDetailsPage = () => {
                   <span className="font-medium">
                     {product.ratingsAverage || "N/A"}
                   </span>
-                  <span className="text-sm text-gray-500">
+                  <span className="text-sm ">
                     ({product.ratingsQuantity || 0} review)
                   </span>
                 </>
               ) : (
-                <span className="text-sm text-gray-500">No ratings yet</span>
+                <span className="text-sm ">No ratings yet</span>
               )}
             </div>
 
@@ -110,13 +111,13 @@ const ProductDetailsPage = () => {
             >
               {product.stockNo > 0 ? "In stock" : "Out of stock"}
             </p>
-            <button
+            <Button
+              variant="success"
               disabled={product.stockNo === 0 || isAdding}
               onClick={() => addToCart(product, 1)}
-              className="bg-black  text-white px-6 py-2 rounded-md hover:bg-gray-800 transition"
             >
               Add to Cart
-            </button>
+            </Button>
           </div>
         </div>
 
@@ -124,13 +125,15 @@ const ProductDetailsPage = () => {
         <ProductReviews reviews={product.reviews} />
 
         {/* Leave a Review */}
-      {   isAuthenticated && <AddReview
-          reviewText={reviewText}
-          setReviewText={setReviewText}
-          setRating={setRating}
-          handleReviewSubmit={handleReviewSubmit}
-          isCreating={isCreating}
-        />}
+        {isAuthenticated && (
+          <AddReview
+            reviewText={reviewText}
+            setReviewText={setReviewText}
+            setRating={setRating}
+            handleReviewSubmit={handleReviewSubmit}
+            isCreating={isCreating}
+          />
+        )}
 
         <SimilarProducts
           currentSlug={product.slug}

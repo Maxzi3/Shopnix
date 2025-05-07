@@ -6,6 +6,7 @@ import Spinner from "../../UI/Spinner";
 import { FiX } from "react-icons/fi";
 import SpinnerMini from "../../UI/SpinnerMini";
 import FormInput from "../../UI/FormInput";
+import Button from "../../UI/Button";
 
 
 function UpdateUserDataForm() {
@@ -249,14 +250,11 @@ function UpdateUserDataForm() {
         >
           Cancel
         </button>
-        <button
+        <Button
+          variant="primary"
           type="submit"
           disabled={!isDirty || isUpdating}
-          className={`px-4 py-2 rounded-md transition-all duration-200 ${
-            !isDirty || isUpdating
-              ? "bg-gray-400 cursor-not-allowed opacity-50"
-              : "bg-black text-white hover:bg-gray-800"
-          }`}
+          
         >
           {isUpdating ? (
             <div className="flex justify-center">
@@ -265,7 +263,7 @@ function UpdateUserDataForm() {
           ) : (
             "Update account"
           )}
-        </button>
+        </Button>
       </div>
     </form>
   );

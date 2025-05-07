@@ -43,7 +43,7 @@ function SignupForm() {
           {...register("fullName", { required: "This Field is Required" })}
         />
         {errors?.fullName && (
-          <span className="text-red-600 text-sm">
+          <span className="text-red-600 text-sm self-start">
             {errors.fullName.message}
           </span>
         )}
@@ -68,10 +68,11 @@ function SignupForm() {
               message: "Invalid email address",
             },
           })}
-        
         />
         {errors?.email && (
-          <span className="text-red-600 text-sm">{errors.email.message}</span>
+          <span className="text-red-600 text-sm self-start">
+            {errors.email.message}
+          </span>
         )}
       </div>
       {/* Phone Number*/}
@@ -89,7 +90,7 @@ function SignupForm() {
           {...register("phoneNumber", { required: "This Field is Required" })}
         />
         {errors?.phoneNumber && (
-          <span className="text-red-600 text-sm">
+          <span className="text-red-600 text-sm self-start">
             {errors.phoneNumber.message}
           </span>
         )}
@@ -115,7 +116,7 @@ function SignupForm() {
           })}
         />
         {errors?.password && (
-          <span className="text-red-600 text-sm">
+          <span className="text-red-600 text-sm self-start">
             {errors.password.message}
           </span>
         )}
@@ -140,7 +141,7 @@ function SignupForm() {
           })}
         />
         {errors?.passwordConfirm && (
-          <span className="text-red-600 text-sm">
+          <span className="text-red-600 text-sm self-start">
             {errors.passwordConfirm.message}
           </span>
         )}
@@ -151,11 +152,11 @@ function SignupForm() {
         <button
           type="submit"
           disabled={isLoading}
-          className="px-4 py-3 w-[150px] bg-black text-white rounded-md hover:bg-gray-800 disabled:bg-gray-400"
+          className="px-4 py-3 w-[150px] bg-black text-white rounded-md hover:bg-gray-800 disabled:bg-gray-400 dark:bg-gray-100 dark:text-gray-800 "
         >
           {isLoading ? (
             <div className="flex justify-center">
-              <SpinnerMini/>
+              <SpinnerMini />
             </div>
           ) : (
             "Signup"

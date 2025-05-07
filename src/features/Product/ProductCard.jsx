@@ -42,7 +42,7 @@ const ProductCard = ({ product }) => {
       <div className="p-4 flex flex-col gap-2">
         {/* Product Name */}
         <Link to={`/product/${product.slug}`}>
-          <p className="text-lg font-semibold hover:text-blue-500 text-gray-800 dark:text-gray-100 break-words line-clamp-2">
+          <p className="text-lg font-semibold hover:text-blue-500 dark:hover:text-blue-500 text-gray-800 dark:text-gray-100 break-words line-clamp-2">
             {name}
           </p>
         </Link>

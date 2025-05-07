@@ -2,7 +2,7 @@ const Spinner = () => {
   return (
     <div
       className="mx-auto my-24 w-16 aspect-square rounded-full 
-                 bg-[conic-gradient(transparent_30%,_#000)] 
+                 dark:bg-[conic-gradient(transparent_30%,_#fff)] bg-[conic-gradient(transparent_30%,_#000)] 
                  animate-rotate"
       style={{
         WebkitMask:

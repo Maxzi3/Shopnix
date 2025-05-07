@@ -49,7 +49,7 @@ const UserOrders = () => {
     filteredOrders.length === 0 && filter !== "All" && orders.length > 0;
 
   return (
-    <div className="w-full  mx-auto px-4 h-screen">
+    <div className="w-full mx-auto px-4 py-10">
       <h1 className="text-2xl font-bold mb-6 text-center">Your Orders</h1>
 
       {/* Filter Dropdown */}

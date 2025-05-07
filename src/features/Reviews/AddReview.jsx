@@ -1,3 +1,5 @@
+import Button from "../../UI/Button";
+import SpinnerMini from "../../UI/SpinnerMini";
 import StarRating from "../../UI/StarRating";
 
 const AddReview = ({
@@ -25,13 +27,15 @@ const AddReview = ({
             placeholder="Share your experience..."
           />
         </div>
-        <button
-          type="submit"
-          disabled={isCreating}
-          className="px-4 py-2 bg-black text-white rounded-md hover:bg-gray-800 disabled:opacity-50"
-        >
-          Submit Review
-        </button>
+        <Button variant="primary" type="submit" disabled={isCreating}>
+          {isCreating ? (
+            <div className="flex justify-center">
+              <SpinnerMini />
+            </div>
+          ) : (
+            "Submit Review"
+          )}
+        </Button>
       </form>
     </div>
   );

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useGetMe } from "../features/Authentication/useGetMe";
 import Spinner from "../UI/Spinner";
 import { formatDate } from "../UI/helpers";
+import Button from "../UI/Button";
 
 
 const ProfilePage = () => {
@@ -72,13 +73,14 @@ const ProfilePage = () => {
           </span>
         </div>
 
-        <button
+        <Button
+          variant="primary"
           onClick={handleClick}
           className="flex items-center gap-3 bg-blue-600 text-white  md:w-auto px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition"
         >
           Update Profile
           <HiArrowRight />
-        </button>
+        </Button>
       </div>
     </div>
   );

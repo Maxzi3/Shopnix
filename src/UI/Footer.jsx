@@ -27,7 +27,7 @@ const Footer = () => {
     <div className="fixed bottom-0 left-0 w-full bg-white dark:bg-gray-900 dark:text-white text-gray-700 border-t z-50">
       <ul className="md:hidden flex justify-between items-center px-5 py-6 text-2xl">
         {/* Home */}
-        <Link to="/" className="text-gray-700 hover:text-blue-600">
+        <Link to="/" className=" hover:text-blue-600">
           <HiOutlineHome />
         </Link>
 
@@ -36,7 +36,7 @@ const Footer = () => {
           {isCartPage ? (
             <Link
               to="/account/orders"
-              className="text-gray-700 hover:text-blue-600"
+              className=" hover:text-blue-600"
             >
               <HiOutlineClipboardDocumentList />
             </Link>
@@ -49,7 +49,7 @@ const Footer = () => {
         {isAuthenticated ? (
           <Link
             to="/account/profile"
-            className="text-gray-700 hover:text-blue-600"
+            className=" hover:text-blue-600"
           >
             <HiOutlineUser />
           </Link>
@@ -74,14 +74,14 @@ const Footer = () => {
         {isCartPage ? (
           <button
             onClick={handleClick}
-            className="text-gray-700 hover:text-blue-600"
+            className=" hover:text-blue-600"
           >
             <HiArrowLeft />
           </button>
         ) : (
           <Link
             to="/cart"
-            className="relative text-gray-700 hover:text-blue-600"
+            className="relative  hover:text-blue-600"
           >
             <HiOutlineShoppingCart className="w-6 h-6" />
             {totalQuantity > 0 && (

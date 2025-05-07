@@ -50,6 +50,7 @@ export async function createReviewOnProduct({ productId, review, rating }) {
     });
     return data;
   } catch (error) {
+    console.error(error)
     throw new Error(error.response?.data?.message || "Failed to create review");
   }
 }

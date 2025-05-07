@@ -6,6 +6,7 @@ import { useCartContext } from "../../Contexts/CartContext";
 import { formatCurrency } from "../../UI/helpers";
 import { useGetMe } from "../Authentication/useGetMe";
 import SpinnerMini from "../../UI/SpinnerMini";
+import FormInput from "../../UI/FormInput";
 
 const CreateOrderForm = () => {
   const [formData, setFormData] = useState({
@@ -49,7 +50,7 @@ const CreateOrderForm = () => {
       {/* Back Button */}
       <button
         onClick={() => navigate("/cart")}
-        className="mb-6 flex items-center gap-2 text-sm text-gray-600 hover:text-gray-800 transition"
+        className="mb-6 flex items-center gap-2 text-sm  hover:text-gray-800 transition"
       >
         ← Back to Cart
       </button>
@@ -58,27 +59,28 @@ const CreateOrderForm = () => {
         {/* Checkout Form */}
         <form
           onSubmit={handleSubmit}
-          className="bg-white border rounded-xl shadow p-6 space-y-6 h-96 overflow-y-auto"
+          className=" border rounded-xl shadow p-6 space-y-6 h-96 overflow-y-auto"
         >
-          <h2 className="text-2xl font-bold text-gray-800">Checkout</h2>
+          <h2 className="text-2xl font-bold">Checkout</h2>
 
           {/* Shipping Address Selection */}
           <div className="space-y-2">
-            <label className="block text-gray-700 font-medium">
-              Shipping Address
-            </label>
+            <label className="block font-medium">Shipping Address</label>
 
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-2 ">
               <label className="flex items-center gap-2">
                 <input
                   type="radio"
                   checked={useSavedAddress}
                   onChange={() => setUseSavedAddress(true)}
-                  className="form-radio"
                 />
-                <span>
-                  Use saved address: {user?.address || "No saved address"}
-                </span>
+                <p>
+                  Use saved address:{" "}
+                  <span className="text-green-600">
+                    {" "}
+                    {user?.address || "No saved address"}
+                  </span>
+                </p>
               </label>
               <label className="flex items-center gap-2">
                 <input
@@ -92,13 +94,12 @@ const CreateOrderForm = () => {
             </div>
 
             {!useSavedAddress && (
-              <input
+              <FormInput
                 type="text"
                 name="shippingAddress"
                 value={formData.shippingAddress}
                 onChange={handleChange}
                 placeholder="Enter new delivery address"
-                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-black"
                 required
               />
             )}
@@ -106,14 +107,12 @@ const CreateOrderForm = () => {
 
           {/* Payment Method */}
           <div>
-            <label className="block mb-1 text-gray-700 font-medium">
-              Payment Method
-            </label>
+            <label className="block mb-1  font-medium">Payment Method</label>
             <select
               name="paymentMethod"
               value={formData.paymentMethod}
               onChange={handleChange}
-              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-black"
+              className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 dark:placeholder:text-gray-500 rounded-md focus:outline-none focus:ring-2 focus:ring-black"
             >
               <option value="Pay on delivery">Pay on delivery</option>
               <option value="Card">Card</option>
@@ -137,13 +136,13 @@ const CreateOrderForm = () => {
         </form>
 
         {/* Cart Summary */}
-        <div className="bg-gray-50 border rounded-xl shadow p-6 mb-16 h-96 overflow-y-auto">
-          <h3 className="text-xl font-semibold mb-4 text-gray-800">
+        <div className="border rounded-xl shadow p-6 mb-16 h-96 overflow-y-auto">
+          <h3 className="text-xl font-semibold mb-4">
             Order Summary
           </h3>
 
           {cart.items.length === 0 ? (
-            <p className="text-gray-500">Your cart is empty.</p>
+            <p>Your cart is empty.</p>
           ) : (
             <ul className="space-y-4">
               {cart.items.map((item) => (
@@ -156,28 +155,28 @@ const CreateOrderForm = () => {
                     />
                   )}
                   <div className="flex-1">
-                    <h4 className="text-sm font-medium text-gray-700">
+                    <h4 className="text-sm font-medium">
                       {item.product.name}
                     </h4>
-                    <p className="text-sm text-gray-500">
+                    <p className="text-sm">
                       {item.quantity} x {formatCurrency(item.product.price)}
                     </p>
                   </div>
-                  <p className="text-sm font-semibold text-gray-700">
+                  <p className="text-sm font-semibold">
                     {formatCurrency(item.product.price * item.quantity)}
                   </p>
                 </li>
               ))}
               <hr />
-              <li className="flex justify-between text-gray-600">
+              <li className="flex justify-between">
                 <span>Subtotal:</span>
                 <span>{formatCurrency(totalPrice)}</span>
               </li>
-              <li className="flex justify-between text-gray-600">
+              <li className="flex justify-between">
                 <span>Delivery Fee:</span>
                 <span>{formatCurrency(deliveryFee)}</span>
               </li>
-              <li className="flex justify-between font-bold text-lg text-gray-800">
+              <li className="flex justify-between font-bold text-lg">
                 <span>Total:</span>
                 <span>{formatCurrency(totalPrice + deliveryFee)}</span>
               </li>

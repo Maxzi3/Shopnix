@@ -12,7 +12,7 @@ export const useCreateOrder = () => {
     mutationFn: createOrderApi,
     onSuccess: () => {
       toast.success("Order placed successfully!");
-      queryClient.invalidateQueries(["userOrders"]);
+      queryClient.invalidateQueries(["userOrders", "cart"]);
       clearCart();
       navigate("/account/orders"); // redirect to confirmation
     },

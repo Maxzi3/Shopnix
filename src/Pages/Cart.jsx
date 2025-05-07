@@ -27,7 +27,7 @@ const CartPage = () => {
     <div className="px-6 md:pt-4 space-y-8 md:max-w-3xl max-h-auto mx-auto mb-[100px] ">
       <h1 className="text-2xl font-bold">Your Cart</h1>
       {cart?.items?.length === 0 ? (
-        <p className="text-gray-500">Your cart is empty.</p>
+        <p>Your cart is empty.</p>
       ) : (
         <>
           <div className="grid gap-4">
@@ -50,10 +50,10 @@ const CartPage = () => {
                     >
                       {item.product.name}
                     </h2>
-                    <p className="text-sm text-gray-600">
+                    <p className="text-sm ">
                       {formatCurrency(item.product.price)} × {item.quantity}
                     </p>
-                    <p className="text-sm text-gray-800 font-semibold">
+                    <p className="text-sm font-semibold">
                       Total:{formatCurrency(item.product.price * item.quantity)}
                     </p>
                   </div>
@@ -72,7 +72,7 @@ const CartPage = () => {
                         )
                       }
                     >
-                      <HiMinus className="w-8 h-8 border border-black rounded-full p-1 disabled:text-gray-400 disabled:border-gray-400" />
+                      <HiMinus className="w-8 h-8 border border-black dark:border-white  rounded-full p-1 disabled:text-gray-400 disabled:border-gray-400" />
                     </button>
                     <span className="w-6 text-center">{item.quantity}</span>
                     <button
@@ -81,7 +81,7 @@ const CartPage = () => {
                         updateCartQuantity(item._id, item.quantity + 1)
                       }
                     >
-                      <HiPlus className="w-8 h-8 border border-black rounded-full p-1" />
+                      <HiPlus className="w-8 h-8 border border-black dark:border-white rounded-full p-1" />
                     </button>
                   </div>
                   <button
@@ -98,13 +98,13 @@ const CartPage = () => {
             <p className="text-lg font-semibold">
               SubTotal:{formatCurrency(totalPrice)}
             </p>
-            <p className="text-sm text-gray-600">
+            <p className="text-sm ">
               Total Quantity: {totalQuantity}
             </p>
           </div>
 
           {/* Cart Summary */}
-          <div className=" w-full bg-white p-4 flex flex-col md:flex-row justify-between items-center gap-4 ">
+          <div className=" w-full p-4 flex flex-col md:flex-row justify-between items-center gap-4 ">
             <button
               onClick={() => navigate("/cart/orders/new")}
               className="bg-blue-600 text-white w-full md:w-auto px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition"

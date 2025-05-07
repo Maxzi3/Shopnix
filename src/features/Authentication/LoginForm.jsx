@@ -3,6 +3,7 @@ import { useLogin } from "./useLogin";
 import { Link } from "react-router-dom";
 import SpinnerMini from "../../UI/SpinnerMini";
 import FormInput from "../../UI/FormInput";
+import Button from "../../UI/Button";
 
 function LoginForm() {
   const [email, setEmail] = useState("");
@@ -69,8 +70,8 @@ function LoginForm() {
         <div className="flex flex-col items-center">
           <button
             type="submit"
-            disabled={isLoading}
-            className="w-[150px]  mt-2 py-3 bg-black text-white rounded-md disabled:bg-gray-400"
+            disabled={isLoading || !email || !password}
+            className="w-[150px]  mt-2 py-3  rounded-md disabled:bg-gray-400 bg-black text-white hover:bg-white  dark:bg-gray-100 dark:text-gray-800 "
           >
             {isLoading ? (
               <div className="flex justify-center">

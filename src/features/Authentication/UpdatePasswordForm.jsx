@@ -3,6 +3,7 @@ import { useUpdatePassword } from "./useUpdatePassword";
 import Spinner from "../../UI/Spinner";
 import SpinnerMini from "../../UI/SpinnerMini";
 import FormInput from "../../UI/FormInput";
+import Button from "../../UI/Button";
 
 function UpdatePasswordForm() {
   const { register, formState, getValues, handleSubmit, reset } = useForm();
@@ -87,7 +88,6 @@ function UpdatePasswordForm() {
             validate: (value) =>
               value === getValues().password || "Passwords must match",
           })}
-          
         />
         {errors?.passwordConfirm && (
           <span className="text-red-600 text-sm">
@@ -106,10 +106,10 @@ function UpdatePasswordForm() {
         >
           Cancel
         </button>
-        <button
+        <Button
+          variant="primary"
           type="submit"
           disabled={isLoading}
-          className="px-4 py-2 bg-black text-white rounded-md hover:bg-gray-800 disabled:bg-gray-400"
         >
           {isLoading ? (
             <div className="flex justify-center">
@@ -118,7 +118,7 @@ function UpdatePasswordForm() {
           ) : (
             "Update Password"
           )}
-        </button>
+        </Button>
       </div>
     </form>
   );

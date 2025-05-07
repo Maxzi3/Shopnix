@@ -45,7 +45,7 @@ function Reviews() {
 
   return (
     <>
-      <div className="w-full mx-auto px-6 space-y-8 h-screen">
+      <div className="w-full mx-auto px-6 space-y-8 md:h-screen py-10">
         <h1 className="text-2xl font-bold">My Reviews</h1>
         {currentReviews.map((review) => (
           <div key={review._id} className="border p-4 rounded-lg space-y-2">
@@ -104,7 +104,7 @@ function Reviews() {
             <HiArrowLeft />
           </button>
 
-          <p className="text-sm text-gray-600">
+          <p className="text-sm ">
             Page <span className="font-semibold">{currentPage}</span> of{" "}
             <span className="font-semibold">{pageCount}</span>
           </p>

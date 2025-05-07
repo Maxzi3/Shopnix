@@ -23,7 +23,7 @@ const AppNavMobile = () => {
   const linkclass = ({ isActive }) =>
     isActive
       ? "flex items-center gap-3 font-medium text-base px-2  py-3 rounded-md transition-all bg-gray-100 text-gray-800"
-      : " flex items-center gap-3 font-medium text-base px-2  py-3 rounded-md transition-all text-gray-600 hover:bg-gray-100 hover:text-gray-800";
+      : " flex items-center gap-3 font-medium text-base px-2  py-3 rounded-md transition-all  hover:bg-gray-100 hover:text-gray-800";
   return (
     <header className="bg-white dark:bg-gray-900 dark:text-white text-gray-700 body-font fixed w-full top-0 z-50">
       <div className="md:hidden flex flex-row  w-11/12  mx-auto py-4">
@@ -85,7 +85,7 @@ const AppNavMobile = () => {
         <Modal.Open opens="delete">
           <button
             onClick={ToggleMenu}
-            className="flex items-center gap-3 font-medium text-base px-2  py-3 rounded-md transition-all text-gray-600 hover:bg-gray-100 hover:text-gray-800"
+            className="flex items-center gap-3 font-medium text-base px-2  py-3 rounded-md transition-all hover:bg-gray-100 hover:text-gray-800"
           >
             <HiOutlineTrash />
             Delete Account
@@ -94,7 +94,7 @@ const AppNavMobile = () => {
         <Modal.Open opens="logout">
           <button
             onClick={ToggleMenu}
-            className="flex items-center gap-3 font-medium text-base px-2  py-3 rounded-md transition-all text-gray-600 hover:bg-gray-100 hover:text-gray-800"
+            className="flex items-center gap-3 font-medium text-base px-2  py-3 rounded-md transition-all hover:bg-gray-100 hover:text-gray-800"
           >
             <HiOutlineArrowRightOnRectangle />
             Log Out

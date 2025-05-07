@@ -40,7 +40,7 @@ const ProductReviews = ({ reviews = [] }) => {
                 ))}
               </span>
             </div>
-            <p className="text-gray-700 mt-1">{review.review}</p>
+            <p className="mt-1">{review.review}</p>
           </div>
         ))}
       </div>
