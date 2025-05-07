@@ -1,7 +1,8 @@
 import { useForm } from "react-hook-form";
 import { useUpdatePassword } from "./useUpdatePassword";
 import Spinner from "../../UI/Spinner";
-import SpinnerMini from "../../ui/SpinnerMini";
+import SpinnerMini from "../../UI/SpinnerMini";
+import FormInput from "../../UI/FormInput";
 
 function UpdatePasswordForm() {
   const { register, formState, getValues, handleSubmit, reset } = useForm();
@@ -22,14 +23,14 @@ function UpdatePasswordForm() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="bg-white md:w-[600px] mx-auto flex flex-col justify-center p-8 mb-[100px] rounded-lg space-y-6 text-sm md:border border-gray-200"
+      className="md:w-[600px] mx-auto flex flex-col justify-center p-8 mb-[100px] rounded-lg space-y-6 text-sm md:border border-gray-200"
     >
       {/* currentPassword */}
       <div>
         <label htmlFor="passwordCurrent" className="block font-medium mb-1">
           Current Password (min 8 characters)
         </label>
-        <input
+        <FormInput
           type="password"
           id="passwordCurrent"
           disabled={isLoading}
@@ -40,7 +41,6 @@ function UpdatePasswordForm() {
               message: "Password must be at least 8 characters",
             },
           })}
-          className="w-full p-3 border border-gray-300 rounded-md"
         />
         {errors?.passwordCurrent && (
           <span className="text-red-600 text-sm">
@@ -54,7 +54,7 @@ function UpdatePasswordForm() {
         <label htmlFor="password" className="block font-medium mb-1">
           New Password (min 8 characters)
         </label>
-        <input
+        <FormInput
           type="password"
           id="password"
           disabled={isLoading}
@@ -65,7 +65,6 @@ function UpdatePasswordForm() {
               message: "Password must be at least 8 characters",
             },
           })}
-          className="w-full p-3 border border-gray-300 rounded-md"
         />
         {errors?.password && (
           <span className="text-red-600 text-sm">
@@ -79,7 +78,7 @@ function UpdatePasswordForm() {
         <label htmlFor="passwordConfirm" className="block font-medium mb-1">
           Repeat Password
         </label>
-        <input
+        <FormInput
           type="password"
           id="passwordConfirm"
           disabled={isLoading}
@@ -88,7 +87,7 @@ function UpdatePasswordForm() {
             validate: (value) =>
               value === getValues().password || "Passwords must match",
           })}
-          className="w-full p-3 border border-gray-300 rounded-md"
+          
         />
         {errors?.passwordConfirm && (
           <span className="text-red-600 text-sm">

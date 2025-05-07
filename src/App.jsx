@@ -9,7 +9,6 @@ import { Toaster } from "react-hot-toast";
 import { CartProvider } from "./Contexts/CartContext";
 import { AuthProvider } from "./Contexts/AuthContext";
 import HomePage from "./Pages/HomePage";
-import OrderPage from "./Pages/OrderPage";
 import ProfilePage from "./Pages/ProfilePage";
 import AppLayout from "./UI/AppLayout";
 import CartPage from "./Pages/Cart";
@@ -17,13 +16,15 @@ import Login from "./Pages/Login";
 import Signup from "./Pages/Signup";
 import ForgotPassword from "./Pages/ForgetPassword";
 import AccountLayout from "./UI/AccountLayout";
-import OrderDetails from "./features/orders/OrderDetails";
 import ProtectedRoute from "./UI/ProtectedRoute";
 import Reviews from "./features/Reviews/Reviews";
 import UpdatePage from "./Pages/UpdatePage";
 import ProductDetailsPage from "./features/Product/ProductDetailsPage";
 import EmailVerificationPage from "./Pages/EmailVerificationPage";
 import ResetPasswordPage from "./Pages/ResetPasswordPage";
+import CreateOrderForm from "./features/orders/CreateOrderForm";
+import UserOrders from "./features/orders/UserOrders";
+import SingleOrder from "./features/orders/SingleOrder";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -42,7 +43,10 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/forgotpassword" element={<ForgotPassword />} />
-        <Route path="/verify-email/:token" element={<EmailVerificationPage />} />
+        <Route
+          path="/verify-email/:token"
+          element={<EmailVerificationPage />}
+        />
         <Route path="/reset-password/:token" element={<ResetPasswordPage />} />
 
         {/* App Layout (for users after login) */}
@@ -50,11 +54,12 @@ const App = () => {
           <Route index element={<HomePage />} />
           <Route path="/product/:slug" element={<ProductDetailsPage />} />
           <Route path="/cart" element={<CartPage />} />
+          <Route path="/cart/orders/new" element={<CreateOrderForm />} />
           <Route
             path="/order"
             element={
               <ProtectedRoute>
-                <OrderPage />
+                <UserOrders />
               </ProtectedRoute>
             }
           />
@@ -69,10 +74,10 @@ const App = () => {
           }
         >
           <Route path="/account/profile" element={<ProfilePage />} />
-          <Route path="/account/reviews" element={<Reviews />} />
-          <Route path="/account/orders" element={<OrderPage />} />
-          <Route path="/account/order/:orderId" element={<OrderDetails />} />
           <Route path="/account/updatedata" element={<UpdatePage />} />
+          <Route path="/account/reviews" element={<Reviews />} />
+          <Route path="/account/orders" element={<UserOrders />} />
+          <Route path="/account/orders/:id" element={<SingleOrder />} />
         </Route>
       </Route>
     )

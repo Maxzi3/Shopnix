@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react";
 import { useUpdateReview } from "./useUpdateReview";
+import SpinnerMini from "../../UI/SpinnerMini";
+import FormInput from "../../UI/FormInput";
+
 
 function EditReviewForm({ review, onClose }) {
   const [text, setText] = useState("");
@@ -15,7 +18,7 @@ function EditReviewForm({ review, onClose }) {
 
   const handleSubmit = () => {
     editReview({
-      reviewId: review._id, 
+      reviewId: review._id,
       review: text,
       rating,
     });
@@ -33,24 +36,24 @@ function EditReviewForm({ review, onClose }) {
       <textarea
         value={text}
         onChange={(e) => setText(e.target.value)}
-        className="border p-2 w-full rounded"
+        className=" p-2 w-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 dark:placeholder:text-gray-500 rounded-md"
       ></textarea>
-      <input
+      <FormInput
         type="number"
+        id="number"
         value={rating}
         onChange={(e) => setRating(Number(e.target.value))}
         min="1"
         max="5"
-        className="border p-2 w-16 rounded"
       />
       <div className="flex space-x-2">
         <button
           type="button"
-          onClick={handleSubmit} 
+          onClick={handleSubmit}
           disabled={isLoading}
           className="bg-blue-600 text-white px-3 py-1 rounded"
         >
-          {isLoading ? "Saving..." : "Save"}
+          {isLoading ? <SpinnerMini /> : "Save"}
         </button>
         <button
           type="button"

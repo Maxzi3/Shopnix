@@ -9,7 +9,7 @@ function ConfirmDelete({ onCloseModal }) {
         Delete Account
       </h3>
 
-      <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
+      <p className=" text-sm sm:text-base leading-relaxed">
         Are you sure you want to delete this account permanently?
         <span className="font-medium"> This action cannot be undone.</span>
       </p>

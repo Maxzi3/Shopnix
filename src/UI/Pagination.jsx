@@ -26,7 +26,7 @@ const Pagination = ({ count }) => {
 
   return (
     <div className="w-full md:flex md:items-center md:justify-between space-y-4">
-      <p className="text-sm text-gray-700 ">
+      <p className="text-sm  ">
         Showing{" "}
         <span className="font-semibold">
           {(currentPage - 1) * PAGE_SIZE + 1}

@@ -19,12 +19,12 @@ const CategoryDropdown = () => {
     <div className="relative inline-block">
       {/* Dropdown list */}
       {open && (
-        <ul className="absolute bottom-full mb-2 bg-white shadow-lg rounded p-2 w-40 z-10 text-xl">
+        <ul className="absolute bottom-full mb-2 bg-white dark:bg-gray-900 dark:text-white text-gray-700shadow-lg rounded p-2 w-40 z-10 text-xl">
           {categories.map((cat) => (
             <li
               key={cat}
-              className={`p-2 cursor-pointer hover:bg-gray-100 ${
-                cat === filterValue ? "bg-gray-200" : ""
+              className={`p-2 cursor-pointer hover:bg-gray-400 ${
+                cat === filterValue ? "bg-gray-400" : ""
               }`} // Highlight the selected category
               onClick={() => handleCategoryChange(cat)} // Handle category change
             >

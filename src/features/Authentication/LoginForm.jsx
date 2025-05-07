@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { useLogin } from "./useLogin";
-import SpinnerMini from "../../ui/SpinnerMini";
 import { Link } from "react-router-dom";
+import SpinnerMini from "../../UI/SpinnerMini";
+import FormInput from "../../UI/FormInput";
 
 function LoginForm() {
   const [email, setEmail] = useState("");
@@ -26,7 +27,7 @@ function LoginForm() {
     <>
       <form
         onSubmit={handleSubmit}
-        className="bg-white  mx-auto flex flex-col justify-center md:p-10 py-8  rounded-lg  space-y-6 text-sm md:border border-gray-200"
+        className="mx-auto flex flex-col justify-center md:p-10 py-8  rounded-lg  space-y-6 text-sm md:border border-gray-200 md:w-[30rem] w-[20rem]"
       >
         {/* Email Input */}
         <div className="mb-3 flex flex-col items-center">
@@ -36,14 +37,13 @@ function LoginForm() {
           >
             Email address
           </label>
-          <input
+          <FormInput
             type="email"
             id="email"
             autoComplete="username"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             disabled={isLoading}
-            className="w-[300px] p-[10px] border border-gray-300 rounded-md"
           />
         </div>
 
@@ -55,14 +55,13 @@ function LoginForm() {
           >
             Password
           </label>
-          <input
+          <FormInput
             type="password"
             id="password"
             autoComplete="current-password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             disabled={isLoading}
-            className="w-[300px] p-[10px] border border-gray-300 rounded-md"
           />
         </div>
 

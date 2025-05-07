@@ -3,8 +3,10 @@ import { HiOutlineTrash, HiPlus, HiMinus } from "react-icons/hi2";
 import Spinner from "../UI/Spinner";
 import SpinnerMini from "../UI/SpinnerMini";
 import { formatCurrency } from "../UI/helpers";
+import { useNavigate } from "react-router-dom";
 
 const CartPage = () => {
+    const navigate = useNavigate();
   const {
     cart,
     removeFromCart,
@@ -103,7 +105,10 @@ const CartPage = () => {
 
           {/* Cart Summary */}
           <div className=" w-full bg-white p-4 flex flex-col md:flex-row justify-between items-center gap-4 ">
-            <button className="bg-blue-600 text-white w-full md:w-auto px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition">
+            <button
+              onClick={() => navigate("/cart/orders/new")}
+              className="bg-blue-600 text-white w-full md:w-auto px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition"
+            >
               Proceed to Checkout
             </button>
             <button

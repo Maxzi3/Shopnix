@@ -4,7 +4,9 @@ import { useGetMe } from "./useGetMe";
 import toast from "react-hot-toast";
 import Spinner from "../../UI/Spinner";
 import { FiX } from "react-icons/fi";
-import SpinnerMini from "../../ui/SpinnerMini";
+import SpinnerMini from "../../UI/SpinnerMini";
+import FormInput from "../../UI/FormInput";
+
 
 function UpdateUserDataForm() {
   const [preview, setPreview] = useState(null);
@@ -110,20 +112,14 @@ function UpdateUserDataForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-white md:w-[600px] mx-auto flex flex-col justify-center p-8 rounded-lg space-y-6 text-sm md:border border-gray-200"
+      className="md:w-[600px] mx-auto flex flex-col justify-center p-8 rounded-lg space-y-6 text-sm md:border border-gray-200"
     >
       {/* Email */}
       <div>
         <label htmlFor="email" className="block font-medium mb-1">
           Email address
         </label>
-        <input
-          type="email"
-          id="email"
-          value={email || "N/A"}
-          disabled
-          className="w-full p-3 border border-gray-300 rounded-md bg-gray-100 cursor-not-allowed"
-        />
+        <FormInput type="email" id="email" value={email || "N/A"} disabled />
       </div>
 
       {/* Email Verified */}
@@ -162,13 +158,12 @@ function UpdateUserDataForm() {
         <label htmlFor="fullName" className="block font-medium mb-1">
           Full name
         </label>
-        <input
+        <FormInput
           type="text"
           id="fullName"
           value={fullName}
           onChange={(e) => setFullName(e.target.value)}
           disabled={isUpdating}
-          className="w-full p-3 border border-gray-300 rounded-md"
         />
       </div>
 
@@ -177,13 +172,12 @@ function UpdateUserDataForm() {
         <label htmlFor="address" className="block font-medium mb-1">
           Address
         </label>
-        <input
+        <FormInput
           type="text"
-          id="addressField"
+          id="address"
           value={address}
           onChange={(e) => setAddress(e.target.value)}
           disabled={isUpdating}
-          className="w-full p-3 border border-gray-300 rounded-md"
         />
       </div>
 
@@ -192,13 +186,12 @@ function UpdateUserDataForm() {
         <label htmlFor="phoneNumber" className="block font-medium mb-1">
           Phone Number
         </label>
-        <input
+        <FormInput
           type="text"
           id="phoneNumber"
           value={phoneNumber}
           onChange={(e) => setPhoneNumber(e.target.value)}
           disabled={isUpdating}
-          className="w-full p-3 border border-gray-300 rounded-md"
         />
       </div>
 
@@ -220,14 +213,14 @@ function UpdateUserDataForm() {
         <label htmlFor="avatar" className="block font-medium mb-1">
           Avatar image
         </label>
-        <input
+        <FormInput
           type="file"
           id="avatar"
           accept="image/*"
           onChange={handleAvatarChange}
           ref={fileInputRef}
           disabled={isUpdating}
-          className="w-full p-3 pr-10 border border-gray-300 rounded-md file:border-0 file:bg-black file:text-white file:px-4 file:py-2 file:rounded-md file:cursor-pointer disabled:cursor-not-allowed"
+          className="w-full p-3 pr-10 border border-gray-300 rounded-md file:border-0 file:bg-black dark:file:bg-gray-800 file:text-white file:px-4 file:py-2 file:rounded-md file:cursor-pointer disabled:cursor-not-allowed"
         />
 
         {preview && (

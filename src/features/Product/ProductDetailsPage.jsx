@@ -63,7 +63,7 @@ const ProductDetailsPage = () => {
     <>
       <button
         onClick={() => navigate("/")}
-        className="flex items-center text-base md: m-4 cursor-pointer hover:text-blue-600"
+        className="flex items-center text-base md: m-4 cursor-pointer dark:text-white hover:text-blue-600"
       >
         <HiArrowLeft className="mr-2" /> Back
       </button>
@@ -113,7 +113,7 @@ const ProductDetailsPage = () => {
             <button
               disabled={product.stockNo === 0 || isAdding}
               onClick={() => addToCart(product, 1)}
-              className="bg-black text-white px-6 py-2 rounded-md hover:bg-gray-800 transition"
+              className="bg-black  text-white px-6 py-2 rounded-md hover:bg-gray-800 transition"
             >
               Add to Cart
             </button>

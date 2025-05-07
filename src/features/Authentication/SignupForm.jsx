@@ -2,7 +2,9 @@ import { useForm } from "react-hook-form";
 import { useSignup } from "./useSignup";
 import Spinner from "../../UI/Spinner";
 import { Link } from "react-router-dom";
-import SpinnerMini from "../../ui/SpinnerMini";
+import SpinnerMini from "../../UI/SpinnerMini";
+import FormInput from "../../UI/FormInput";
+
 
 
 function SignupForm() {
@@ -24,7 +26,7 @@ function SignupForm() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="bg-white flex flex-col justify-center md:p-8 py-8 rounded-lg md:border border-gray-200  text-sm"
+      className="flex flex-col justify-center md:p-8 py-8 rounded-lg md:border border-gray-200 text-sm md:w-[30rem] w-[20rem]"
     >
       {/* Full Name */}
       <div className="mb-3 flex flex-col items-center">
@@ -34,12 +36,11 @@ function SignupForm() {
         >
           Full name
         </label>
-        <input
+        <FormInput
           type="text"
           id="fullName"
           disabled={isLoading}
           {...register("fullName", { required: "This Field is Required" })}
-          className="w-[300px] p-[10px] border border-gray-300 rounded-md"
         />
         {errors?.fullName && (
           <span className="text-red-600 text-sm">
@@ -56,7 +57,7 @@ function SignupForm() {
         >
           Email address
         </label>
-        <input
+        <FormInput
           type="email"
           id="email"
           disabled={isLoading}
@@ -67,7 +68,7 @@ function SignupForm() {
               message: "Invalid email address",
             },
           })}
-          className="w-[300px] p-[10px] border border-gray-300 rounded-md"
+        
         />
         {errors?.email && (
           <span className="text-red-600 text-sm">{errors.email.message}</span>
@@ -81,12 +82,11 @@ function SignupForm() {
         >
           Phone Number
         </label>
-        <input
+        <FormInput
           type="text"
           id="phoneNumber"
           disabled={isLoading}
           {...register("phoneNumber", { required: "This Field is Required" })}
-          className="w-[300px] p-[10px] border border-gray-300 rounded-md"
         />
         {errors?.phoneNumber && (
           <span className="text-red-600 text-sm">
@@ -102,7 +102,7 @@ function SignupForm() {
         >
           Password (min 8 characters)
         </label>
-        <input
+        <FormInput
           type="password"
           id="password"
           disabled={isLoading}
@@ -113,7 +113,6 @@ function SignupForm() {
               message: "Password must be at least 8 characters",
             },
           })}
-          className="w-[300px] p-[10px] border border-gray-300 rounded-md"
         />
         {errors?.password && (
           <span className="text-red-600 text-sm">
@@ -130,7 +129,7 @@ function SignupForm() {
         >
           Repeat password
         </label>
-        <input
+        <FormInput
           type="password"
           id="passwordConfirm"
           disabled={isLoading}
@@ -139,7 +138,6 @@ function SignupForm() {
             validate: (value) =>
               value === getValues().password || "Password needs to match",
           })}
-          className="w-[300px] p-[10px]   border border-gray-300 rounded-md"
         />
         {errors?.passwordConfirm && (
           <span className="text-red-600 text-sm">

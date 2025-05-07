@@ -25,7 +25,7 @@ const AppNavMobile = () => {
       ? "flex items-center gap-3 font-medium text-base px-2  py-3 rounded-md transition-all bg-gray-100 text-gray-800"
       : " flex items-center gap-3 font-medium text-base px-2  py-3 rounded-md transition-all text-gray-600 hover:bg-gray-100 hover:text-gray-800";
   return (
-    <header className="text-gray-600 body-font fixed w-full top-0 bg-white z-50">
+    <header className="bg-white dark:bg-gray-900 dark:text-white text-gray-700 body-font fixed w-full top-0 z-50">
       <div className="md:hidden flex flex-row  w-11/12  mx-auto py-4">
         <button onClick={ToggleMenu} className="md:hidden z-50">
           {!isOpen ? (
@@ -46,7 +46,7 @@ const AppNavMobile = () => {
         </div>
       </div>
       <nav
-        className={`bg-white h-screen  absolute top-0 left-0 flex flex-col px-6 pt-20 pb-40 shadow-xl
+        className={`bg-white dark:bg-gray-900 dark:text-white text-gray-700 h-screen  absolute top-0 left-0 flex flex-col px-6 pt-20 pb-40 shadow-xl
     transition-transform duration-300 ease-in-out
     ${isOpen ? "translate-x-0" : "-translate-x-full"}`}
       >

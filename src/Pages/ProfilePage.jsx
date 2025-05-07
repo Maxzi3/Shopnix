@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useGetMe } from "../features/Authentication/useGetMe";
 import Spinner from "../UI/Spinner";
 import { formatDate } from "../UI/helpers";
-import { API_BASE_URL } from "../UI/Constant";
+
 
 const ProfilePage = () => {
   const { user, isLoading } = useGetMe();
@@ -22,7 +22,7 @@ const ProfilePage = () => {
   };
   const getValueOrNil = (value) => value || "N/A";
   return (
-    <div className=" bg-white px-4 py-8 md:w-[600px] max-w-xl mx-auto">
+    <div className="  px-4 py-8 md:w-[600px] max-w-xl mx-auto">
       <h1 className="text-2xl font-bold mb-6 text-center">Your Profile</h1>
 
       {/* Profile Image */}
@@ -37,31 +37,31 @@ const ProfilePage = () => {
       {/* User Info */}
       <div className="space-y-4 text-sm sm:text-base">
         <div className="flex justify-between items-center border-b pb-2">
-          <span className="font-medium text-gray-600">Name:</span>
+          <span className="font-medium">Name:</span>
           <span>{getValueOrNil(user.fullName)}</span>
         </div>
         <div className="flex justify-between items-center border-b pb-2">
-          <span className="font-medium text-gray-600">Email:</span>
+          <span className="font-medium">Email:</span>
           <span>{getValueOrNil(user.email)}</span>
         </div>
         <div className="flex justify-between items-center border-b pb-2">
-          <span className="font-medium text-gray-600">Phone:</span>
+          <span className="font-medium">Phone:</span>
           <span>{getValueOrNil(user.phoneNumber)}</span>
         </div>
         <div className="flex justify-between items-center border-b pb-2">
-          <span className="font-medium text-gray-600">Address:</span>
+          <span className="font-medium">Address:</span>
           <span className="text-right max-w-[60%]">
             {getValueOrNil(user.address)}
           </span>
         </div>
         <div className="flex justify-between items-center border-b pb-2">
-          <span className="font-medium text-gray-600">Date Joined:</span>
+          <span className="font-medium">Date Joined:</span>
           <span>{formatDate(user.createdAt)}</span>
         </div>
 
         {/* Email Verification Status */}
         <div className="flex justify-between items-center border-b pb-2">
-          <span className="font-medium text-gray-600">Email Verified:</span>
+          <span className="font-medium">Email Verified:</span>
           <span
             className={`px-2 py-1 rounded-full text-xs font-semibold capitalize ${
               emailStatusBadge[user.emailVerified?.toLowerCase()] ||

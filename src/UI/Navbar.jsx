@@ -23,12 +23,12 @@ const Navbar = () => {
   };
 
   return (
-    <header className="relative text-gray-600 body-font">
+    <header className="relative text-gray-600 dark:text-gray-200 body-font">
       {/* Desktop View */}
       <div className="hidden w-full md:flex justify-between items-center px-4 md:px-8 py-5">
         <Link
           to="/"
-          className="flex title-font font-medium items-center text-gray-900 mb-4 mr-2 md:mb-0"
+          className="flex title-font font-medium items-center text-gray-900 dark:text-gray-100 mb-4 mr-2 md:mb-0"
         >
           <Logo />
         </Link>
@@ -38,7 +38,7 @@ const Navbar = () => {
           <>
             {/* Category Filter */}
             <select
-              className="border ml-10 border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300"
+              className="border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 ml-10"
               value={filterValue}
               onChange={handleFilterChange}
             >
@@ -52,16 +52,18 @@ const Navbar = () => {
           </>
         )}
         <div className="flex justify-between gap-5 items-center text-3xl">
-          {/* 👇 Only show if authenticated */}
           {isCartPage ? (
             <Link
               to="/"
-              className="flex items-center text-base hover:text-blue-600"
+              className="flex items-center text-base hover:text-blue-600 dark:hover:text-blue-400"
             >
               <HiArrowLeft className="mr-2" /> Back to Store
             </Link>
           ) : (
-            <Link to="/cart" className="relative hover:text-gray-900">
+            <Link
+              to="/cart"
+              className="relative hover:text-gray-900 dark:hover:text-white"
+            >
               <HiOutlineShoppingCart className="w-6 h-6" />
               {totalQuantity > 0 && (
                 <sup className="absolute -top-2 -right-3 bg-red-500 text-white text-[10px] w-5 h-5 flex items-center justify-center rounded-full leading-none">
@@ -71,38 +73,41 @@ const Navbar = () => {
             </Link>
           )}
           {isAuthenticated ? (
-            <Link to="/account/profile" className="hover:text-gray-900">
+            <Link
+              to="/account/profile"
+              className="hover:text-gray-900 dark:hover:text-white"
+            >
               <HiOutlineUser />
             </Link>
           ) : (
-            // 👇 Show these if NOT authenticated
             <div className="flex gap-4 text-base">
               <Link
                 to="/login"
-                className="hover:text-blue-600 border border-gray-300 rounded px-3 py-1"
+                className="hover:text-blue-600 dark:hover:text-blue-400 border border-gray-300 dark:border-gray-600 rounded px-3 py-1"
               >
                 Login
               </Link>
               <Link
                 to="/signup"
-                className=" hover:text-blue-600 rounded px-3 py-1"
+                className="hover:text-blue-600 dark:hover:text-blue-400 rounded px-3 py-1"
               >
                 Sign Up
               </Link>
             </div>
           )}
-
           <DarkmodeToggle />
         </div>
       </div>
 
       {/* Mobile View */}
-      <div className="md:hidden fixed top-0 left-0 w-full z-50 bg-white shadow-sm px-4 py-3 flex justify-between items-center gap-4">
+      <div className="md:hidden fixed top-0 left-0 w-full z-50 bg-white dark:bg-gray-900 shadow-sm dark:shadow-md px-4 py-3 flex justify-between items-center gap-4">
         <Link to="/">
           <Logo />
         </Link>
         {isProductPage ? (
-          <h1 className="text-xl font-semibold">Buy abeg!!</h1>
+          <h1 className="text-xl font-semibold text-gray-900 dark:text-white">
+            Buy abeg!!
+          </h1>
         ) : (
           <div className="flex-1">
             <Input />

@@ -33,7 +33,7 @@ const Window = ({ children, name }) => {
     <div className="fixed inset-0 bg-black/30 backdrop-blur-sm z-[1000] flex items-center justify-center">
       <div
         ref={modalRef}
-        className="relative bg-white rounded-xl shadow-xl w-[90%] sm:w-full max-w-lg px-4 py-6 sm:p-8 animate-fadeIn mx-4"
+        className="relative bg-white dark:bg-gray-900 dark:text-white text-gray-700 rounded-xl shadow-xl w-[90%] sm:w-full max-w-lg px-4 py-6 sm:p-8 animate-fadeIn mx-4"
         tabIndex="-1"
       >
         <button

@@ -2,7 +2,8 @@ import { useParams } from "react-router-dom";
 import { useState } from "react";
 import { useResetPassword } from "../features/Authentication/useResetPassword";
 import Logo from "../UI/Logo";
-import SpinnerMini from "../ui/SpinnerMini";
+import SpinnerMini from "../UI/SpinnerMini";
+
 
 function ResetPasswordPage() {
   const { token } = useParams();
@@ -26,27 +27,33 @@ function ResetPasswordPage() {
           Reset Password
         </h2>
 
-        <label className="block mb-2">
-          <span className="text-sm">New Password</span>
+        <span className="block mb-2">
+          <label htmlFor="password" className="text-sm">
+            New Password
+          </label>
           <input
             type="password"
+            name="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
             className="mt-1 block w-full border px-3 py-2 rounded-md"
           />
-        </label>
+        </span>
 
-        <label className="block mb-4">
-          <span className="text-sm">Confirm Password</span>
+        <span className="block mb-4">
+          <label htmlFor="confirmpasword" className="text-sm">
+            Confirm Password
+          </label>
           <input
             type="password"
+            name="confirmpasword"
             value={passwordConfirm}
             onChange={(e) => setPasswordConfirm(e.target.value)}
             required
             className="mt-1 block w-full border px-3 py-2 rounded-md"
           />
-        </label>
+        </span>
 
         <button
           type="submit"

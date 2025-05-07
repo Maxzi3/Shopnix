@@ -1,4 +1,4 @@
-import SpinnerMini from "../../ui/SpinnerMini";
+import SpinnerMini from "../../UI/SpinnerMini";
 import { useLogout } from "./useLogout";
 
 const LogoutForm = ({ onCloseModal }) => {
@@ -6,7 +6,7 @@ const LogoutForm = ({ onCloseModal }) => {
   return (
     <div className="flex flex-col gap-4 p-4 sm:p-6 w-full max-w-sm sm:max-w-md">
       <h3 className="text-lg sm:text-xl text-red-600 font-semibold">LOGOUT</h3>
-      <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
+      <p className=" text-sm sm:text-base leading-relaxed">
         Are you sure you want Logout, New products are waiting for you, Shop Now
         !
       </p>

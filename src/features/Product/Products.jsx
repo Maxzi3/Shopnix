@@ -25,7 +25,7 @@ if (!filteredProducts.length)
   return <p className="text-center text-gray-500">No products found.</p>;
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 md:space-y-5 justify-items-center gap-2 max-h-auto mb-[100px]">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 md:space-y-5 justify-items-center gap-2 max-h-auto mb-[100px] ">
       {filteredProducts.map((product) => (
         <ProductCard key={product.id} product={product} />
       ))}

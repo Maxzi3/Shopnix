@@ -7,8 +7,9 @@ import Spinner from "../../UI/Spinner";
 import EditReviewForm from "./EditReviewForm";
 import ReviewsModal from "./ReviewsModal";
 import { useDeleteReview } from "./useDeleteReview";
-import SpinnerMini from "../../ui/SpinnerMini";
+
 import { formatDate } from "../../UI/helpers";
+import SpinnerMini from "../../UI/SpinnerMini";
 
 function Reviews() {
   const { data: reviews, isLoading, error } = useUserReviews();
@@ -20,14 +21,14 @@ function Reviews() {
     removeReview(reviewId);
   };
 
-  if (!reviews?.length) return <p>No reviews yet.</p>;
+  if (!reviews?.length) return <div className="px-4">No reviews yet.</div>;
   if (isLoading)
     return (
-      <p>
+      <div className="px-4">
         <Spinner />
-      </p>
+      </div>
     );
-  if (error) return <p>Error loading reviews</p>;
+  if (error) return <div className="px-4">Error loading reviews</div>;
 
   const pageCount = Math.ceil(reviews?.length / PAGE_SIZE);
   const indexOfLastReview = currentPage * PAGE_SIZE;
@@ -44,7 +45,7 @@ function Reviews() {
 
   return (
     <>
-      <div className="w-full mx-auto px-6 space-y-8">
+      <div className="w-full mx-auto px-6 space-y-8 h-screen">
         <h1 className="text-2xl font-bold">My Reviews</h1>
         {currentReviews.map((review) => (
           <div key={review._id} className="border p-4 rounded-lg space-y-2">
@@ -61,9 +62,9 @@ function Reviews() {
               ))}
             </div>
 
-            <p className="text-gray-700">{review.review}</p>
+            <p className="">{review.review}</p>
 
-            <div className="flex space-x-4 text-sm text-gray-600">
+            <div className="flex space-x-4 text-sm ">
               <button
                 onClick={() => setSelectedReview(review)}
                 disabled={isDeleting}

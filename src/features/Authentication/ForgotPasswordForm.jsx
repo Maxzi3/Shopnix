@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useForgotPassword } from "./useForgotPassword";
-import SpinnerMini from "../../ui/SpinnerMini";
 import { Link } from "react-router-dom";
+import SpinnerMini from "../../UI/SpinnerMini";
 
 function ForgotPasswordForm() {
   const [email, setEmail] = useState("");
