@@ -44,14 +44,16 @@ function Reviews() {
   };
 
   return (
-    <>
-      <div className="w-full mx-auto px-6 space-y-8 md:h-screen py-10">
+    <div className="w-full md:w-10/12  px-6 space-y-4 md:h-screen md:py-2 py-24">
+      <div className="space-y-4 md:h-screen">
         <h1 className="text-2xl font-bold">My Reviews</h1>
         {currentReviews.map((review) => (
-          <div key={review._id} className="border p-4 rounded-lg space-y-2">
+          <div key={review._id} className="border p-4 rounded-lg space-y-2 ">
             <div className="flex justify-between items-center">
-              <h2 className="font-medium">{review?.product?.name}</h2>
-              <span className="text-gray-500 text-sm">
+              <h2 className="font-medium break-words line-clamp-2">
+                {review?.product?.name}
+              </h2>
+              <span className="text-gray-500 text-sm shrink-0">
                 {formatDate(review.createdAt)}
               </span>
             </div>
@@ -130,7 +132,7 @@ function Reviews() {
           />
         </ReviewsModal>
       )}
-    </>
+    </div>
   );
 }
 

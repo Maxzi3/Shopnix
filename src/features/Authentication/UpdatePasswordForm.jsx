@@ -24,7 +24,7 @@ function UpdatePasswordForm() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="md:w-[600px] mx-auto flex flex-col justify-center p-8 mb-[100px] rounded-lg space-y-6 text-sm md:border border-gray-200"
+      className="md:w-[600px] mx-auto flex flex-col justify-center p-8 rounded-lg space-y-6 text-sm md:border border-gray-200"
     >
       {/* currentPassword */}
       <div>

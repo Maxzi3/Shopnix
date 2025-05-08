@@ -9,6 +9,7 @@ import { formatCurrency, formatDate } from "../../UI/helpers";
 import { HiTrash } from "react-icons/hi2";
 import SpinnerMini from "../../UI/SpinnerMini";
 import Spinner from "../../UI/Spinner";
+import { FiX } from "react-icons/fi";
 
 const statusBadge = {
   pending: "bg-blue-100 text-blue-800",
@@ -37,19 +38,21 @@ const UserOrders = () => {
     : [];
   if (isLoading)
     return (
-      <div className="px-4">
+      <div className="flex justify-center ">
         <Spinner />
       </div>
     );
-  if (error) return <div className="px-4">Error loading orders: {error.message}</div>;
-  if (!orders || orders.length === 0) return <div className="px-4">No orders found</div>;
+  if (error)
+    return <div className="px-4">Error loading orders: {error.message}</div>;
+  if (!orders || orders.length === 0)
+    return <div className="px-4">No orders found</div>;
 
   // Check if filtered orders are empty for the selected filter
   const noFilteredOrders =
     filteredOrders.length === 0 && filter !== "All" && orders.length > 0;
 
   return (
-    <div className="w-full mx-auto px-4 py-10">
+    <div className="w-full mx-auto px-4 md:py-2 py-24">
       <h1 className="text-2xl font-bold mb-6 text-center">Your Orders</h1>
 
       {/* Filter Dropdown */}
@@ -84,15 +87,17 @@ const UserOrders = () => {
           ? paginatedOrders.map((order) => (
               <div
                 key={order._id}
-                className="border rounded-lg p-4 shadow-sm flex flex-col md:flex-row justify-between items-start md:items-center"
+                className="border rounded-lg p-4 shadow-sm flex flex-col justify-between items-start md:w-10/12 md:justify-self-end "
               >
-                <div className="w-full">
-                  <p className="font-medium">Order ID: #{order._id}</p>
+                <p className=" font-medium text-base shrink-0 text-blue-600 ">
+                  ID: #{order._id}
+                </p>
+                <div className="w-full flex flex-row items-center justify-between space-y-4">
                   <p className="text-sm ">
                     Date: {formatDate(order.createdAt)}
                   </p>
                   <p
-                    className={`inline-block px-2 py-1 mt-2 rounded-full text-xs font-semibold ${
+                    className={`inline-block px-2 py-1 rounded-full text-xs font-semibold ${
                       statusBadge[order.orderStatus]
                     }`}
                   >
@@ -100,27 +105,30 @@ const UserOrders = () => {
                   </p>
                 </div>
 
-                <div className="mt-2 md:mt-0 flex flex-col md:items-end gap-2 w-full md:w-1/3">
+                <div className=" mt-2 md:mt-0 flex flex-col gap-2 w-full">
                   <p className="font-semibold">
                     Total: {formatCurrency(order.totalPrice)}
                   </p>
-                  <button
-                    onClick={() => navigate(`/account/orders/${order._id}`)}
-                    className="flex items-center gap-2 text-sm text-blue-600 hover:underline"
-                  >
-                    <HiOutlineEye />
-                    View Details
-                  </button>
-                  {order.orderStatus === "pending" && (
+                  <div className="flex flex-row  justify-between">
                     <button
-                      onClick={() => cancelOrder(order._id)}
-                      disabled={isCanceling}
-                      className="flex items-center gap-2 text-red-600 hover:text-red-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                      onClick={() => navigate(`/account/orders/${order._id}`)}
+                      className="flex items-center gap-2 text-sm text-blue-600 hover:underline"
                     >
-                      <HiTrash className="w-5 h-5" />
-                      {isCanceling ? <SpinnerMini /> : " "}
+                      <HiOutlineEye />
+                      View Details
                     </button>
-                  )}
+                    {order.orderStatus === "pending" && (
+                      <button
+                        onClick={() => cancelOrder(order._id)}
+                        disabled={isCanceling}
+                        className="flex items-center gap-2 text-red-600 hover:text-red-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                      >
+                        <FiX size={18} /> Cancel
+                        {/* <HiTrash className="w-5 h-5" /> */}
+                        {isCanceling ? <SpinnerMini /> : " "}
+                      </button>
+                    )}
+                  </div>
                 </div>
               </div>
             ))

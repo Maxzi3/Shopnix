@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
-import { HiArrowLeft, HiOutlineUser } from "react-icons/hi2";
+import { HiArrowLeft} from "react-icons/hi2";
 import DarkmodeToggle from "./DarkModeToggle";
+import PFP from "./PFP";
 
 const AccountHeader = () => {
   return (
@@ -11,7 +12,7 @@ const AccountHeader = () => {
           {" "}
           <HiArrowLeft className="mr-2" /> Back to Store
         </Link>
-        <HiOutlineUser className="text-2xl" />
+        <PFP />
         <DarkmodeToggle />
       </div>
     </header>

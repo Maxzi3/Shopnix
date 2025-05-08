@@ -14,19 +14,21 @@ const Pagination = ({ count }) => {
     const next = currentPage === pageCount ? currentPage : currentPage + 1;
     searchParams.set("page", next);
     setSearchParams(searchParams);
+    window.scrollTo({ top: 0, behavior: "smooth" }); // Smooth scroll to top
   };
 
   const prevPage = () => {
     const prev = currentPage === 1 ? currentPage : currentPage - 1;
     searchParams.set("page", prev);
     setSearchParams(searchParams);
+    window.scrollTo({ top: 0, behavior: "smooth" }); // Smooth scroll to top
   };
 
   if (pageCount <= 1) return null;
 
   return (
     <div className="w-full md:flex md:items-center md:justify-between space-y-4">
-      <p className="text-sm  ">
+      <p className="text-sm">
         Showing{" "}
         <span className="font-semibold">
           {(currentPage - 1) * PAGE_SIZE + 1}

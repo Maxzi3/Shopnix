@@ -19,7 +19,7 @@ import Button from "../../UI/Button";
 const ProductDetailsPage = () => {
   const { slug } = useParams();
   const navigate = useNavigate();
-  const { isAuthenticated } = useGetMe();
+  const { user ,isAuthenticated } = useGetMe();
   const [searchParams, setSearchParams] = useSearchParams();
   const { data, isLoading } = useProduct(slug);
   const product = data;
@@ -41,7 +41,10 @@ const ProductDetailsPage = () => {
     );
 
   const discountPrice = product.price - (product.priceDiscount || 0);
-
+  // Check if user has already reviewed the product
+  const hasReviewed = product?.reviews?.some(
+    (review) => review.user?._id.toString() === user?._id?.toString()
+  );
   function handleReviewSubmit(e) {
     e.preventDefault();
     if (!reviewText.trim()) {
@@ -125,7 +128,7 @@ const ProductDetailsPage = () => {
         <ProductReviews reviews={product.reviews} />
 
         {/* Leave a Review */}
-        {isAuthenticated && (
+        {isAuthenticated && !hasReviewed &&(
           <AddReview
             reviewText={reviewText}
             setReviewText={setReviewText}

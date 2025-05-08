@@ -7,6 +7,7 @@ import { formatCurrency } from "../../UI/helpers";
 import { useGetMe } from "../Authentication/useGetMe";
 import SpinnerMini from "../../UI/SpinnerMini";
 import FormInput from "../../UI/FormInput";
+import Button from "../../UI/Button";
 
 const CreateOrderForm = () => {
   const [formData, setFormData] = useState({
@@ -50,7 +51,7 @@ const CreateOrderForm = () => {
       {/* Back Button */}
       <button
         onClick={() => navigate("/cart")}
-        className="mb-6 flex items-center gap-2 text-sm  hover:text-gray-800 transition"
+        className="mb-6 flex items-center gap-2 text-sm transition"
       >
         ← Back to Cart
       </button>
@@ -75,8 +76,8 @@ const CreateOrderForm = () => {
                   onChange={() => setUseSavedAddress(true)}
                 />
                 <p>
-                  Use saved address:{" "}
-                  <span className="text-green-600">
+                  Use saved address{" "}
+                  <span className="text-green-600 max-w-[150px] truncate">
                     {" "}
                     {user?.address || "No saved address"}
                   </span>
@@ -120,11 +121,7 @@ const CreateOrderForm = () => {
           </div>
 
           {/* Submit Button */}
-          <button
-            type="submit"
-            disabled={isLoading}
-            className="w-full bg-black text-white py-2 rounded-md font-semibold  transition disabled:opacity-50 text-center"
-          >
+          <Button variant="primary" type="submit" disabled={isLoading}>
             {isLoading ? (
               <div className="flex justify-center">
                 <SpinnerMini />
@@ -132,14 +129,12 @@ const CreateOrderForm = () => {
             ) : (
               "Place Order"
             )}
-          </button>
+          </Button>
         </form>
 
         {/* Cart Summary */}
         <div className="border rounded-xl shadow p-6 mb-16 h-96 overflow-y-auto">
-          <h3 className="text-xl font-semibold mb-4">
-            Order Summary
-          </h3>
+          <h3 className="text-xl font-semibold mb-4">Order Summary</h3>
 
           {cart.items.length === 0 ? (
             <p>Your cart is empty.</p>
@@ -155,9 +150,7 @@ const CreateOrderForm = () => {
                     />
                   )}
                   <div className="flex-1">
-                    <h4 className="text-sm font-medium">
-                      {item.product.name}
-                    </h4>
+                    <h4 className="text-sm font-medium">{item.product.name}</h4>
                     <p className="text-sm">
                       {item.quantity} x {formatCurrency(item.product.price)}
                     </p>

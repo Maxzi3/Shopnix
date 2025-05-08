@@ -23,7 +23,7 @@ const ProfilePage = () => {
   };
   const getValueOrNil = (value) => value || "N/A";
   return (
-    <div className="  px-4 py-8 md:w-[600px] max-w-xl mx-auto">
+    <div className=" px-4 py-8 md:w-[600px] w-full mx-auto">
       <h1 className="text-2xl font-bold mb-6 text-center">Your Profile</h1>
 
       {/* Profile Image */}
@@ -50,7 +50,7 @@ const ProfilePage = () => {
           <span>{getValueOrNil(user.phoneNumber)}</span>
         </div>
         <div className="flex justify-between items-center border-b pb-2">
-          <span className="font-medium">Address:</span>
+          <span className="font-medium w-1/2 shrink-0">Address:</span>
           <span className="text-right max-w-[60%]">
             {getValueOrNil(user.address)}
           </span>

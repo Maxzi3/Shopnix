@@ -23,7 +23,7 @@ const AccountLayout = () => {
       <Modal>
         <div className="md:hidden block bg-white dark:bg-gray-900 dark:text-white text-gray-700">
           <AppNavMobile />
-          <main className="bg-white dark:bg-gray-900 dark:text-white text-gray-700 py-20 md:overflow-scroll h-auto">
+          <main className="bg-white dark:bg-gray-900 dark:text-white text-gray-700  md:overflow-scroll min-h-screen ">
             <Outlet />
           </main>
           <AccountFooter />

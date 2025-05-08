@@ -24,7 +24,7 @@ const CartPage = () => {
   if (isLoading || !cart) return <Spinner />;
 
   return (
-    <div className="px-6 md:pt-4 space-y-8 md:max-w-3xl max-h-auto mx-auto mb-[100px] ">
+    <div className="px-4 md:pt-4 space-y-8 md:max-w-3xl max-h-auto mx-auto mb-[100px] ">
       <h1 className="text-2xl font-bold">Your Cart</h1>
       {cart?.items?.length === 0 ? (
         <p>Your cart is empty.</p>
@@ -34,7 +34,7 @@ const CartPage = () => {
             {cart.items.map((item) => (
               <div
                 key={item.product._id}
-                className="flex flex-col md:flex-row md:items-center justify-between border p-4 rounded-lg shadow-sm space-y-4 md:space-y-0"
+                className="flex flex-row items-center justify-between border p-4 rounded-lg shadow-sm space-y-20 md:space-y-0"
               >
                 {/* Left Section: Image + Info */}
                 <div className="flex gap-4 items-start md:items-center">
@@ -60,7 +60,7 @@ const CartPage = () => {
                 </div>
 
                 {/* Right Section: Quantity + Delete */}
-                <div className="flex flex-col items-end gap-2 md:gap-4">
+                <div className="flex flex-row justify-end gap-2 md:gap-4">
                   <div className="flex items-center gap-2">
                     <button
                       disabled={isUpdating || item.quantity === 1}

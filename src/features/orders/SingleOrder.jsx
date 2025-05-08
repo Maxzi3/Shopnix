@@ -31,7 +31,7 @@ const SingleOrder = () => {
     );
 
   return (
-    <div className="max-w-4xl md:w-full mx-auto px-4 py-6 mb-10">
+    <div className="max-w-4xl md:w-full mx-auto px-4 md:py-6 py-24 mb-10">
       {/* Back Button */}
       <button
         onClick={() => navigate(-1)}
@@ -41,8 +41,8 @@ const SingleOrder = () => {
       </button>
 
       <div className="rounded-xl shadow-md md:p-6 p-4 space-y-4 border mb-10">
-        <h2 className="md:text-2xl text-xl  dark:text-white 700 font-semibold text-blue-800">
-          #{order._id}
+        <h2 className="md:text-2xl text-xl flex-shrink-0 font-semibold text-blue-800">
+         #{order._id}
         </h2>
 
         <div className="grid md:grid-cols-2 gap-x-28 gap-4">

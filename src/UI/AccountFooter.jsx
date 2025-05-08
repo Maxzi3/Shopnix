@@ -2,11 +2,11 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   HiOutlineClipboardDocumentList,
   HiOutlineShoppingCart,
-  HiOutlineUser,
   HiArrowLeft,
   HiOutlineHome,
 } from "react-icons/hi2";
 import { useCartContext } from "../Contexts/CartContext";
+import PFP from "./PFP";
 
 const AccountFooter = () => {
   const location = useLocation();
@@ -59,7 +59,7 @@ const AccountFooter = () => {
           </button>
         ) : (
           <Link to="/account/profile">
-            <HiOutlineUser />
+            <PFP/>
           </Link>
         )}
       </ul>

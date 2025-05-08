@@ -6,12 +6,13 @@ import { useCartContext } from "../Contexts/CartContext";
 import { HiArrowLeft } from "react-icons/hi";
 import { useGetMe } from "../features/Authentication/useGetMe";
 import Input from "./Input";
+import PFP from "./PFP";
 
 const Navbar = () => {
   const { isAuthenticated } = useGetMe();
   const location = useLocation();
   const { totalQuantity } = useCartContext();
-  const isCartPage = location.pathname === "/cart";
+  const isCartPage = location.pathname.startsWith("/cart");
   const isProductPage = location.pathname.startsWith("/product/");
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -77,7 +78,7 @@ const Navbar = () => {
               to="/account/profile"
               className="hover:text-gray-900 dark:hover:text-white"
             >
-              <HiOutlineUser />
+              <PFP />
             </Link>
           ) : (
             <div className="flex gap-4 text-base">
@@ -100,13 +101,13 @@ const Navbar = () => {
       </div>
 
       {/* Mobile View */}
-      <div className="md:hidden fixed top-0 left-0 w-full z-50 bg-white dark:bg-gray-900 shadow-sm dark:shadow-md px-4 py-3 flex justify-between items-center gap-4">
+      <div className="md:hidden fixed top-0 left-0 w-full z-50 bg-white dark:bg-gray-900 shadow-sm dark:shadow-md px-4 py-4 flex justify-between items-center gap-4">
         <Link to="/">
           <Logo />
         </Link>
-        {isProductPage ? (
+        {isCartPage || isProductPage ? (
           <h1 className="text-xl font-semibold text-gray-900 dark:text-white">
-            Buy abeg!!
+            <DarkmodeToggle />
           </h1>
         ) : (
           <div className="flex-1">
