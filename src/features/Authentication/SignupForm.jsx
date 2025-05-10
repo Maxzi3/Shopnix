@@ -21,8 +21,6 @@ function SignupForm() {
     );
   };
 
-  if (isLoading) return <Spinner />;
-
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
@@ -40,6 +38,7 @@ function SignupForm() {
           type="text"
           id="fullName"
           disabled={isLoading}
+          placeholder="John Doe"
           {...register("fullName", { required: "This Field is Required" })}
         />
         {errors?.fullName && (
@@ -60,6 +59,7 @@ function SignupForm() {
         <FormInput
           type="email"
           id="email"
+          placeholder="johndoe@email.com"
           disabled={isLoading}
           {...register("email", {
             required: "This Field is Required",
@@ -86,6 +86,7 @@ function SignupForm() {
         <FormInput
           type="text"
           id="phoneNumber"
+          placeholder="+1234567890"
           disabled={isLoading}
           {...register("phoneNumber", { required: "This Field is Required" })}
         />

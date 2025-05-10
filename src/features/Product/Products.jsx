@@ -43,7 +43,7 @@ const Products = () => {
       {/* Pagination */}
       {paginatedProducts.length > 0 && (
         <div className="flex flex-row  md:pb-10 pb-24 md:items-center md:justify-self-end md:w-1/2">
-          <Pagination count={paginatedProducts.length} />
+          <Pagination count={filteredProducts.length} pageSize={PAGE_SIZE} />
         </div>
       )}
     </>

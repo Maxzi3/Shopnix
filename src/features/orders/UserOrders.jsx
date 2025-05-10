@@ -43,9 +43,13 @@ const UserOrders = () => {
       </div>
     );
   if (error)
-    return <div className="px-4">Error loading orders: {error.message}</div>;
+    return (
+      <div className="px-4 md:py-2 py-24">
+        Error loading orders: {error.message}
+      </div>
+    );
   if (!orders || orders.length === 0)
-    return <div className="px-4">No orders found</div>;
+    return <div className="px-4 md:py-2 py-24">No orders found</div>;
 
   // Check if filtered orders are empty for the selected filter
   const noFilteredOrders =

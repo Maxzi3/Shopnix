@@ -21,14 +21,15 @@ function Reviews() {
     removeReview(reviewId);
   };
 
-  if (!reviews?.length) return <div className="px-4">No reviews yet.</div>;
+  if (!reviews?.length)
+    return <div className="px-4 md:py-2 py-24">No reviews yet.</div>;
   if (isLoading)
     return (
       <div className="px-4">
         <Spinner />
       </div>
     );
-  if (error) return <div className="px-4">Error loading reviews</div>;
+  if (error) return <div className="px-4 md:py-2 py-24">Error loading reviews</div>;
 
   const pageCount = Math.ceil(reviews?.length / PAGE_SIZE);
   const indexOfLastReview = currentPage * PAGE_SIZE;

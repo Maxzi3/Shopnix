@@ -76,12 +76,14 @@ export async function resetPassword({ token, password, passwordConfirm }) {
     throw new Error(error.response?.data?.message || "Password reset failed");
   }
 }
-export async function emailVerify({ token}) {
+export async function emailVerify({ token }) {
   try {
     const { data } = await api.post(`/users/verifyEmail/${token}`);
     return data;
   } catch (error) {
-    throw new Error(error.response?.data?.message || "Email verification failed");
+    throw new Error(
+      error.response?.data?.message || "Email verification failed"
+    );
   }
 }
 export async function updateMe(userData) {
@@ -126,3 +128,12 @@ export async function getMe() {
   }
 }
 
+export async function resendVerificationEmail({ email }) {
+  try {
+    const { data } = await api.post("/users/resend-verification", { email });
+    return data;
+  } catch (error) {
+    console.error(error);
+    throw new Error(error.response?.data?.message || "Something went wrong");
+  }
+}

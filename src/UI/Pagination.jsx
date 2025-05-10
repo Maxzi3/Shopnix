@@ -1,41 +1,46 @@
 import { HiChevronLeft, HiChevronRight } from "react-icons/hi2";
 import { useSearchParams } from "react-router-dom";
-import { PAGE_SIZE } from "../UI/Constant";
+import { useEffect } from "react";
+import { PAGE_SIZE } from "../UI/Constant"; 
 
-const Pagination = ({ count }) => {
+const Pagination = ({ count, pageSize = PAGE_SIZE }) => {
+  // Set default to PAGE_SIZE
   const [searchParams, setSearchParams] = useSearchParams();
   const currentPage = !searchParams.get("page")
     ? 1
     : Number(searchParams.get("page"));
 
-  const pageCount = Math.ceil(count / PAGE_SIZE);
+  const pageCount = Math.ceil(count / pageSize); // Use the dynamic pageSize
 
   const nextPage = () => {
     const next = currentPage === pageCount ? currentPage : currentPage + 1;
     searchParams.set("page", next);
     setSearchParams(searchParams);
-    window.scrollTo({ top: 0, behavior: "smooth" }); // Smooth scroll to top
   };
 
   const prevPage = () => {
     const prev = currentPage === 1 ? currentPage : currentPage - 1;
     searchParams.set("page", prev);
     setSearchParams(searchParams);
-    window.scrollTo({ top: 0, behavior: "smooth" }); // Smooth scroll to top
   };
+
+  // Ensure smooth scroll after page change
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [searchParams]); // Trigger scroll when searchParams change
 
   if (pageCount <= 1) return null;
 
   return (
-    <div className="w-full md:flex md:items-center md:justify-between space-y-4">
+    <div className="w-full md:flex md:items-center md:justify-between">
       <p className="text-sm">
         Showing{" "}
         <span className="font-semibold">
-          {(currentPage - 1) * PAGE_SIZE + 1}
+          {(currentPage - 1) * pageSize + 1}
         </span>{" "}
         to{" "}
         <span className="font-semibold">
-          {currentPage === pageCount ? count : currentPage * PAGE_SIZE}
+          {currentPage === pageCount ? count : currentPage * pageSize}
         </span>{" "}
         of <span className="font-semibold">{count}</span>
       </p>

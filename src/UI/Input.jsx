@@ -19,7 +19,7 @@ const Input = () => {
   return (
     <div className="relative w-full max-w-[500px] mx-auto">
       <input
-        className="border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 w-full rounded-full p-3 px-5 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 placeholder:text-gray-400 dark:placeholder:text-gray-500"
+        className="border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 w-full rounded-full py-2 md:px-4 sm:px-6 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 placeholder:text-gray-400 dark:placeholder:text-gray-500"
         type="text"
         placeholder="Search products..."
         value={searchTerm}

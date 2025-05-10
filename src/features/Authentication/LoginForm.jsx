@@ -1,18 +1,22 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useLogin } from "./useLogin";
+import { useResendEmail } from "./useResendEmail"; // import this
 import { Link } from "react-router-dom";
 import SpinnerMini from "../../UI/SpinnerMini";
 import FormInput from "../../UI/FormInput";
-import Button from "../../UI/Button";
 
 function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { login, isLoading } = useLogin();
+
+  const lastTriedEmailRef = useRef("");
+  const { login, isLoading, error } = useLogin();
+  const { resend, isLoading: isResending } = useResendEmail();
 
   function handleSubmit(e) {
     e.preventDefault();
     if (!email || !password) return;
+    lastTriedEmailRef.current = email;
     login(
       { email, password },
       {
@@ -24,11 +28,18 @@ function LoginForm() {
     );
   }
 
+  function handleResend() {
+    if (lastTriedEmailRef.current) resend({ email: lastTriedEmailRef.current });
+  }
+
+  const showResend =
+    error?.message === "Please verify your email before logging in.";
+
   return (
     <>
       <form
         onSubmit={handleSubmit}
-        className="mx-auto flex flex-col justify-center md:p-10 py-8  rounded-lg  space-y-6 text-sm md:border border-gray-200 md:w-[30rem] w-[20rem]"
+        className="mx-auto flex flex-col justify-center md:p-10 py-8 rounded-lg space-y-6 text-sm md:border border-gray-200 md:w-[30rem] w-[20rem]"
       >
         {/* Email Input */}
         <div className="mb-3 flex flex-col items-center">
@@ -71,7 +82,7 @@ function LoginForm() {
           <button
             type="submit"
             disabled={isLoading || !email || !password}
-            className="w-[150px]  mt-2 py-3  rounded-md disabled:bg-gray-400 bg-black text-white hover:bg-white  dark:bg-gray-100 dark:text-gray-800 "
+            className="w-[150px] mt-2 py-3 rounded-md disabled:bg-gray-400 bg-black text-white  dark:bg-gray-100 dark:text-gray-800"
           >
             {isLoading ? (
               <div className="flex justify-center">
@@ -81,13 +92,26 @@ function LoginForm() {
               "Login"
             )}
           </button>
+
+          {/* 🔁 Resend Button */}
+          {showResend && (
+            <button
+              type="button"
+              onClick={handleResend}
+              disabled={isResending}
+              className="mt-4 text-blue-600 hover:underline"
+            >
+              {isResending ? "Resending..." : "Resend Verification Email"}
+            </button>
+          )}
+
           <p className="p-4 text-center">
             Need an account?{" "}
             <Link className="hover:text-blue-600" to="/signup">
               SignUp
             </Link>
           </p>
-          <p className=" text-center">
+          <p className="text-center">
             Forgot Password? <Link to="/forgotpassword">Click here</Link>
           </p>
         </div>

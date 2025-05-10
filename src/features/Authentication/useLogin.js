@@ -11,7 +11,12 @@ export function useLogin() {
   const queryClient = useQueryClient();
   const { setAuth } = useAuth();
 
-  const { mutate: login, isPending } = useMutation({
+  const {
+    mutate: login,
+    isPending,
+    error,
+    status,
+  } = useMutation({
     mutationFn: ({ email, password }) => loginUser({ email, password }),
     onSuccess: async (data) => {
       setAuth(data?.token, data?.user);
@@ -33,10 +38,9 @@ export function useLogin() {
       toast.success("Login successful!");
     },
     onError: (err) => {
-      console.error("Login Error:", err.response?.data?.message || err.message);
-      toast.error("Provided Email or Password is Incorrect");
+      toast.error(err.message);
     },
   });
 
-  return { login, isLoading: isPending };
+  return { login, isLoading: isPending, error, status };
 }
