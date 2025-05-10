@@ -11,6 +11,7 @@ import {
 } from "../Hooks/useLocalStorage";
 import { toast } from "react-hot-toast";
 import { useAuth } from "./AuthContext";
+import { useUpdateCartSize } from "../features/Cart/useUpdateCartSize";
 
 export const CartContext = createContext();
 
@@ -35,6 +36,7 @@ export const CartProvider = ({ children }) => {
   const { addItem, isLoading: isAdding } = useAddToCart();
   const { deleteItem, isLoading: isDeleting } = useDeleteCartItem();
   const { updateItem, isLoading: isUpdating } = useUpdateCartItem();
+  const { updateSize, isLoading: isUpdatingSize } = useUpdateCartSize();
   const { clear, isLoading: isClearing } = useClearCart();
 
   const addToCart = (product, quantity) => {
@@ -95,6 +97,29 @@ export const CartProvider = ({ children }) => {
       }
     }
   };
+  const updateCartSize = (productId, newSize) => {
+    console.log("updateCartSize called with:", {
+      productId,
+      newSize,
+      type: typeof productId,
+    });
+    if (token) {
+      // If user is authenticated, call mutation
+      updateSize({ cartItemId: productId, size: newSize });
+    } else {
+      // If user is a guest, update localStorage
+      const guestCart = getGuestCart();
+      const itemIndex = guestCart.findIndex((item) => item._id === productId);
+
+      if (itemIndex !== -1) {
+        guestCart[itemIndex].size = newSize;
+        saveGuestCart(guestCart); 
+        setGuestCartItems(guestCart); 
+        toast.success("Item size updated!");
+      }
+    }
+  };
+
 
   const clearCart = () => {
     if (token) {
@@ -124,6 +149,7 @@ export const CartProvider = ({ children }) => {
     addToCart,
     removeFromCart,
     updateCartQuantity,
+    updateCartSize,
     clearCart,
     totalQuantity,
     totalPrice,
@@ -132,6 +158,7 @@ export const CartProvider = ({ children }) => {
     isDeleting,
     isUpdating,
     isClearing,
+    isUpdatingSize,
   };
 
   return (

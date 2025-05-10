@@ -150,7 +150,9 @@ const CreateOrderForm = () => {
                     />
                   )}
                   <div className="flex-1">
-                    <h4 className="text-sm font-medium">{item.product.name}</h4>
+                    <h4 className="text-sm font-medium">
+                      {item.product.name} <span>(Size: {item.size})</span>
+                    </h4>
                     <p className="text-sm">
                       {item.quantity} x {formatCurrency(item.product.price)}
                     </p>

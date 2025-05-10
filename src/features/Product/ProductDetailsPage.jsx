@@ -15,11 +15,12 @@ import { HiArrowLeft } from "react-icons/hi2";
 import toast from "react-hot-toast";
 import { useGetMe } from "../Authentication/useGetMe";
 import Button from "../../UI/Button";
+import ImageSlide from "../../UI/ImageSlide";
 
 const ProductDetailsPage = () => {
   const { slug } = useParams();
   const navigate = useNavigate();
-  const { user ,isAuthenticated } = useGetMe();
+  const { user, isAuthenticated } = useGetMe();
   const [searchParams, setSearchParams] = useSearchParams();
   const { data, isLoading } = useProduct(slug);
   const product = data;
@@ -74,10 +75,10 @@ const ProductDetailsPage = () => {
       <div className="px-6 md:pt-4 md:max-w-3xl max-h-auto mx-auto mb-[100px] max-w-5xl p-6 space-y-10">
         {/* Product Info */}
         <div className="grid md:grid-cols-2 gap-6">
-          <img
-            src={product.imageUrl}
-            alt={product.name}
-            className="rounded-lg w-full md:h-[400px] md:object-cover object-contain"
+          <ImageSlide
+            images={product.images}
+            imageUrl={product.imageUrl}
+            name={product.name}
           />
           <div className="space-y-4">
             <h1 className="text-3xl font-bold">{product.name}</h1>
@@ -128,7 +129,7 @@ const ProductDetailsPage = () => {
         <ProductReviews reviews={product.reviews} />
 
         {/* Leave a Review */}
-        {isAuthenticated && !hasReviewed &&(
+        {isAuthenticated && !hasReviewed && (
           <AddReview
             reviewText={reviewText}
             setReviewText={setReviewText}

@@ -45,7 +45,7 @@ const SimilarProducts = ({ currentSlug, category }) => {
             <img
               src={product.imageUrl}
               alt={product.name}
-              className="md:h-40 w-full object-contain"
+              className="md:h-42 w-full object-cover"
             />
             <div className="p-4">
               <h3 className="font-medium text-lg truncate">{product.name}</h3>

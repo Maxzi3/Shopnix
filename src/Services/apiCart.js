@@ -47,9 +47,30 @@ export async function clearCart() {
 }
 export async function mergeGuestCartApi(guestCart) {
   try {
-    const { data } = await api.post("/cart/merge", guestCart); 
+    const { data } = await api.post("/cart/merge", guestCart);
     return data;
   } catch (error) {
     throw new Error(error.response?.data?.message || "Failed to Merge cart");
   }
 }
+export const updateCartSizeApi = async (cartItemId, size) => {
+  try {
+console.log("updateCartSize called with:", {
+  cartItemId,
+  size,
+  type: typeof cartItemId,
+});
+    const { data } = await api.patch(`/cart/update-size/${cartItemId}`, {
+      size,
+    });
+      console.log("updateCartSize called with:", {
+        cartItemId, size,
+        type: typeof cartItemId,
+      });
+    console.log(`/cart/update-size/${cartItemId}`);
+    return data;
+  } catch (error) {
+    console.error(error)
+    throw new Error(error.response?.data?.message || "Failed to Update size");
+  }
+};

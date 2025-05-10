@@ -34,7 +34,7 @@ const ProductCard = ({ product }) => {
         <img
           src={imageUrl}
           alt={name}
-          className="h-48 w-full object-contain bg-white dark:bg-gray-700"
+          className="h-48 w-full object-top  bg-white dark:bg-gray-700"
         />
       </Link>
 
