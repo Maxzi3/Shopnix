@@ -38,7 +38,6 @@ const CreateOrderForm = () => {
       toast.error("Your cart is empty.");
       return;
     }
-    console.log(formData, addressToUse);
     createOrder({ ...formData, shippingAddress: addressToUse });
   };
 

@@ -104,7 +104,6 @@ export async function updateMe(userData) {
 
     return data;
   } catch (error) {
-    console.error(error);
     throw new Error(error.response?.data?.message || "Update failed");
   }
 }
@@ -133,7 +132,6 @@ export async function resendVerificationEmail({ email }) {
     const { data } = await api.post("/users/resend-verification", { email });
     return data;
   } catch (error) {
-    console.error(error);
     throw new Error(error.response?.data?.message || "Something went wrong");
   }
 }

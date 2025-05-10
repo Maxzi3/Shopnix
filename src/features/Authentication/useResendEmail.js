@@ -9,7 +9,6 @@ export function useResendEmail() {
       toast.success("Verification email resent.");
     },
     onError: (err) => {
-        console.error(err)
       toast.error(err.message || "Failed to resend email.");
     },
   });

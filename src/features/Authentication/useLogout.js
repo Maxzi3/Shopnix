@@ -15,11 +15,7 @@ export function useLogout() {
       navigate("/", { replace: true });
       toast.success("Logged out successfully!");
     },
-    onError: (err) => {
-      console.error(
-        "Logout Error:",
-        err.response?.data?.message || err.message
-      );
+    onError: () => {
       toast.error("Failed to log out");
     },
   });

@@ -20,7 +20,6 @@ export const getUserOrdersApi = async () => {
     });
     return Array.isArray(data.data) ? data.data : [];
   } catch (error) {
-    console.error(error);
     throw new Error(
       error.response?.data?.message || "Something went wrong. Please try again."
     );

@@ -16,7 +16,6 @@ export async function getProductBySlug(productSlug) {
     });
     return data.data;
   } catch (error) {
-    console.error("getProductBySlug - Error:", error.response?.data || error);
     throw new Error(error.response?.data?.message || "Failed to fetch product");
   }
 }

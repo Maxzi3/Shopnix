@@ -13,7 +13,6 @@ const SingleOrder = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { data: order, isLoading, error } = useGetSingleOrder(id);
-  // console.log(order.orderItems)
   const { mutate: cancelOrder, isPending: isCanceling } = useCancelOrder();
 
   if (isLoading)

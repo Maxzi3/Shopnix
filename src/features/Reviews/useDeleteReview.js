@@ -11,9 +11,7 @@ export function useDeleteReview() {
       toast.success("Review deleted!");
       queryClient.invalidateQueries(["reviews"]); // 🔄 Correct key here
     },
-    onError: (err) => console.log(err),
   });
 
   return { removeReview, isLoading: isPending };
 }
-

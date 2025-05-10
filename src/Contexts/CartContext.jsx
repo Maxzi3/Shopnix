@@ -98,11 +98,6 @@ export const CartProvider = ({ children }) => {
     }
   };
   const updateCartSize = (productId, newSize) => {
-    console.log("updateCartSize called with:", {
-      productId,
-      newSize,
-      type: typeof productId,
-    });
     if (token) {
       // If user is authenticated, call mutation
       updateSize({ cartItemId: productId, size: newSize });

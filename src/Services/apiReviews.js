@@ -11,7 +11,6 @@ export async function createReview({ review, rating, product }) {
 export async function getReviews() {
   try {
     const { data } = await api.get("/reviews");
-    console.log(data);
     return data;
   } catch (error) {
     throw new Error(error.response?.data?.message || "Failed to fetch reviews");
@@ -50,7 +49,6 @@ export async function createReviewOnProduct({ productId, review, rating }) {
     });
     return data;
   } catch (error) {
-    console.error(error)
     throw new Error(error.response?.data?.message || "Failed to create review");
   }
 }
