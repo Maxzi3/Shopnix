@@ -78,7 +78,8 @@ export async function resetPassword({ token, password, passwordConfirm }) {
 }
 export async function emailVerify({ token }) {
   try {
-    const { data } = await api.get(`/users/verifyEmail/${token}`);
+    const { data } = await api.get(`/users/verify-email/${token}`);
+    console.log(token)
     return data;
   } catch (error) {
     throw new Error(
