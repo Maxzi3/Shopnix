@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useEmailVerification } from "../features/Authentication/useEmailVerification";
 import Logo from "../UI/Logo";
 import SpinnerMini from "../UI/SpinnerMini";
+import Spinner from "../UI/Spinner";
 
 function EmailVerificationPage() {
   const { token } = useParams();
@@ -41,7 +42,7 @@ function EmailVerificationPage() {
           <p>
             Please wait a moment.
             <span className="flex justify-center">
-              <SpinnerMini />
+              <Spinner />
             </span>
           </p>
         )}

@@ -9,10 +9,8 @@ export function useEmailVerification() {
     onSuccess: (data) => {
       if (data.status === "success") {
         if (data.verified) {
-          toast.success("Email verified successfully!");
           navigate("/login?verified=true", { replace: true });
         } else if (data.alreadyVerified) {
-          toast.success("Email is already verified!");
           navigate("/login?alreadyVerified=true", { replace: true });
         }
       }
