@@ -61,7 +61,7 @@ function LoginForm() {
     <>
       <form
         onSubmit={handleSubmit}
-        className="mx-auto flex flex-col justify-center md:p-10 py-8 rounded-lg space-y-6 text-sm md:border border-gray-200 md:w-[30rem] w-[20rem]"
+        className="mx-auto flex flex-col justify-center md:p-10 rounded-lg space-y-6 text-sm md:border border-gray-200 md:w-[30rem] w-[20rem]"
       >
         {/* Email Input */}
         <div className="mb-3 flex flex-col items-center">
