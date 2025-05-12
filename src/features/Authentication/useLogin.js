@@ -20,6 +20,7 @@ export function useLogin() {
     mutationFn: ({ email, password }) => loginUser({ email, password }),
     onSuccess: async (data) => {
       setAuth(data?.token, data?.user);
+      await queryClient.invalidateQueries({queryKey:["user"]})
       const guestCart = getGuestCart();
       if (guestCart.length > 0) {
         try {

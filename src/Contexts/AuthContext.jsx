@@ -1,56 +1,59 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 
 const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
-  const [token, setToken] = useState(() => {
+  const [token, setToken] = useState(null);
+  const [user, setUser] = useState(null);
+
+  // ✅ Hydrate state from localStorage on app load
+  useEffect(() => {
     try {
-      const item = window.localStorage.getItem("token");
-      return item !== null && item !== "undefined" ? JSON.parse(item) : null;
+      const storedToken = localStorage.getItem("token");
+      const storedUser = localStorage.getItem("user");
+
+      if (storedToken && storedToken !== "undefined") {
+        setToken(JSON.parse(storedToken));
+      }
+
+      if (storedUser && storedUser !== "undefined") {
+        setUser(JSON.parse(storedUser));
+      }
     } catch (error) {
-      console.error("Error reading localStorage:", error);
-      return null;
+      console.error("Error loading auth from localStorage:", error);
     }
-  });
-  const [user, setUser] = useState(() => {
-    try {
-      const item = window.localStorage.getItem("user");
-      return item !== null && item !== "undefined" ? JSON.parse(item) : null;
-    } catch (error) {
-      console.error("Error reading localStorage:", error);
-      return null;
-    }
-  });
+  }, []);
 
   const setAuth = (newToken, newUser) => {
     try {
       if (newToken) {
-        window.localStorage.setItem("token", JSON.stringify(newToken));
+        localStorage.setItem("token", JSON.stringify(newToken));
         setToken(newToken);
       } else {
-        window.localStorage.removeItem("token");
+        localStorage.removeItem("token");
         setToken(null);
       }
+
       if (newUser) {
-        window.localStorage.setItem("user", JSON.stringify(newUser));
+        localStorage.setItem("user", JSON.stringify(newUser));
         setUser(newUser);
       } else {
-        window.localStorage.removeItem("user");
+        localStorage.removeItem("user");
         setUser(null);
       }
     } catch (error) {
-      console.error("Error setting localStorage:", error);
+      console.error("Error setting auth in localStorage:", error);
     }
   };
 
   const clearAuth = () => {
     try {
-      window.localStorage.removeItem("token");
-      window.localStorage.removeItem("user");
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
       setToken(null);
       setUser(null);
     } catch (error) {
-      console.error("Error clearing localStorage:", error);
+      console.error("Error clearing auth from localStorage:", error);
     }
   };
 
