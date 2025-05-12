@@ -4,12 +4,10 @@ import { toast } from "react-hot-toast";
 import { loginUser } from "../../Services/apiAuth";
 import { mergeGuestCartApi } from "../../Services/apiCart";
 import { getGuestCart, clearGuestCart } from "../../Hooks/useLocalStorage";
-import { useAuth } from "../../Contexts/AuthContext";
 
 export function useLogin() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-  const { setAuth } = useAuth();
 
   const {
     mutate: login,
@@ -19,27 +17,25 @@ export function useLogin() {
   } = useMutation({
     mutationFn: ({ email, password }) => loginUser({ email, password }),
     onSuccess: async (data) => {
-      setAuth(data?.token, data?.user);
-      await queryClient.invalidateQueries({queryKey:["user"]})
-      const guestCart = getGuestCart();
+      queryClient.invalidateQueries({ queryKey: ["user"] }); // Invalidate user query
+      const guestCart = getGuestCart(); // Clear ongoing fetch requests
       if (guestCart.length > 0) {
         try {
-          await mergeGuestCartApi({ guestItems: guestCart });
-          clearGuestCart();
-          queryClient.invalidateQueries({
-            queryKey: ["cart", data?.token],
-            exact: true,
-          });
+          await mergeGuestCartApi({ guestItems: guestCart }); // Merge guest cart
+          clearGuestCart(); // Clear guest cart
+          queryClient.invalidateQueries({ queryKey: ["cart"] }); // Invalidate cart query
           // toast.success("Guest cart merged successfully!");
         } catch (error) {
           console.error("Guest cart merge failed", error);
+          toast.error("Failed to merge guest cart");
         }
       }
+      queryClient.setQueryData(["user"], data.user); // Optimistically update user data
       navigate("/", { replace: true });
       toast.success("Login successful!");
     },
     onError: (err) => {
-      toast.error(err.message);
+      toast.error(err.message || "Login failed");
     },
   });
 

@@ -1,19 +1,19 @@
 import { useQuery } from "@tanstack/react-query";
 import { getUserCart } from "../../Services/apiCart";
 import { toast } from "react-hot-toast";
-import { useAuth } from "../../Contexts/AuthContext";
+import { useGetMe } from "../Authentication/useGetMe";
 
 export function useCart() {
-  const { token } = useAuth();
+  const { isLoading: isUserLoading, isAuthenticated } = useGetMe();
 
   return useQuery({
-    queryKey: ["cart", token],
+    queryKey: ["cart"],
     queryFn: async () => {
       const response = await getUserCart();
       return response.data.cart;
     },
-    enabled: !!token,
-    refetchOnMount: "always",
+    enabled: isAuthenticated && !isUserLoading,
+    retry: false,
     onError: (err) => {
       toast.error(err.message || "Could not fetch cart");
     },
