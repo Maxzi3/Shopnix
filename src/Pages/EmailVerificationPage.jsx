@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useEmailVerification } from "../features/Authentication/useEmailVerification";
 import Logo from "../UI/Logo";
-import SpinnerMini from "../UI/SpinnerMini";
 import Spinner from "../UI/Spinner";
 
 function EmailVerificationPage() {
