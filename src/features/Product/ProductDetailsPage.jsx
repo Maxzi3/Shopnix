@@ -16,11 +16,13 @@ import toast from "react-hot-toast";
 import { useGetMe } from "../Authentication/useGetMe";
 import Button from "../../UI/Button";
 import ImageSlide from "../../UI/ImageSlide";
+import { useAuth } from "../../Contexts/AuthContext";
 
 const ProductDetailsPage = () => {
   const { slug } = useParams();
   const navigate = useNavigate();
-  const { user, isAuthenticated } = useGetMe();
+  const { user } = useGetMe();
+  const { isAuthenticated } = useAuth();
   const [searchParams, setSearchParams] = useSearchParams();
   const { data, isLoading } = useProduct(slug);
   const product = data;
