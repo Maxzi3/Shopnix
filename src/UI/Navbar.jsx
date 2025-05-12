@@ -4,12 +4,12 @@ import { HiOutlineShoppingCart, HiOutlineUser } from "react-icons/hi2";
 import Logo from "./Logo";
 import { useCartContext } from "../Contexts/CartContext";
 import { HiArrowLeft } from "react-icons/hi";
+import { useGetMe } from "../features/Authentication/useGetMe";
 import Input from "./Input";
 import PFP from "./PFP";
-import { useAuth } from "../Contexts/AuthContext";
 
 const Navbar = () => {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated } = useGetMe();
   const location = useLocation();
   const { totalQuantity } = useCartContext();
   const isCartPage = location.pathname.startsWith("/cart");

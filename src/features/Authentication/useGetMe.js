@@ -2,21 +2,18 @@ import { useQuery } from "@tanstack/react-query";
 import { getMe } from "../../Services/apiAuth";
 import { toast } from "react-hot-toast";
 import { useAuth } from "../../Contexts/AuthContext";
-
 export function useGetMe() {
-  const { setAuth } = useAuth();
-
+ const { token } = useAuth();
   const { data: user, isPending } = useQuery({
-    queryKey: ["user"], 
+    queryKey: ["user", token], // 👈 see? added token here
     queryFn: getMe,
-    retry: false,
-    onSuccess: (userData) => {
-      setAuth(userData); // ✅ This updates isAuthenticated reactively
-    },
+    enabled: !!token,
     onError: (err) => {
       toast.error(err.message || "Failed to load user data");
     },
   });
 
-  return { user, isLoading: isPending };
+  const isAuthenticated = !!user && !!token;
+
+  return { user, isLoading: isPending, isAuthenticated };
 }

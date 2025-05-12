@@ -5,11 +5,11 @@ import SpinnerMini from "../UI/SpinnerMini";
 import { formatCurrency } from "../UI/helpers";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import { useAuth } from "../Contexts/AuthContext";
+import { useGetMe } from "../features/Authentication/useGetMe";
 
 const CartPage = () => {
   const navigate = useNavigate();
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated } = useGetMe();
   const {
     cart,
     removeFromCart,

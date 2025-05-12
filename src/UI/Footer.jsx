@@ -8,11 +8,11 @@ import {
 } from "react-icons/hi2";
 import CategoryDropdown from "./CategoryDropdown";
 import { useCartContext } from "../Contexts/CartContext";
+import { useGetMe } from "../features/Authentication/useGetMe";
 import PFP from "./PFP";
-import { useAuth } from "../Contexts/AuthContext";
 
 const Footer = () => {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated } = useGetMe();
   const location = useLocation();
   const navigate = useNavigate();
   const { totalQuantity } = useCartContext();

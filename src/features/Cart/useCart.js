@@ -4,15 +4,15 @@ import { toast } from "react-hot-toast";
 import { useAuth } from "../../Contexts/AuthContext";
 
 export function useCart() {
-  const { isAuthenticated } = useAuth();
+  const { token } = useAuth();
 
   return useQuery({
-    queryKey: ["cart", isAuthenticated],
+    queryKey: ["cart", token],
     queryFn: async () => {
       const response = await getUserCart();
       return response.data.cart;
     },
-    enabled: !!isAuthenticated,
+    enabled: !!token,
     refetchOnMount: "always",
     onError: (err) => {
       toast.error(err.message || "Could not fetch cart");

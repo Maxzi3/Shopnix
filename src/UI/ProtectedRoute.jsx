@@ -2,14 +2,12 @@ import { useGetMe } from "../features/Authentication/useGetMe";
 import Spinner from "./Spinner";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import { useAuth } from "../Contexts/AuthContext";
 
 const ProtectedRoute = ({ children }) => {
   const navigate = useNavigate();
 
   // 1. Load Authenticated User
-  const { isLoading } = useGetMe();
-  const { isAuthenticated } = useAuth();
+  const { isLoading, isAuthenticated } = useGetMe();
 
   // 2. If there is no authenticated user, redirect to /login
   useEffect(() => {

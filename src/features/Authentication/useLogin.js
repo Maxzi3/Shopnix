@@ -19,14 +19,14 @@ export function useLogin() {
   } = useMutation({
     mutationFn: ({ email, password }) => loginUser({ email, password }),
     onSuccess: async (data) => {
-      setAuth(data.user);
+      setAuth(data?.token, data?.user);
       const guestCart = getGuestCart();
       if (guestCart.length > 0) {
         try {
           await mergeGuestCartApi({ guestItems: guestCart });
           clearGuestCart();
           queryClient.invalidateQueries({
-            queryKey: ["cart"],
+            queryKey: ["cart", data?.token],
             exact: true,
           });
           // toast.success("Guest cart merged successfully!");
@@ -36,7 +36,6 @@ export function useLogin() {
       }
       navigate("/", { replace: true });
       toast.success("Login successful!");
-      navigate(0);  // Force refresh to update AuthContext
     },
     onError: (err) => {
       toast.error(err.message);

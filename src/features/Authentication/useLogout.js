@@ -11,7 +11,7 @@ export function useLogout() {
   const { mutate: logout, isPending } = useMutation({
     mutationFn: logoutUser,
     onSuccess: () => {
-      clearAuth(); 
+      clearAuth(); // Clear token and user
       navigate("/", { replace: true });
       toast.success("Logged out successfully!");
     },
