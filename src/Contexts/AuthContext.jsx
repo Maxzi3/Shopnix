@@ -3,25 +3,59 @@ import { createContext, useContext, useState, useEffect } from "react";
 const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
-  const [token, setToken] = useState(null);
-  const [user, setUser] = useState(null);
-
-  // ✅ Hydrate state from localStorage on app load
-  useEffect(() => {
+  const [token, setToken] = useState(() => {
     try {
-      const storedToken = localStorage.getItem("token");
-      const storedUser = localStorage.getItem("user");
-
-      if (storedToken && storedToken !== "undefined") {
-        setToken(JSON.parse(storedToken));
+      const rawToken = localStorage.getItem("token");
+      if (!rawToken || rawToken === "undefined" || rawToken === "null") {
+        localStorage.removeItem("token");
+        return null;
       }
-
-      if (storedUser && storedUser !== "undefined") {
-        setUser(JSON.parse(storedUser));
-      }
-    } catch (error) {
-      console.error("Error loading auth from localStorage:", error);
+      return JSON.parse(rawToken);
+    } catch {
+      return null;
     }
+  });
+
+  const [user, setUser] = useState(() => {
+    try {
+      const rawUser = localStorage.getItem("user");
+      if (!rawUser || rawUser === "undefined" || rawUser === "null") {
+        localStorage.removeItem("user");
+        return null;
+      }
+      return JSON.parse(rawUser);
+    } catch {
+      return null;
+    }
+  });
+
+  const [hasHydrated, setHasHydrated] = useState(false);
+
+  // Safari fallback: make sure we sync after first load
+  useEffect(() => {
+    if (!token) {
+      try {
+        const storedToken = localStorage.getItem("token");
+        if (storedToken && storedToken !== "undefined") {
+          setToken(JSON.parse(storedToken));
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    }
+
+    if (!user) {
+      try {
+        const storedUser = localStorage.getItem("user");
+        if (storedUser && storedUser !== "undefined") {
+          setUser(JSON.parse(storedUser));
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    }
+
+    setHasHydrated(true);
   }, []);
 
   const setAuth = (newToken, newUser) => {
@@ -59,7 +93,7 @@ export function AuthProvider({ children }) {
 
   return (
     <AuthContext.Provider value={{ token, user, setAuth, clearAuth }}>
-      {children}
+      {hasHydrated ? children : null}
     </AuthContext.Provider>
   );
 }
