@@ -20,7 +20,7 @@ function LoginForm() {
    const alreadyVerified = searchParams.get("alreadyVerified");
 
    if (isVerified === "true") {
-     toast.success("✅ Your email has been verified. You can now log in!");
+     toast.success("Your email has been verified. You can now log in!");
      toastShownRef.current = true;
    }
 

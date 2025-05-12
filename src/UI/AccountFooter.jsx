@@ -28,7 +28,7 @@ const AccountFooter = () => {
   };
   return (
     <div className="fixed bottom-0 w-full bg-white dark:bg-gray-900 dark:text-white text-gray-700 border-t-2 z-50 ">
-      <ul className="md:hidden flex justify-between py-6 px-5 text-2xl items-center ">
+      <ul className="md:hidden flex justify-between py-6 px-4 text-2xl items-center ">
         <Link to="/">
           <HiOutlineHome />
         </Link>
