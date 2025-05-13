@@ -1,19 +1,20 @@
 import { useQuery } from "@tanstack/react-query";
 import { getMe } from "../../Services/apiAuth";
-
+import { toast } from "react-hot-toast";
+import { useAuth } from "../../Contexts/AuthContext";
 export function useGetMe() {
-  const {
-    data: user,
-    isLoading,
-    error,
-  } = useQuery({
-    queryKey: ["user"], // Unique key for caching
-    queryFn: getMe, // The getMe function from your API
-    retry: false, // Don't retry on failure (e.g., 401 means user is not logged in)
-    refetchOnWindowFocus: false, // Prevent refetch on tab focus
-    refetchOnReconnect: false, // Prevent refetch on reconnect
-    staleTime: 1000 * 60 * 5, // Cache data for 5 minutes
+  const { token } = useAuth();
+  const { data: user, isPending } = useQuery({
+    queryKey: ["user"],
+    queryFn: getMe,
+    retry: false,
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
+    enabled: !!token, // Only fetch if token exists
+    onError: (err) => {
+      toast.error(err.message || "Failed to load user data");
+    },
   });
 
-  return { user, isLoading, isAuthenticated: !!user, error };
+  return { user, isLoading: isPending };
 }

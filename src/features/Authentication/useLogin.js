@@ -4,10 +4,12 @@ import { toast } from "react-hot-toast";
 import { loginUser } from "../../Services/apiAuth";
 import { mergeGuestCartApi } from "../../Services/apiCart";
 import { getGuestCart, clearGuestCart } from "../../Hooks/useLocalStorage";
+import { useAuth } from "../../Contexts/AuthContext";
 
 export function useLogin() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+  const { login: setAuth } = useAuth();
 
   const {
     mutate: login,
@@ -17,7 +19,8 @@ export function useLogin() {
   } = useMutation({
     mutationFn: ({ email, password }) => loginUser({ email, password }),
     onSuccess: async (data) => {
-      queryClient.invalidateQueries({ queryKey: ["user"] }); // Invalidate user query
+     setAuth({ user: data.data, token: data.token }); // Set user and token in context
+     queryClient.invalidateQueries({ queryKey: ["user"] });
       const guestCart = getGuestCart(); // Clear ongoing fetch requests
       if (guestCart.length > 0) {
         try {

@@ -8,11 +8,11 @@ import {
 } from "react-icons/hi2";
 import CategoryDropdown from "./CategoryDropdown";
 import { useCartContext } from "../Contexts/CartContext";
-import { useGetMe } from "../features/Authentication/useGetMe";
 import PFP from "./PFP";
+import { useAuth } from "../Contexts/AuthContext";
 
 const Footer = () => {
-  const { isAuthenticated } = useGetMe();
+  const { token } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
   const { totalQuantity } = useCartContext();
@@ -46,7 +46,7 @@ const Footer = () => {
         {isCartPage ? (
           <>
             {/* Auth Icons */}
-            {isAuthenticated ? (
+            {token ? (
               <Link to="/account/profile" className=" hover:text-blue-600">
                 <PFP />
               </Link>
@@ -98,7 +98,7 @@ const Footer = () => {
               </Link>
             )}
             {/* Auth Icons */}
-            {isAuthenticated ? (
+            {token ? (
               <Link to="/account/profile" className=" hover:text-blue-600">
                 <PFP />
               </Link>
