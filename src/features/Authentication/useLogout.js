@@ -12,8 +12,8 @@ export function useLogout() {
   const { mutate: logout, isPending } = useMutation({
     mutationFn: logoutUser,
     onSuccess: () => {
+      queryClient.clear(); // Clear all queries
       queryClient.setQueryData(["user"], null);
-      queryClient.invalidateQueries({ queryKey: ["user"] });
       clearAuth();
       navigate("/", { replace: true });
       toast.success("Logged out successfully!");
