@@ -12,7 +12,7 @@ import PFP from "./PFP";
 import { useAuth } from "../Contexts/AuthContext";
 
 const Footer = () => {
-  const { token } = useAuth();
+  const { isAuthenticated } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
   const { totalQuantity } = useCartContext();
@@ -46,7 +46,7 @@ const Footer = () => {
         {isCartPage ? (
           <>
             {/* Auth Icons */}
-            {token ? (
+            {isAuthenticated ? (
               <Link to="/account/profile" className=" hover:text-blue-600">
                 <PFP />
               </Link>
@@ -98,7 +98,7 @@ const Footer = () => {
               </Link>
             )}
             {/* Auth Icons */}
-            {token ? (
+            {isAuthenticated ? (
               <Link to="/account/profile" className=" hover:text-blue-600">
                 <PFP />
               </Link>

@@ -9,7 +9,7 @@ import PFP from "./PFP";
 import { useAuth } from "../Contexts/AuthContext";
 
 const Navbar = () => {
-  const { token } = useAuth();
+  const { isAuthenticated } = useAuth();
   const location = useLocation();
   const { totalQuantity } = useCartContext();
   const isCartPage = location.pathname.startsWith("/cart");
@@ -73,7 +73,7 @@ const Navbar = () => {
               )}
             </Link>
           )}
-          {token  ? (
+          {isAuthenticated ? (
             <Link
               to="/account/profile"
               className="hover:text-gray-900 dark:hover:text-white"

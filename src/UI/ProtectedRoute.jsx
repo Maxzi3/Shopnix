@@ -9,12 +9,12 @@ const ProtectedRoute = ({ children }) => {
 
   // 1. Load Authenticated User
   const { isLoading } = useGetMe();
-  const { token } = useAuth();
+  const { isAuthenticated } = useAuth();
 
   // 2. If there is no authenticated user, redirect to /login
   useEffect(() => {
-    if (!token && !isLoading) navigate("/");
-  }, [token, isLoading, navigate]);
+    if (!isAuthenticated && !isLoading) navigate("/");
+  }, [isAuthenticated, isLoading, navigate]);
 
   // 3. While loading show Spinner
   if (isLoading)
@@ -25,7 +25,7 @@ const ProtectedRoute = ({ children }) => {
     );
 
   // 4. If there is a user, render the app
-  if (token) return children;
+  if (isAuthenticated) return children;
 
   // (Optional safety fallback)
   return null;
