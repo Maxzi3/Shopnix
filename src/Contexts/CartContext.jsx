@@ -19,14 +19,13 @@ export const CartProvider = ({ children }) => {
   const { token } = useAuth();
   const [guestCartItems, setGuestCartItems] = useState(() => getGuestCart());
 
-  const { data: cartData, isLoading, refetch } = useCart();
+  const { data: cartData, isLoading} = useCart();
 
   useEffect(() => {
-    if (token) {
-      refetch();
+    if (token && cartData) {
       setGuestCartItems([]); // Clear guest cart UI after login
     }
-  }, [token, refetch]);
+  }, [token, cartData]);
 
   const cart = useMemo(() => {
     if (token && cartData) return cartData; // Use DB cart if logged in
@@ -85,7 +84,7 @@ export const CartProvider = ({ children }) => {
 
       if (itemIndex !== -1) {
         if (quantity === 0) {
-          guestCart.splice(itemIndex, 1); 
+          guestCart.splice(itemIndex, 1);
           toast.success("Item removed from cart!");
         } else {
           guestCart[itemIndex].quantity = quantity;
@@ -108,13 +107,12 @@ export const CartProvider = ({ children }) => {
 
       if (itemIndex !== -1) {
         guestCart[itemIndex].size = newSize;
-        saveGuestCart(guestCart); 
-        setGuestCartItems(guestCart); 
+        saveGuestCart(guestCart);
+        setGuestCartItems(guestCart);
         toast.success("Item size updated!");
       }
     }
   };
-
 
   const clearCart = () => {
     if (token) {

@@ -5,9 +5,17 @@ const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
   const queryClient = useQueryClient();
-  const [token, setToken] = useState(localStorage.getItem("token") || null);
+  const [token, setToken] = useState(null);
 
-  // Sync token with localStorage
+  // Hydrate token from localStorage on first load
+  useEffect(() => {
+    const storedToken = localStorage.getItem("token");
+    if (storedToken && !token) {
+      setToken(storedToken);
+    }
+  }, []);
+
+  // Sync token to localStorage whenever it changes
   useEffect(() => {
     if (token) {
       localStorage.setItem("token", token);
@@ -16,16 +24,14 @@ export function AuthProvider({ children }) {
     }
   }, [token]);
 
-  // Set token after login
   const login = ({ token }) => {
     setToken(token);
   };
 
-  // Clear token on logout
   const clearAuth = () => {
     setToken(null);
     localStorage.removeItem("token");
-    queryClient.clear(); // Clear all queries
+    queryClient.clear();
     queryClient.setQueryData(["user"], null);
   };
 
@@ -33,7 +39,7 @@ export function AuthProvider({ children }) {
     <AuthContext.Provider
       value={{
         token,
-        isAuthenticated: !!token, // Rely only on token
+        isAuthenticated: !!token,
         login,
         clearAuth,
       }}
