@@ -14,7 +14,11 @@ const ProfilePage = () => {
     navigate("/account/updatedata");
   };
 
-  if (isLoading) return <Spinner />;
+  if (isLoading) return (
+    <div className="px-4 py-8 ">
+      <Spinner />
+    </div>
+  );
 
   const emailStatusBadge = {
     pending: "bg-blue-100 text-blue-800",

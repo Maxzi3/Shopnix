@@ -7,7 +7,6 @@ import {
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "react-hot-toast";
 import { CartProvider } from "./Contexts/CartContext";
-import { AuthProvider } from "./Contexts/AuthContext";
 import HomePage from "./Pages/HomePage";
 import ProfilePage from "./Pages/ProfilePage";
 import AppLayout from "./UI/AppLayout";
@@ -25,6 +24,7 @@ import ResetPasswordPage from "./Pages/ResetPasswordPage";
 import CreateOrderForm from "./features/orders/CreateOrderForm";
 import UserOrders from "./features/orders/UserOrders";
 import SingleOrder from "./features/orders/SingleOrder";
+import ErrorFallback from "./UI/ErrorFallback";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -38,7 +38,7 @@ const queryClient = new QueryClient({
 const App = () => {
   const router = createBrowserRouter(
     createRoutesFromElements(
-      <Route>
+      <Route errorElement={<ErrorFallback />}>
         {/* Public Routes */}
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
@@ -84,38 +84,36 @@ const App = () => {
   );
   return (
     <QueryClientProvider client={queryClient}>
-      <AuthProvider>
-        <CartProvider>
-          <Toaster
-            position="top-center"
-            gutter={12}
-            containerStyle={{
-              margin: "8px",
-            }}
-            toastOptions={{
-              success: {
-                duration: 3000,
-              },
-              error: {
-                duration: 3000,
-              },
-              style: {
-                fontSize: "14px",
-                maxWidth: "90vw", // responsive on mobile
-                wordWrap: "break-word", // handles long messages
-                padding: "12px 16px",
-                backgroundColor: "#fff",
-                color: "#374151",
-                borderRadius: "12px",
-                boxShadow:
-                  "0 2px 6px rgba(0, 0, 0, 0.05), 0 4px 12px rgba(0, 0, 0, 0.1)",
-              },
-            }}
-          />
+      <CartProvider>
+        <Toaster
+          position="top-center"
+          gutter={12}
+          containerStyle={{
+            margin: "8px",
+          }}
+          toastOptions={{
+            success: {
+              duration: 3000,
+            },
+            error: {
+              duration: 3000,
+            },
+            style: {
+              fontSize: "14px",
+              maxWidth: "90vw", // responsive on mobile
+              wordWrap: "break-word", // handles long messages
+              padding: "12px 16px",
+              backgroundColor: "#fff",
+              color: "#374151",
+              borderRadius: "12px",
+              boxShadow:
+                "0 2px 6px rgba(0, 0, 0, 0.05), 0 4px 12px rgba(0, 0, 0, 0.1)",
+            },
+          }}
+        />
 
-          <RouterProvider router={router} />
-        </CartProvider>
-      </AuthProvider>
+        <RouterProvider router={router} />
+      </CartProvider>
     </QueryClientProvider>
   );
 };
