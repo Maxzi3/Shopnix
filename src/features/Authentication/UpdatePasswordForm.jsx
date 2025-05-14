@@ -1,6 +1,5 @@
 import { useForm } from "react-hook-form";
 import { useUpdatePassword } from "./useUpdatePassword";
-import Spinner from "../../UI/Spinner";
 import SpinnerMini from "../../UI/SpinnerMini";
 import FormInput from "../../UI/FormInput";
 import Button from "../../UI/Button";
@@ -18,8 +17,6 @@ function UpdatePasswordForm() {
       }
     );
   };
-
-  if (isLoading) return <Spinner />;
 
   return (
     <form
@@ -106,11 +103,7 @@ function UpdatePasswordForm() {
         >
           Cancel
         </button>
-        <Button
-          variant="primary"
-          type="submit"
-          disabled={isLoading}
-        >
+        <Button variant="primary" type="submit" disabled={isLoading}>
           {isLoading ? (
             <div className="flex justify-center">
               <SpinnerMini />

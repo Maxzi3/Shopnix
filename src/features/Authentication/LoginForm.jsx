@@ -1,35 +1,36 @@
 import { useEffect, useRef, useState } from "react";
 import { useLogin } from "./useLogin";
-import { useResendEmail } from "./useResendEmail"; 
+import { useResendEmail } from "./useResendEmail";
 import { Link, useSearchParams } from "react-router-dom";
 import SpinnerMini from "../../UI/SpinnerMini";
 import FormInput from "../../UI/FormInput";
 import toast from "react-hot-toast";
+import { useQueryClient } from "@tanstack/react-query";
 
 function LoginForm() {
   const [searchParams] = useSearchParams();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const queryClient = useQueryClient();
 
- const toastShownRef = useRef(false);
+  const toastShownRef = useRef(false);
 
- useEffect(() => {
-   if (toastShownRef.current) return;
+  useEffect(() => {
+    if (toastShownRef.current) return;
 
-   const isVerified = searchParams.get("verified");
-   const alreadyVerified = searchParams.get("alreadyVerified");
+    const isVerified = searchParams.get("verified");
+    const alreadyVerified = searchParams.get("alreadyVerified");
 
-   if (isVerified === "true") {
-     toast.success("Your email has been verified. You can now log in!");
-     toastShownRef.current = true;
-   }
+    if (isVerified === "true") {
+      toast.success("Your email has been verified. You can now log in!");
+      toastShownRef.current = true;
+    }
 
-   if (alreadyVerified === "true") {
-     toast.info("🔒 Email already verified. You can log in.");
-     toastShownRef.current = true;
-   }
- }, [searchParams]);
-
+    if (alreadyVerified === "true") {
+      toast.info("🔒 Email already verified. You can log in.");
+      toastShownRef.current = true;
+    }
+  }, [searchParams]);
 
   const lastTriedEmailRef = useRef("");
   const { login, isLoading, error } = useLogin();
@@ -42,9 +43,8 @@ function LoginForm() {
     login(
       { email, password },
       {
-        onSettled: () => {
-          setEmail("");
-          setPassword("");
+        onSuccess: async () => {
+          await queryClient.invalidateQueries({ queryKey: ["authStatus"] });
         },
       }
     );

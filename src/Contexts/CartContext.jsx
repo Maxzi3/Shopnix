@@ -10,38 +10,38 @@ import {
   clearGuestCart,
 } from "../Hooks/useLocalStorage";
 import { toast } from "react-hot-toast";
-import { useAuth } from "./AuthContext";
 import { useUpdateCartSize } from "../features/Cart/useUpdateCartSize";
+import { useAuthStatus } from "../features/Authentication/useAuthStatus";
 
 export const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
-  const { token } = useAuth();
+  const { isAuthenticated } = useAuthStatus();
   const [guestCartItems, setGuestCartItems] = useState(() => getGuestCart());
 
-  const { data: cartData, isLoading} = useCart();
+  const { data: cartData, isLoading } = useCart();
 
   useEffect(() => {
-    if (token && cartData) {
+    if (isAuthenticated && cartData) {
       setGuestCartItems([]); // Clear guest cart UI after login
+      clearGuestCart();
     }
-  }, [token, cartData]);
+  }, [isAuthenticated, cartData]);
 
   const cart = useMemo(() => {
-    if (token && cartData) return cartData; // Use DB cart if logged in
+    if (isAuthenticated && cartData) return cartData; // Use DB cart if logged in
     return { items: guestCartItems };
-  }, [token, cartData, guestCartItems]);
+  }, [isAuthenticated, cartData, guestCartItems]);
 
   const { addItem, isLoading: isAdding } = useAddToCart();
   const { deleteItem, isLoading: isDeleting } = useDeleteCartItem();
   const { updateItem, isLoading: isUpdating } = useUpdateCartItem();
   const { updateSize, isLoading: isUpdatingSize } = useUpdateCartSize();
   const { clear, isLoading: isClearing } = useClearCart();
+  const isGuest = !isAuthenticated;
 
   const addToCart = (product, quantity) => {
-    if (token) {
-      addItem({ productId: product._id, quantity, productName: product.name });
-    } else {
+    if (isGuest) {
       const guestCart = getGuestCart();
       const existingItem = guestCart.find((item) => item._id === product._id);
 
@@ -59,26 +59,26 @@ export const CartProvider = ({ children }) => {
 
       saveGuestCart(guestCart);
       setGuestCartItems(guestCart);
+    } else {
+      addItem({ productId: product._id, quantity, productName: product.name });
     }
   };
 
   const removeFromCart = (productId) => {
-    if (token) {
-      deleteItem(productId);
-    } else {
+    if (isGuest) {
       const guestCart = getGuestCart().filter(
         (item) => item.product._id !== productId
       );
       saveGuestCart(guestCart);
       setGuestCartItems(guestCart);
       toast.success("Item removed from cart!");
+    } else {
+      deleteItem(productId);
     }
   };
 
   const updateCartQuantity = (productId, quantity) => {
-    if (token) {
-      updateItem({ itemId: productId, quantity });
-    } else {
+    if (isGuest) {
       let guestCart = getGuestCart();
       const itemIndex = guestCart.findIndex((item) => item._id === productId);
 
@@ -94,14 +94,13 @@ export const CartProvider = ({ children }) => {
         saveGuestCart(guestCart);
         setGuestCartItems(guestCart);
       }
+    } else {
+      updateItem({ itemId: productId, quantity });
     }
   };
+
   const updateCartSize = (productId, newSize) => {
-    if (token) {
-      // If user is authenticated, call mutation
-      updateSize({ cartItemId: productId, size: newSize });
-    } else {
-      // If user is a guest, update localStorage
+    if (isGuest) {
       const guestCart = getGuestCart();
       const itemIndex = guestCart.findIndex((item) => item._id === productId);
 
@@ -111,16 +110,18 @@ export const CartProvider = ({ children }) => {
         setGuestCartItems(guestCart);
         toast.success("Item size updated!");
       }
+    } else {
+      updateSize({ cartItemId: productId, size: newSize });
     }
   };
 
   const clearCart = () => {
-    if (token) {
-      clear();
-    } else {
+    if (isGuest) {
       clearGuestCart();
       setGuestCartItems([]);
       toast.success("Cart cleared!");
+    } else {
+      clear();
     }
   };
 

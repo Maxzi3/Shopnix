@@ -1,6 +1,10 @@
 import { api } from "../UI/Constant";
 
 // AUTHENTICATION
+export async function checkAuthStatus() {
+  const res = await api.get("/users/check-auth");
+  return res.data; 
+}
 export async function loginUser({ email, password }) {
   try {
     const { data } = await api.post("/users/login", { email, password });

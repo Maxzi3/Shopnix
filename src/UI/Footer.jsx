@@ -9,10 +9,10 @@ import {
 import CategoryDropdown from "./CategoryDropdown";
 import { useCartContext } from "../Contexts/CartContext";
 import PFP from "./PFP";
-import { useAuth } from "../Contexts/AuthContext";
+import { useAuthStatus } from "../features/Authentication/useAuthStatus";
 
 const Footer = () => {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, user, isLoading } = useAuthStatus();
   const location = useLocation();
   const navigate = useNavigate();
   const { totalQuantity } = useCartContext();
@@ -48,7 +48,7 @@ const Footer = () => {
             {/* Auth Icons */}
             {isAuthenticated ? (
               <Link to="/account/profile" className=" hover:text-blue-600">
-                <PFP />
+                <PFP avatar={user?.avatar} isLoading={isLoading} />
               </Link>
             ) : (
               <div className="flex gap-2 text-sm">
@@ -100,7 +100,7 @@ const Footer = () => {
             {/* Auth Icons */}
             {isAuthenticated ? (
               <Link to="/account/profile" className=" hover:text-blue-600">
-                <PFP />
+                <PFP avatar={user?.avatar} isLoading={isLoading} />
               </Link>
             ) : (
               <div className="flex gap-2 text-sm">

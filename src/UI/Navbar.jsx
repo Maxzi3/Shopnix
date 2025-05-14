@@ -6,10 +6,10 @@ import { useCartContext } from "../Contexts/CartContext";
 import { HiArrowLeft } from "react-icons/hi";
 import Input from "./Input";
 import PFP from "./PFP";
-import { useAuth } from "../Contexts/AuthContext";
+import { useAuthStatus } from "../features/Authentication/useAuthStatus";
 
 const Navbar = () => {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, user, isLoading } = useAuthStatus();
   const location = useLocation();
   const { totalQuantity } = useCartContext();
   const isCartPage = location.pathname.startsWith("/cart");
@@ -78,7 +78,7 @@ const Navbar = () => {
               to="/account/profile"
               className="hover:text-gray-900 dark:hover:text-white"
             >
-              <PFP />
+              <PFP avatar={user?.avatar} isLoading={isLoading} />
             </Link>
           ) : (
             <div className="flex gap-4 text-base">
