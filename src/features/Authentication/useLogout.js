@@ -10,6 +10,7 @@ export function useLogout() {
   const { mutate: logout, isPending } = useMutation({
     mutationFn: logoutUser,
     onSuccess: () => {
+      localStorage.removeItem("jwt");
       queryClient.setQueryData(["authStatus"], null);
       queryClient.invalidateQueries({ queryKey: ["authStatus"] });
 

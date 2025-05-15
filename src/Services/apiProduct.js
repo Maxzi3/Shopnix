@@ -11,9 +11,7 @@ export async function getProducts() {
 }
 export async function getProductBySlug(productSlug) {
   try {
-    const { data } = await api.get(`/products/${productSlug}`, {
-      withCredentials: true,
-    });
+    const { data } = await api.get(`/products/${productSlug}`);
     return data.data;
   } catch (error) {
     throw new Error(error.response?.data?.message || "Failed to fetch product");

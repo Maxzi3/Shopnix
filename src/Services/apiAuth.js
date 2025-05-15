@@ -50,10 +50,7 @@ export async function updateMyPassword({
   try {
     const { data } = await api.patch(
       "/users/updateMyPassword",
-      { passwordCurrent, password, passwordConfirm },
-      {
-        withCredentials: true, // This ensures the cookies are sent with the request
-      }
+      { passwordCurrent, password, passwordConfirm }
     );
 
     return data;

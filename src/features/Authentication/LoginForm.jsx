@@ -46,6 +46,12 @@ function LoginForm() {
         onSuccess: async () => {
           await queryClient.invalidateQueries({ queryKey: ["authStatus"] });
         },
+      },
+      {
+        onSettled: () => {
+          setEmail("");
+          setPassword("");
+        },
       }
     );
   }

@@ -16,9 +16,9 @@ export function useLogin() {
     status,
   } = useMutation({
     mutationFn: ({ email, password }) => loginUser({ email, password }),
-    onSuccess: async () => {
+    onSuccess: async (data) => {
+      localStorage.setItem("jwt", data?.token);
       const guestCart = getGuestCart();
-
       if (guestCart.length > 0) {
         try {
           await mergeGuestCartApi({ guestItems: guestCart });

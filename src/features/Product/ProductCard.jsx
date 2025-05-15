@@ -1,10 +1,4 @@
-import {
-  FaStar,
-  FaRegStar,
-  FaStarHalfAlt,
-  FaCartPlus,
-  FaBan,
-} from "react-icons/fa";
+import { FaCartPlus, FaBan } from "react-icons/fa";
 import RenderStars from "../../UI/RenderStars";
 import { useCartContext } from "../../Contexts/CartContext";
 import { formatCurrency } from "../../UI/helpers";
@@ -22,7 +16,6 @@ const ProductCard = ({ product }) => {
     ratingsQuantity,
     _id,
   } = product;
-  
 
   // Calculate discounted price
   const discountedPrice = price * (1 - priceDiscount / 100);
@@ -34,7 +27,7 @@ const ProductCard = ({ product }) => {
         <img
           src={imageUrl}
           alt={name}
-          className="h-48 w-full object-top  bg-white dark:bg-gray-700"
+          className="h-48 w-full object-contain  bg-white dark:bg-gray-700"
         />
       </Link>
 

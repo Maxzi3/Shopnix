@@ -19,9 +19,7 @@ export async function getReviews() {
 
 export async function getUserReviews() {
   try {
-    const res = await api.get("/reviews/user", {
-      withCredentials: true,
-    });
+    const res = await api.get("/reviews/user");
     return res.data.data;
   } catch (error) {
     throw new Error(
