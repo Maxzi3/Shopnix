@@ -5,13 +5,13 @@ import { Link, useSearchParams } from "react-router-dom";
 import SpinnerMini from "../../UI/SpinnerMini";
 import FormInput from "../../UI/FormInput";
 import toast from "react-hot-toast";
-import { useQueryClient } from "@tanstack/react-query";
+
 
 function LoginForm() {
   const [searchParams] = useSearchParams();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const queryClient = useQueryClient();
+ 
 
   const toastShownRef = useRef(false);
 
@@ -42,11 +42,6 @@ function LoginForm() {
     lastTriedEmailRef.current = email;
     login(
       { email, password },
-      {
-        onSuccess: async () => {
-          await queryClient.invalidateQueries({ queryKey: ["authStatus"] });
-        },
-      },
       {
         onSettled: () => {
           setEmail("");

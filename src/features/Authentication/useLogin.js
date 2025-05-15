@@ -28,6 +28,7 @@ export function useLogin() {
           toast.error("Failed to merge guest cart");
         }
       }
+      await queryClient.invalidateQueries({ queryKey: ["authStatus"] });
       queryClient.invalidateQueries({ queryKey: ["cart"] });
       queryClient.invalidateQueries({ queryKey: ["user"] });
       navigate("/", { replace: true });

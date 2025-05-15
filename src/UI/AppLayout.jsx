@@ -4,11 +4,13 @@ import { Outlet } from "react-router-dom";
 
 const AppLayout = () => {
   return (
-    <div className="flex flex-col  md:pt-0 pt-24 min-h-screen bg-white dark:bg-gray-900 dark:text-white text-gray-700">
+    <div className="flex flex-col min-h-screen bg-white dark:bg-gray-900 text-gray-700 dark:text-white">
       <Navbar />
-      <main className="flex-grow">
+
+      <main className="flex-grow pb-20">
         <Outlet />
       </main>
+
       <Footer />
     </div>
   );

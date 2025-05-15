@@ -26,7 +26,7 @@ const Footer = () => {
     }
   };
   return (
-    <div className="fixed bottom-0 left-0 w-full bg-white dark:bg-gray-900 dark:text-white text-gray-700 border-t z-50">
+    <div className="fixed bottom-0 left-0 shadow-t-md w-full bg-white dark:bg-gray-900 dark:text-white text-gray-700 border-t z-50">
       <ul className="md:hidden flex justify-between items-center px-5 py-4 text-2xl">
         {/* Home */}
         <Link to="/" className=" hover:text-blue-600">

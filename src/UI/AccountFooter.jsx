@@ -7,11 +7,13 @@ import {
 } from "react-icons/hi2";
 import { useCartContext } from "../Contexts/CartContext";
 import PFP from "./PFP";
+import { useAuthStatus } from "../features/Authentication/useAuthStatus";
 
 const AccountFooter = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { totalQuantity } = useCartContext();
+  const {  user, isLoading } = useAuthStatus();
 
   const isProfilePage = location.pathname === "/account/profile";
   const isCartPage = location.pathname === "/cart";
@@ -28,7 +30,7 @@ const AccountFooter = () => {
   };
   return (
     <div className="fixed bottom-0 w-full bg-white dark:bg-gray-900 dark:text-white text-gray-700 border-t-2 z-50 ">
-      <ul className="md:hidden flex justify-between py-6 px-4 text-2xl items-center ">
+      <ul className="md:hidden flex justify-between py-4 px-5 text-2xl items-center ">
         <Link to="/">
           <HiOutlineHome />
         </Link>
@@ -59,7 +61,7 @@ const AccountFooter = () => {
           </button>
         ) : (
           <Link to="/account/profile">
-            <PFP/>
+            <PFP avatar={user?.avatar} isLoading={isLoading} />
           </Link>
         )}
       </ul>
