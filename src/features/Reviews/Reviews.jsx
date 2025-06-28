@@ -23,13 +23,13 @@ function Reviews() {
 
   if (isLoading)
     return (
-      <div className="py-24 px-4">
+      <div className="px-4 py-24">
         <Spinner />
       </div>
     );
   if (!reviews?.length)
-    return <div className="px-4 md:py-2 py-24">No reviews yet.</div>;
-  if (error) return <div className="px-4 md:py-2 py-24">Error loading reviews</div>;
+    return <div className="px-4 py-24 lg:py-2">No reviews yet.</div>;
+  if (error) return <div className="px-4 py-24 lg:py-2">Error loading reviews</div>;
 
   const pageCount = Math.ceil(reviews?.length / PAGE_SIZE);
   const indexOfLastReview = currentPage * PAGE_SIZE;
@@ -45,16 +45,16 @@ function Reviews() {
   };
 
   return (
-    <div className="w-full md:w-10/12  px-6 space-y-4 md:h-screen md:py-2 py-24">
-      <div className="space-y-4 md:h-screen">
+    <div className="w-full px-6 py-24 space-y-4 lg:w-10/12 lg:h-screen lg:py-2">
+      <div className="space-y-4 lg:h-screen">
         <h1 className="text-2xl font-bold">My Reviews</h1>
         {currentReviews.map((review) => (
-          <div key={review._id} className="border p-4 rounded-lg space-y-2 ">
-            <div className="flex justify-between items-center">
+          <div key={review._id} className="p-4 space-y-2 border rounded-lg ">
+            <div className="flex items-center justify-between">
               <h2 className="font-medium break-words line-clamp-2">
                 {review?.product?.name}
               </h2>
-              <span className="text-gray-500 text-sm shrink-0">
+              <span className="text-sm text-gray-500 shrink-0">
                 {formatDate(review.createdAt)}
               </span>
             </div>

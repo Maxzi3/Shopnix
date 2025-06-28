@@ -4,11 +4,11 @@ import Logo from "../UI/Logo";
 function ForgotPassword() {
   return (
     <main
-      className="min-h-screen grid place-content-center bg-white dark:bg-gray-900 dark:text-white text-gray-700 gap-8 px-4"
+      className="grid h-screen px-4 text-gray-700 bg-white place-content-center dark:bg-gray-900 dark:text-white"
     >
       <div className="flex flex-col items-center space-y-4">
         <Logo />
-        <h4 className="text-xl text-center font-semibold">Forgot Password?</h4>
+        <h4 className="text-xl font-semibold text-center">Forgot Password?</h4>
         <ForgotPasswordForm />
       </div>
     </main>

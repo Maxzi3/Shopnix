@@ -24,13 +24,13 @@ function SignupForm() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col justify-center md:p-8 py-8 rounded-lg md:border border-gray-200 text-sm md:w-[30rem] w-[20rem]"
+      className="flex flex-col justify-center lg:p-8 py-8 rounded-lg lg:border border-gray-200 text-sm lg:w-[30rem] md:w-[40rem] w-[20rem]"
     >
       {/* Full Name */}
-      <div className="mb-3 flex flex-col items-center">
+      <div className="flex flex-col items-center mb-3">
         <label
           htmlFor="fullName"
-          className="block text-base font-medium mb-1 self-start"
+          className="self-start block mb-1 text-base font-medium"
         >
           Full name
         </label>
@@ -42,17 +42,17 @@ function SignupForm() {
           {...register("fullName", { required: "This Field is Required" })}
         />
         {errors?.fullName && (
-          <span className="text-red-600 text-sm self-start">
+          <span className="self-start text-sm text-red-600">
             {errors.fullName.message}
           </span>
         )}
       </div>
 
       {/* Email */}
-      <div className="mb-3 flex flex-col items-center">
+      <div className="flex flex-col items-center mb-3">
         <label
           htmlFor="email"
-          className="block text-base font-medium mb-1 self-start"
+          className="self-start block mb-1 text-base font-medium"
         >
           Email address
         </label>
@@ -70,16 +70,16 @@ function SignupForm() {
           })}
         />
         {errors?.email && (
-          <span className="text-red-600 text-sm self-start">
+          <span className="self-start text-sm text-red-600">
             {errors.email.message}
           </span>
         )}
       </div>
       {/* Phone Number*/}
-      <div className="mb-3 flex flex-col items-center">
+      <div className="flex flex-col items-center mb-3">
         <label
           htmlFor="phoneNumber"
-          className="block text-base font-medium mb-1 self-start"
+          className="self-start block mb-1 text-base font-medium"
         >
           Phone Number
         </label>
@@ -91,16 +91,16 @@ function SignupForm() {
           {...register("phoneNumber", { required: "This Field is Required" })}
         />
         {errors?.phoneNumber && (
-          <span className="text-red-600 text-sm self-start">
+          <span className="self-start text-sm text-red-600">
             {errors.phoneNumber.message}
           </span>
         )}
       </div>
       {/* Password */}
-      <div className="mb-3 flex flex-col items-center">
+      <div className="flex flex-col items-center mb-3">
         <label
           htmlFor="password"
-          className="block text-base font-medium mb-1 self-start"
+          className="self-start block mb-1 text-base font-medium"
         >
           Password (min 8 characters)
         </label>
@@ -117,17 +117,17 @@ function SignupForm() {
           })}
         />
         {errors?.password && (
-          <span className="text-red-600 text-sm self-start">
+          <span className="self-start text-sm text-red-600">
             {errors.password.message}
           </span>
         )}
       </div>
 
       {/* Confirm Password */}
-      <div className="mb-3 flex flex-col items-center">
+      <div className="flex flex-col items-center mb-3">
         <label
           htmlFor="passwordConfirm"
-          className="block text-base font-medium mb-1 self-start"
+          className="self-start block mb-1 text-base font-medium"
         >
           Repeat password
         </label>
@@ -142,7 +142,7 @@ function SignupForm() {
           })}
         />
         {errors?.passwordConfirm && (
-          <span className="text-red-600 text-sm self-start">
+          <span className="self-start text-sm text-red-600">
             {errors.passwordConfirm.message}
           </span>
         )}

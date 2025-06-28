@@ -21,43 +21,42 @@ const ProductCard = ({ product }) => {
   const discountedPrice = price * (1 - priceDiscount / 100);
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-2xl w-[280px] hover:shadow-lg transition overflow-hidden border dark:border-gray-700 mb-5">
+    <div className="relative bg-white dark:bg-gray-800 rounded-2xl hover:shadow-lg transition overflow-hidden border dark:border-gray-700 w-full h-full flex flex-col min-h-[300px]">
       {/* Product Image */}
       <Link to={`/product/${product.slug}`}>
         <img
           src={imageUrl}
           alt={name}
-          className="h-48 w-full object-contain  bg-white dark:bg-gray-700"
+          className="object-contain w-full h-48 bg-white dark:bg-gray-700"
         />
       </Link>
 
       {/* Content */}
-      <div className="p-4 flex flex-col gap-2">
-        {/* Product Name */}
+      <div className="flex flex-col flex-grow gap-2 p-4">
         <Link to={`/product/${product.slug}`}>
-          <p className="text-lg font-semibold hover:text-blue-500 dark:hover:text-blue-500 text-gray-800 dark:text-gray-100 break-words line-clamp-2">
+          <p className="text-lg font-semibold text-gray-800 break-words hover:text-blue-500 dark:hover:text-blue-500 dark:text-gray-100 line-clamp-2">
             {name}
           </p>
         </Link>
 
         {/* Price Section */}
-        <div className="flex items-center justify-between mt-2">
+
+        {/* Price + Button */}
+        <div className="flex items-center justify-between mt-auto">
           <div className="flex flex-wrap items-center gap-2">
             <span className="text-base font-bold text-gray-900 dark:text-white">
               {formatCurrency(discountedPrice)}
             </span>
-
             {priceDiscount > 0 && (
-              <span className="text-xs line-through text-gray-500 dark:text-gray-400">
+              <span className="text-xs text-gray-500 line-through dark:text-gray-400">
                 {formatCurrency(price)}
               </span>
             )}
           </div>
-
           <button
             disabled={stockNo === 0 || isAdding}
             onClick={() => addToCart(product, 1)}
-            className={`w-9 h-9 flex items-center justify-center rounded-full transition shrink-0 ${
+            className={`w-9 h-9 flex items-center justify-center rounded-full transition shrink-0 absolute right-3 bottom-12 md:bottom-8 ${
               stockNo === 0
                 ? "cursor-not-allowed text-gray-400"
                 : "border border-black dark:border-gray-300 hover:text-blue-700 dark:hover:text-blue-400"

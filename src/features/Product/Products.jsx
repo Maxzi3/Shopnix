@@ -35,14 +35,15 @@ const Products = () => {
 
   return (
     <>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 md:space-y-5 justify-items-center gap-2 max-h-auto mb-[100px] ">
+      <div className="grid grid-cols-2 gap-4 px-4 py-6 my-16 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 lg:my-2 ">
         {paginatedProducts.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}
       </div>
+
       {/* Pagination */}
       {paginatedProducts.length > 0 && (
-        <div className="flex flex-row  md:pb-10 pb-24 md:items-center md:justify-self-end md:w-1/2">
+        <div className="flex flex-row pb-24 lg:pb-10 lg:items-center lg:justify-self-end lg:w-1/2">
           <Pagination count={filteredProducts.length} pageSize={PAGE_SIZE} />
         </div>
       )}

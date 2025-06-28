@@ -35,7 +35,7 @@ const SimilarProducts = ({ currentSlug, category }) => {
     <div className="mt-12">
       <h2 className="text-2xl font-bold mb-4">Similar Products</h2>
 
-      <div className="grid gap-5 md:grid-cols-3">
+      <div className="grid gap-5 lg:grid-cols-3">
         {currentProducts.map((product) => (
           <Link
             key={product._id}
@@ -45,7 +45,7 @@ const SimilarProducts = ({ currentSlug, category }) => {
             <img
               src={product.imageUrl}
               alt={product.name}
-              className="md:h-42 w-full object-cover"
+              className="lg:h-42 w-full object-cover"
             />
             <div className="p-4">
               <h3 className="font-medium text-lg truncate">{product.name}</h3>

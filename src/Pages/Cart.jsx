@@ -56,7 +56,7 @@ const CartPage = () => {
   if (isLoading || !cart) return <Spinner />;
 
   return (
-    <div className="px-4 py-6 space-y-8 md:max-w-3xl mx-auto mb-[100px]">
+    <div className="px-4 py-6 space-y-8 lg:max-w-3xl mx-auto lg:my-0 my-[80px]">
       <h1 className="text-2xl font-bold">Your Cart</h1>
       {cart?.items?.length === 0 ? (
         <p className="text-gray-600">Your cart is empty.</p>
@@ -69,19 +69,19 @@ const CartPage = () => {
               return (
                 <div
                   key={item._id}
-                  className="flex flex-col md:flex-row items-start md:items-center justify-between border p-4 rounded-lg shadow-sm gap-4"
+                  className="flex flex-col lg:flex-row items-start lg:items-center justify-between border p-4 rounded-lg shadow-sm gap-4"
                 >
                   {/* Left Section: Image + Info */}
                   <div className="flex gap-4 items-start">
                     <img
                       src={item.product.imageUrl}
                       alt={item.product.name}
-                      className="w-28 h-28 md:w-20 md:h-20 object-cover rounded"
+                      className="w-28 h-28 lg:w-20 lg:h-20 object-cover rounded"
                       loading="lazy"
                     />
                     <div className="flex-1">
                       <h2
-                        className="font-medium max-w-[150px] md:max-w-[200px] truncate"
+                        className="font-medium max-w-[150px] lg:max-w-[200px] truncate"
                         title={item.product.name}
                       >
                         {item.product.name}
@@ -93,7 +93,7 @@ const CartPage = () => {
                         Total:{" "}
                         {formatCurrency(item.product.price * item.quantity)}
                       </p>
-                      <div className="flex flex-col md:flex-row items-start md:items-center gap-4 w-full md:w-auto">
+                      <div className="flex flex-col lg:flex-row items-start lg:items-center gap-4 w-full lg:w-auto">
                         {/* Size Selection */}
                         {sizeOptions.length > 0 && (
                           <div className="flex flex-row items-center py-2 gap-2">
@@ -110,7 +110,7 @@ const CartPage = () => {
                                 handleSizeSelect(item._id, e.target.value)
                               }
                               disabled={isUpdatingSize}
-                              className={`border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800  dark:text-gray-200 p-2   transition-all duration-300  rounded-md px-1 py-1 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full md:w-24 ${
+                              className={`border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800  dark:text-gray-200 p-2   transition-all duration-300  rounded-md px-1 py-1 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full lg:w-24 ${
                                 isUpdatingSize
                                   ? "opacity-50 cursor-not-allowed"
                                   : ""
@@ -130,7 +130,7 @@ const CartPage = () => {
                   </div>
 
                   {/* Right Section: Quantity + Delete */}
-                  <div className="flex flex-row w-full justify-end gap-4 md:gap-4">
+                  <div className="flex flex-row w-full justify-end gap-4 lg:gap-4">
                     <div className="flex items-center gap-2">
                       <button
                         disabled={isUpdating || item.quantity === 1}
@@ -174,11 +174,11 @@ const CartPage = () => {
 
           {/* Cart Summary */}
 
-          <div className=" w-full p-4 flex flex-col md:flex-row justify-between items-center gap-4 ">
+          <div className=" w-full p-4 flex flex-col lg:flex-row justify-between items-center gap-4 ">
             {isAuthenticated && (
               <button
                 onClick={handleCheckout}
-                className="bg-blue-600 text-white w-full md:w-auto px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition"
+                className="bg-blue-600 text-white w-full lg:w-auto px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition"
               >
                 Proceed to Checkout
               </button>
@@ -186,7 +186,7 @@ const CartPage = () => {
             <button
               disabled={isClearing}
               onClick={clearCart}
-              className="bg-red-600 text-white w-full md:w-auto px-6 py-3 rounded-lg font-medium hover:bg-red-700 transition"
+              className="bg-red-600 text-white w-full lg:w-auto px-6 py-3 rounded-lg font-medium hover:bg-red-700 transition"
             >
               {isClearing ? (
                 <div className="flex justify-center">

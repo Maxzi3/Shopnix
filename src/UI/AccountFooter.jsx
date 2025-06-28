@@ -29,8 +29,8 @@ const AccountFooter = () => {
     }
   };
   return (
-    <div className="fixed bottom-0 w-full bg-white dark:bg-gray-900 dark:text-white text-gray-700 border-t-2 z-50 ">
-      <ul className="md:hidden flex justify-between py-4 px-5 text-2xl items-center ">
+    <div className="fixed bottom-0 z-50 w-full text-gray-700 bg-white border-t-2 dark:bg-gray-900 dark:text-white ">
+      <ul className="flex items-center justify-between px-5 py-4 text-2xl lg:hidden ">
         <Link to="/">
           <HiOutlineHome />
         </Link>
@@ -46,10 +46,10 @@ const AccountFooter = () => {
           )}
         </li>
 
-        <Link to="/cart" className="relative">
-          <HiOutlineShoppingCart className="text-2xl" />
+        <Link to="/cart" className="relative hover:text-blue-600">
+          <HiOutlineShoppingCart className="w-6 h-6" />
           {totalQuantity > 0 && (
-            <sup className="absolute -top-3 -right-2 sm:static sm:hidden bg-red-600 text-white text-[10px] w-5 h-5 flex items-center justify-center rounded-full leading-none">
+            <sup className="absolute -top-2 -right-3  bg-red-500 text-white text-[10px] w-5 h-5 flex items-center justify-center rounded-full leading-none">
               {totalQuantity > 99 ? "99+" : totalQuantity}
             </sup>
           )}

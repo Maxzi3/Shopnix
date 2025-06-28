@@ -26,8 +26,8 @@ const Footer = () => {
     }
   };
   return (
-    <div className="fixed bottom-0 left-0 shadow-t-md w-full bg-white dark:bg-gray-900 dark:text-white text-gray-700 border-t z-50">
-      <ul className="md:hidden flex justify-between items-center px-5 py-4 text-2xl">
+    <div className="fixed bottom-0 left-0 z-50 w-full text-gray-700 bg-white border-t shadow-t-md dark:bg-gray-900 dark:text-white">
+      <ul className="flex items-center justify-between px-5 py-4 text-2xl lg:hidden">
         {/* Home */}
         <Link to="/" className=" hover:text-blue-600">
           <HiOutlineHome />
@@ -54,13 +54,13 @@ const Footer = () => {
               <div className="flex gap-2 text-sm">
                 <Link
                   to="/login"
-                  className="hover:text-blue-600 border border-gray-300 rounded px-2 py-1"
+                  className="px-2 py-1 border border-gray-300 rounded hover:text-blue-600"
                 >
                   Login
                 </Link>
                 <Link
                   to="/signup"
-                  className="hover:text-blue-600 border border-gray-300 rounded px-2 py-1"
+                  className="px-2 py-1 border border-gray-300 rounded hover:text-blue-600"
                 >
                   Sign Up
                 </Link>
@@ -71,7 +71,7 @@ const Footer = () => {
                 <HiArrowLeft />
               </button>
             ) : (
-              <Link to="/cart" className="relative  hover:text-blue-600">
+              <Link to="/cart" className="relative hover:text-blue-600">
                 <HiOutlineShoppingCart className="w-6 h-6" />
                 {totalQuantity > 0 && (
                   <sup className="absolute -top-2 -right-3  bg-red-500 text-white text-[10px] w-5 h-5 flex items-center justify-center rounded-full leading-none">
@@ -88,7 +88,7 @@ const Footer = () => {
                 <HiArrowLeft />
               </button>
             ) : (
-              <Link to="/cart" className="relative  hover:text-blue-600">
+              <Link to="/cart" className="relative hover:text-blue-600">
                 <HiOutlineShoppingCart className="w-6 h-6" />
                 {totalQuantity > 0 && (
                   <sup className="absolute -top-2 -right-3  bg-red-500 text-white text-[10px] w-5 h-5 flex items-center justify-center rounded-full leading-none">
@@ -106,13 +106,13 @@ const Footer = () => {
               <div className="flex gap-2 text-sm">
                 <Link
                   to="/login"
-                  className="hover:text-blue-600 border border-gray-300 rounded px-2 py-1"
+                  className="px-2 py-1 border border-gray-300 rounded hover:text-blue-600"
                 >
                   Login
                 </Link>
                 <Link
                   to="/signup"
-                  className="hover:text-blue-600 border border-gray-300 rounded px-2 py-1"
+                  className="px-2 py-1 border border-gray-300 rounded hover:text-blue-600"
                 >
                   Sign Up
                 </Link>

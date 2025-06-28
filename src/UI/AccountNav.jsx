@@ -12,8 +12,8 @@ import Modal from "./Modal";
   const AccountNav = () => {
     const linkclass = ({ isActive }) =>
       isActive
-        ? "flex items-center gap-3 font-medium text-base px-6 py-3 rounded-md transition-all bg-gray-100 text-gray-800"
-        : " flex items-center gap-3 font-medium text-base px-6 py-3 rounded-md transition-all hover:bg-gray-100 hover:text-gray-800";
+        ? "flex items-center  gap-2 font-medium text-base px-4  py-3 rounded-md transition-all bg-gray-100 text-gray-800"
+        : " flex items-center gap-1 font-medium text-base px-4  py-3 rounded-md transition-all hover:bg-gray-100 hover:text-gray-800";
     return (
       <ul className="flex flex-col gap-2">
         <NavLink to="/account/profile" className={linkclass}>
@@ -33,13 +33,13 @@ import Modal from "./Modal";
           Update Profile
         </NavLink>
         <Modal.Open opens="delete">
-          <button className="flex items-center gap-3 font-medium text-base px-6 py-3 rounded-md transition-all  hover:bg-gray-100 hover:text-gray-800 w-full text-left">
+          <button className="flex items-center w-full gap-1 px-4 py-3 text-base font-medium text-left transition-all rounded-md hover:bg-gray-100 hover:text-gray-800">
             <HiOutlineTrash />
             Delete Account
           </button>
         </Modal.Open>
         <Modal.Open opens="logout">
-          <button className="flex items-center gap-3 font-medium text-base px-6 py-3 rounded-md transition-all hover:bg-gray-100 hover:text-gray-800 w-full text-left">
+          <button className="flex items-center w-full gap-1 px-4 py-3 text-base font-medium text-left transition-all rounded-md hover:bg-gray-100 hover:text-gray-800">
             <HiOutlineArrowRightOnRectangle />
             Log Out
           </button>

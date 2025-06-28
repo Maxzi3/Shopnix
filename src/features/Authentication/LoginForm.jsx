@@ -62,13 +62,13 @@ function LoginForm() {
     <>
       <form
         onSubmit={handleSubmit}
-        className="mx-auto flex flex-col justify-center md:p-10 rounded-lg space-y-6 text-sm md:border border-gray-200 md:w-[30rem] w-[20rem]"
+        className="mx-auto flex flex-col justify-center lg:p-10 py-8 rounded-lg space-y-6 text-sm lg:border border-gray-200 lg:w-[30rem] md:w-[30rem] w-[20rem]"
       >
         {/* Email Input */}
-        <div className="mb-3 flex flex-col items-center">
+        <div className="flex flex-col items-center mb-3">
           <label
             htmlFor="email"
-            className="block text-base font-medium mb-2 self-start"
+            className="self-start block mb-2 text-base font-medium"
           >
             Email address
           </label>
@@ -83,10 +83,10 @@ function LoginForm() {
         </div>
 
         {/* Password Input */}
-        <div className="mb-3 flex flex-col items-center">
+        <div className="flex flex-col items-center mb-3">
           <label
             htmlFor="password"
-            className="block text-base font-medium mb-2 self-start"
+            className="self-start block mb-2 text-base font-medium"
           >
             Password
           </label>

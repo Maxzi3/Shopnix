@@ -32,7 +32,7 @@ const Pagination = ({ count, pageSize = PAGE_SIZE }) => {
   if (pageCount <= 1) return null;
 
   return (
-    <div className="w-full md:flex md:items-center md:justify-between">
+    <div className="w-full lg:flex lg:items-center lg:justify-between">
       <p className="text-sm">
         Showing{" "}
         <span className="font-semibold">
@@ -45,7 +45,7 @@ const Pagination = ({ count, pageSize = PAGE_SIZE }) => {
         of <span className="font-semibold">{count}</span>
       </p>
 
-      <div className="flex gap-2">
+      <div className="flex gap-2 mt-2">
         <button
           onClick={prevPage}
           disabled={currentPage === 1}

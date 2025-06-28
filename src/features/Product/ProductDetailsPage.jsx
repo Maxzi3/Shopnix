@@ -70,11 +70,11 @@ const ProductDetailsPage = () => {
     <>
       <button
         onClick={() => navigate("/")}
-        className="flex items-center text-base md: m-4 cursor-pointer dark:text-white hover:text-blue-600"
+        className="flex items-center text-base lg:mt-0 mt-20 m-4 cursor-pointer dark:text-white hover:text-blue-600"
       >
         <HiArrowLeft className="mr-2" /> Back
       </button>
-      <div className="px-6 md:pt-4 md:max-w-3xl max-h-auto mx-auto mb-[100px] max-w-5xl p-6 space-y-10">
+      <div className="px-6 lg:pt-4 lg:max-w-3xl max-h-auto mx-auto mb-[100px] max-w-5xl p-6 space-y-10">
         {/* Product Info */}
         <div className="grid md:grid-cols-2 gap-6">
           <ImageSlide

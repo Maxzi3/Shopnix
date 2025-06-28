@@ -26,10 +26,10 @@ const Navbar = () => {
   return (
     <header className="relative text-gray-600 dark:text-gray-200 body-font">
       {/* Desktop View */}
-      <div className="hidden w-full md:flex justify-between items-center px-4 md:px-8 py-5">
+      <div className="items-center justify-between hidden w-full px-4 py-5 lg:flex md:px-8">
         <Link
           to="/"
-          className="flex title-font font-medium items-center text-gray-900 dark:text-gray-100 mb-4 mr-2 md:mb-0"
+          className="flex items-center mb-4 mr-2 font-medium text-gray-900 title-font dark:text-gray-100 md:mb-0"
         >
           <Logo />
         </Link>
@@ -39,7 +39,7 @@ const Navbar = () => {
           <>
             {/* Category Filter */}
             <select
-              className="border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 ml-10"
+              className="p-2 ml-10 text-gray-700 transition-all duration-300 bg-white border border-gray-300 rounded-lg dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
               value={filterValue}
               onChange={handleFilterChange}
             >
@@ -52,7 +52,7 @@ const Navbar = () => {
             <Input />
           </>
         )}
-        <div className="flex justify-between gap-5 items-center text-3xl">
+        <div className="flex items-center justify-between gap-5 text-3xl">
           {isCartPage ? (
             <Link
               to="/"
@@ -84,13 +84,13 @@ const Navbar = () => {
             <div className="flex gap-4 text-base">
               <Link
                 to="/login"
-                className="hover:text-blue-600 dark:hover:text-blue-400 border border-gray-300 dark:border-gray-600 rounded px-3 py-1"
+                className="px-3 py-1 border border-gray-300 rounded hover:text-blue-600 dark:hover:text-blue-400 dark:border-gray-600"
               >
                 Login
               </Link>
               <Link
                 to="/signup"
-                className="hover:text-blue-600 dark:hover:text-blue-400 rounded px-3 py-1"
+                className="px-3 py-1 rounded hover:text-blue-600 dark:hover:text-blue-400"
               >
                 Sign Up
               </Link>
@@ -101,7 +101,7 @@ const Navbar = () => {
       </div>
 
       {/* Mobile View */}
-      <div className="md:hidden fixed top-0 left-0 w-full z-50 bg-white dark:bg-gray-900 shadow-sm dark:shadow-md px-4 py-4 flex justify-between items-center gap-4">
+      <div className="fixed top-0 left-0 z-50 flex items-center justify-between w-full gap-4 px-4 py-4 bg-white shadow-sm lg:hidden dark:bg-gray-900 dark:shadow-md">
         <Link to="/">
           <Logo />
         </Link>

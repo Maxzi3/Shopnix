@@ -24,10 +24,10 @@ function ForgotPasswordForm() {
   }
 
   return (
-    <form className="p-10 mx-auto flex flex-col justify-center md:border border-gray-200 rounded-lg space-y-2 text-sm">
+    <form className="flex flex-col justify-center lg:p-8 py-8 rounded-lg lg:border border-gray-200 text-sm lg:w-[30rem] md:w-[40rem] w-[20rem]">
       {/* Email Input */}
       <div className="mb-3">
-        <label htmlFor="email" className="block text-base font-medium mb-2">
+        <label htmlFor="email" className="block mb-2 text-base font-medium">
           Email address
         </label>
         <FormInput
@@ -41,7 +41,7 @@ function ForgotPasswordForm() {
       </div>
 
       {/* Submit Button */}
-      <div>
+      <div className="flex flex-col items-center pt-2 border-gray-100">
         <button
           type="submit"
           disabled={isPending || !email}

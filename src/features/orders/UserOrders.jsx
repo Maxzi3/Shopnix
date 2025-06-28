@@ -44,23 +44,23 @@ const UserOrders = () => {
     );
   if (error)
     return (
-      <div className="px-4 md:py-2 py-24">
+      <div className="px-4 py-24 lg:py-2">
         Error loading orders: {error.message}
       </div>
     );
   if (!orders || orders.length === 0)
-    return <div className="px-4 md:py-2 py-24">No orders found</div>;
+    return <div className="px-4 py-24 lg:py-2">No orders found</div>;
 
   // Check if filtered orders are empty for the selected filter
   const noFilteredOrders =
     filteredOrders.length === 0 && filter !== "All" && orders.length > 0;
 
   return (
-    <div className="w-full mx-auto px-4 md:py-2 py-24">
-      <h1 className="text-2xl font-bold mb-6 text-center">Your Orders</h1>
+    <div className="w-full px-4 py-24 mx-auto lg:py-2">
+      <h1 className="mb-6 text-2xl font-bold text-center">Your Orders</h1>
 
       {/* Filter Dropdown */}
-      <div className="mb-4 flex justify-end">
+      <div className="flex justify-end mb-4">
         {orders.length > 1 && (
           <select
             value={filter}
@@ -68,7 +68,7 @@ const UserOrders = () => {
               setFilter(e.target.value);
               setSearchParams({ page: "1" });
             }}
-            className="border px-3 py-2  dark:bg-gray-900 dark:text-white text-gray-700 rounded-md sm:w-auto"
+            className="px-3 py-2 text-gray-700 border rounded-md dark:bg-gray-900 dark:text-white sm:w-auto"
           >
             <option value="All">All</option>
             <option value="Pending">Pending</option>
@@ -80,7 +80,7 @@ const UserOrders = () => {
 
       {/* No Filtered Orders Message */}
       {noFilteredOrders && (
-        <div className="text-center  mb-4">
+        <div className="mb-4 text-center">
           No orders found for {filter} status
         </div>
       )}
@@ -91,12 +91,12 @@ const UserOrders = () => {
           ? paginatedOrders.map((order) => (
               <div
                 key={order._id}
-                className="border rounded-lg p-4 shadow-sm flex flex-col justify-between items-start md:w-10/12 md:justify-self-end "
+                className="flex flex-col items-start justify-between p-4 border rounded-lg shadow-sm lg:w-10/12 lg:justify-self-end "
               >
-                <p className=" font-medium text-base shrink-0 text-blue-600 ">
+                <p className="text-base font-medium text-blue-600 shrink-0">
                   ID: #{order._id}
                 </p>
-                <div className="w-full flex flex-row items-center justify-between space-y-4">
+                <div className="flex flex-row items-center justify-between w-full space-y-4">
                   <p className="text-sm ">
                     Date: {formatDate(order.createdAt)}
                   </p>
@@ -109,11 +109,11 @@ const UserOrders = () => {
                   </p>
                 </div>
 
-                <div className=" mt-2 md:mt-0 flex flex-col gap-2 w-full">
+                <div className="flex flex-col w-full gap-2 mt-2 lg:mt-0">
                   <p className="font-semibold">
                     Total: {formatCurrency(order.totalPrice)}
                   </p>
-                  <div className="flex flex-row  justify-between">
+                  <div className="flex flex-row justify-between">
                     <button
                       onClick={() => navigate(`/account/orders/${order._id}`)}
                       className="flex items-center gap-2 text-sm text-blue-600 hover:underline"

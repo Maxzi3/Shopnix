@@ -3,10 +3,10 @@ import Logo from "../UI/Logo";
 
 function Signup() {
   return (
-    <main className="min-h-screen grid place-content-center bg-white dark:bg-gray-900 dark:text-white text-gray-700  gap-8 p-8">
+    <main className="grid min-h-screen gap-8 p-8 text-gray-700 bg-white place-content-center dark:bg-gray-900 dark:text-white">
       <div className="flex flex-col items-center space-y-5">
         <Logo />
-        <h4 className="text-2xl text-center font-semibold">
+        <h4 className="text-2xl font-semibold text-center">
           Sign-In To Your Account
         </h4>
         <SignupForm />
